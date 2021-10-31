@@ -1,0 +1,1 @@
+play_anim_d(id,nsprite[global.pixelui][5]);

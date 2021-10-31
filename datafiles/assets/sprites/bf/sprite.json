@@ -1,0 +1,10 @@
+{
+	"sprites": [
+		{
+			"name": "idle",
+			"frames": 25,
+			"prefix": "BF idle dance",
+			"offset": [0, 0]
+		}
+	]
+}

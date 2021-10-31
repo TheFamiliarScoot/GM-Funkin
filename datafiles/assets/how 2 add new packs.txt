@@ -1,0 +1,10 @@
+1. go to the songs folder
+2. make a new folder, call it anything (doesnt have to be related to the mod lol)
+3. open packslist.txt in songs and add that folder name to the end of the file
+4. go to your mods' assets folder
+5. copy both the "data" and "songs" folders and move them somewhere else
+6. move every folder from "songs" into the "data" folder
+7. copy all of those song folders you merged into "data" and move them to the pack folder you created
+8. in the pack folder, make a new .txt file called "songslist"
+9. add every song name to each line in the songslist.txt file (order doesn't matter)
+10. launch the game and you should see your pack added :)

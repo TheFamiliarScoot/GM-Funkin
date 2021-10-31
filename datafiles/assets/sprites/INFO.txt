@@ -1,0 +1,1 @@
+this is mainly for if i ever add the use for atlas instead of vector sprites

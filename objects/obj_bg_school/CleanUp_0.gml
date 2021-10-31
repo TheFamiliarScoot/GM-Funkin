@@ -1,0 +1,1 @@
+texture_flush("bg_school");

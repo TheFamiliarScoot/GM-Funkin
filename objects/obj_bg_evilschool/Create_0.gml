@@ -1,0 +1,1 @@
+texture_prefetch("bg_evilschool");
