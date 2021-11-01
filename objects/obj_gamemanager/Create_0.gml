@@ -30,7 +30,8 @@ exception_unhandled_handler(function(ex) {
 		"actually how?",
 		"bruh moment",
 		"skill issue",
-		"honestly deserved"
+		"honestly deserved",
+		"#RIPBOZO"
 	]
 	if file_exists(file) file_delete(file);
 	var _f = file_text_open_write(file);
@@ -199,9 +200,10 @@ global.chars = [
 global.stages = [
 	obj_bg_stage,
 	obj_bg_spooky,
+	obj_bg_philly,
 	obj_bg_school,
 	obj_bg_school_roses,
-	obj_bg_evilschool
+	obj_bg_evilschool,
 ];
 
 var set = global.presets[global.preset];

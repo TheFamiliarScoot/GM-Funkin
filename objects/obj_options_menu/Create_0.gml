@@ -31,6 +31,7 @@ characters = [
 stages = [
 	"THE STAGE",
 	"HAUNTED MANSION",
+	"PHILLY",
 	"SCHOOL",
 	"SCHOOL?",
 	"GLITCHED SCHOOL"
