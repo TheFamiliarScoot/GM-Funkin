@@ -194,7 +194,8 @@ global.chars = [
 	obj_senpai_angry,
 	obj_spirit,
 	obj_bf_pixel,
-	obj_gf_pixel
+	obj_gf_pixel,
+	obj_custom_char
 ];
 
 global.stages = [
@@ -220,6 +221,12 @@ else {
 	global.bfobject = set[2];
 	global.bgobject = set[3];
 }
+
+global.bfcustom = "bf";
+global.dadcustom = "hypno2";
+
+global.usenoteskin = true;
+global.curnoteskin = "sm";
 
 room_goto(room_menu);
 

@@ -5,6 +5,8 @@ var key = type % 4;
 
 var p = global.pixelui;
 
+var nsub = 0;
+
 // 0 - static
 // 1 - pressed
 // 2 - confirm
@@ -12,15 +14,39 @@ var p = global.pixelui;
 // 4 - end
 
 
-switch sprite_index {
-	case nsprite[p][1]: ovsprite = osprite[p][1]; break;
-	case nsprite[p][2]: ovsprite = osprite[p][2]; break;
-	default: ovsprite = osprite[p][5]; break;
+
+if global.usenoteskin {
+	switch sprite_index {
+		case nsprite[p][1]: nsub = 2; break;
+		case nsprite[p][2]: nsub = 0; break;
+		default: nsub = 0;
+	}
+}
+else {
+	switch sprite_index {
+		case nsprite[p][1]: ovsprite = osprite[p][1]; break;
+		case nsprite[p][2]: ovsprite = osprite[p][2]; break;
+		default: ovsprite = osprite[p][5]; break;
+	}
 }
 if enabled {
+	var col1 = stype.color;
+	var col2 = c_white;
 	if p { gpu_set_texfilter(false); }
-	draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,stype.ang+visualangle,stype.color,image_alpha);
-	draw_sprite_ext(ovsprite,image_index,x,y,image_xscale,image_yscale,stype.ang+visualangle,c_white,image_alpha);
+	if global.usenoteskin {
+		if sprite_index = nsprite[p][2] {
+			draw_sprite_ext(customoverlay,nsub,x,y,image_xscale,image_yscale,stype.ang+visualangle,col2,image_alpha);
+			draw_sprite_ext(customsprite,nsub,x,y,image_xscale,image_yscale,stype.ang+visualangle,col1,image_alpha);
+		}
+		else {
+			draw_sprite_ext(customsprite,nsub,x,y,image_xscale,image_yscale,stype.ang+visualangle,col1,image_alpha);
+			draw_sprite_ext(customoverlay,nsub,x,y,image_xscale,image_yscale,stype.ang+visualangle,col2,image_alpha);
+		}
+	}
+	else {
+		draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,stype.ang+visualangle,col1,image_alpha);
+		draw_sprite_ext(ovsprite,image_index,x,y,image_xscale,image_yscale,stype.ang+visualangle,col2,image_alpha);	
+	}
 	for (var i = -1; i < 2; i += 1) {
 		if i + cond.section < 0 { continue; }
 		if i + cond.section >= cond.sectioncount { continue; }
@@ -45,45 +71,49 @@ if enabled {
 			var tailY = (y + ((real_y*aoy)+(note.covered * -global.notescroll)));
 			var tailscale = lengthdiff * -global.notescroll;
 			var endY = (y+(tailLength*-global.notescroll))+(real_y*aoy);
+			
+			var endh = 64;
+			if global.usenoteskin { endh = 200; }
 	
-			var endscale = (clamp(lengthdiff,0,64)/64)*-global.notescroll;
+			var endscale = (clamp(lengthdiff,0,endh)/endh)*-global.notescroll;
+			
+			switch note.special {
+				case 0:
+					col1 = thistype.color;
+					col2 = c_white;
+					break;
+				case 1:
+					col1 = c_black;
+					col2 = c_red;
+					break;
+				case 2:
+					col1 = c_white;
+					col2 = c_lime;
+					break;
+			}
 			if !note.completed && !tailBounds {
-				switch note.special {
-					case 0:
-						draw_sprite_ext(nsprite[p][3],0,x+(real_y*aox),tailY,0.75*scalemod,tailscale,image_angle,thistype.color,0.75);
-						draw_sprite_ext(osprite[p][3],0,x+(real_y*aox),tailY,0.75*scalemod,tailscale,image_angle,c_white,0.75);
-						draw_sprite_ext(nsprite[p][4],0,x+(real_y*aox),endY,0.75*scalemod,endscale,image_angle,thistype.color,0.75);
-						draw_sprite_ext(osprite[p][4],0,x+(real_y*aox),endY,0.75*scalemod,endscale,image_angle,c_white,0.75);
-						break;
-					case 1:
-						draw_sprite_ext(nsprite[p][3],0,x+(real_y*aox),tailY,0.75*scalemod,tailscale,image_angle,c_black,75);
-						draw_sprite_ext(osprite[p][3],0,x+(real_y*aox),tailY,0.75*scalemod,tailscale,image_angle,c_red,0.75);
-						draw_sprite_ext(nsprite[p][4],0,x+(real_y*aox),endY,0.75*scalemod,endscale,image_angle,c_black,0.75);
-						draw_sprite_ext(osprite[p][4],0,x+(real_y*aox),endY,0.75*scalemod,endscale,image_angle,c_red,0.75);
-					case 2:
-						draw_sprite_ext(nsprite[p][3],0,x+(real_y*aox),tailY,0.75*scalemod,tailscale,image_angle,c_white,75);
-						draw_sprite_ext(osprite[p][3],0,x+(real_y*aox),tailY,0.75*scalemod,tailscale,image_angle,c_lime,0.75);
-						draw_sprite_ext(nsprite[p][4],0,x+(real_y*aox),endY,0.75*scalemod,endscale,image_angle,c_white,0.75);
-						draw_sprite_ext(osprite[p][4],0,x+(real_y*aox),endY,0.75*scalemod,endscale,image_angle,c_lime,0.75);
+				if global.usenoteskin {
+					draw_sprite_ext(customtail,0,x+(real_y*aox),tailY,0.75*scalemod,tailscale/100,image_angle,col1,0.75);
+					draw_sprite_ext(customtoverlay,0,x+(real_y*aox),tailY,0.75*scalemod,tailscale/100,image_angle,col2,0.75);
+					draw_sprite_ext(customtail,1,x+(real_y*aox),endY,0.75*scalemod,endscale,image_angle,col1,0.75);
+					draw_sprite_ext(customtoverlay,1,x+(real_y*aox),endY,0.75*scalemod,endscale,image_angle,col2,0.75);
 				}
-
+				else {
+					draw_sprite_ext(nsprite[p][3],0,x+(real_y*aox),tailY,0.75*scalemod,tailscale,image_angle,col1,0.75);
+					draw_sprite_ext(osprite[p][3],0,x+(real_y*aox),tailY,0.75*scalemod,tailscale,image_angle,col2,0.75);
+					draw_sprite_ext(nsprite[p][4],0,x+(real_y*aox),endY,0.75*scalemod,endscale,image_angle,col1,0.75);
+					draw_sprite_ext(osprite[p][4],0,x+(real_y*aox),endY,0.75*scalemod,endscale,image_angle,col2,0.75);
+				}
 			}
 			if !note.hit && !boundsCheck {
-				switch note.special {
-					case 0:
-						draw_sprite_ext(nsprite[p][0], -1, x+(real_y*aox), y + (real_y*aoy),0.75*scalemod,0.75*scalemod,thistype.ang,thistype.color,1);
-						draw_sprite_ext(osprite[p][0], -1, x+(real_y*aox), y + (real_y*aoy),0.75*scalemod,0.75*scalemod,thistype.ang,c_white,1);
-						break;
-					case 1:
-						draw_sprite_ext(nsprite[p][0], -1, x+(real_y*aox), y + (real_y*aoy),0.75*scalemod,0.75*scalemod,thistype.ang,c_black,1);
-						draw_sprite_ext(osprite[p][0], -1, x+(real_y*aox), y + (real_y*aoy),0.75*scalemod,0.75*scalemod,thistype.ang,c_red,1);
-						break;
-					case 2:
-						draw_sprite_ext(nsprite[p][0], -1, x+(real_y*aox), y + (real_y*aoy),0.75*scalemod,0.75*scalemod,thistype.ang,c_white,1);
-						draw_sprite_ext(osprite[p][0], -1, x+(real_y*aox), y + (real_y*aoy),0.75*scalemod,0.75*scalemod,thistype.ang,c_lime,1);
-						break;
+				if global.usenoteskin {
+					draw_sprite_ext(customsprite, 1, x+(real_y*aox), y + (real_y*aoy),0.75*scalemod,0.75*scalemod,thistype.ang,col1,1);
+					draw_sprite_ext(customoverlay, 1, x+(real_y*aox), y + (real_y*aoy),0.75*scalemod,0.75*scalemod,thistype.ang,col2,1);		
 				}
-
+				else {
+					draw_sprite_ext(nsprite[p][0], -1, x+(real_y*aox), y + (real_y*aoy),0.75*scalemod,0.75*scalemod,thistype.ang,col1,1);
+					draw_sprite_ext(osprite[p][0], -1, x+(real_y*aox), y + (real_y*aoy),0.75*scalemod,0.75*scalemod,thistype.ang,col2,1);
+				}
 			}
 	
 			// doing this in here because this is where i process notes anyways

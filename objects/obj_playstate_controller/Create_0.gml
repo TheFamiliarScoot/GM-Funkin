@@ -1,6 +1,18 @@
 texture_prefetch("ingame_ui");
 texture_flush("mainmenu");
 
+global.dadinstance = noone;
+global.bfinstance = noone;
+global.gfinstance = noone;
+
+if global.usenoteskin {
+	var ndir = "assets/sprites/noteskins/" + global.curnoteskin + "/";
+	global.noteskin = sprite_add(ndir + "note.png",3,false,false,100,100);
+	global.noteskin_o = sprite_add(ndir + "note_overlay.png",3,false,false,100,100);
+	global.noteskin_tail = sprite_add(ndir + "tail.png",2,false,false,100,0);
+	global.noteskin_tailo = sprite_add(ndir + "tail_overlay.png",2,false,false,100,0);
+	global.noteopt = read_json(ndir + "skinoptions.json");
+}
 
 if opt.customization.usepreset {
 	var set = global.presets[opt.customization.preset];
@@ -16,12 +28,14 @@ var gfisdad = global.dadobject == global.gfobject;
 
 if gfisdad { object = obj_gfspawn; }
 else { object = obj_dadspawn; }
-instance_create_layer(object.x,object.y,object.layer,global.dadobject);
+if global.dadobject = obj_custom_char { global.dadinstance = create_custom_char(global.dadcustom,object.x,object.y,object.layer,0); }
+else { global.dadinstance = spawn_char(object.x,object.y,object.layer,0,global.dadobject); }
 
 object = obj_bfspawn
-instance_create_layer(object.x,object.y,object.layer,global.bfobject);
+if global.bfobject = obj_custom_char { global.bfinstance = create_custom_char(global.bfcustom,object.x,object.y,object.layer,1); }
+else { global.bfinstance = spawn_char(object.x,object.y,object.layer,1,global.bfobject); }
 
 object = obj_gfspawn
-if !gfisdad { instance_create_layer(object.x,object.y,object.layer,global.gfobject); }
+if !gfisdad { global.gfinstance = spawn_char(object.x,object.y,object.layer,2,global.gfobject); }
 
 if !opt.nobg { instance_create_layer(0,0,layer,global.bgobject); }

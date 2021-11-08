@@ -71,8 +71,8 @@ catch (e3) {
 }
 */
 try {
-	if cursection.mustHitSection { global.target = global.bfobject; }
-	else { global.target = global.dadobject; }
+	if cursection.mustHitSection { global.target = global.bfinstance; }
+	else { global.target = global.dadinstance; }
 }
 catch (wtf) {}
 

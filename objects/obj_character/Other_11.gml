@@ -1,5 +1,3 @@
-self.image_index = 0;
-d_image_speed = 1;
-self.sprite_index = down_sprite;
+play_anim_ind(id,down_sprite,is_custom,true);
 self.alarm[0] = d(room_speed/2);
 self.holding = true;

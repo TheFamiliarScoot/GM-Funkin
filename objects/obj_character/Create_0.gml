@@ -17,10 +17,10 @@ if !is_custom {
 var templeft = left_sprite;
 var tempright = right_sprite;
 if invert {
-	if object_index = global.bfobject {
+	if playside = 1 {
 		image_xscale = scale;
 	}
-	else if object_index = global.dadobject {
+	else if playside = 0 {
 		image_xscale = -scale;
 		camOffX = -camOffX;
 		left_sprite = tempright;
@@ -31,13 +31,13 @@ if invert {
 	}
 }
 else {
-	if object_index = global.bfobject {
+	if playside = 1 {
 		image_xscale = -scale;
 		camOffX = -camOffX;
 		left_sprite = tempright;
 		right_sprite = templeft;
 	}
-	else if object_index = global.dadobject {
+	else if playside = 0 {
 		image_xscale = scale;
 	}
 	else {
@@ -45,6 +45,25 @@ else {
 	}
 }
 image_yscale = scale;
+
+customsprite = noone;
+spritedata = 0;
+cursprite = 0;
+curspritename = "";
+animtimer = 0;
+animspeed = 0;
+useicon = false;
+
+if is_custom {
+	var dir = "assets/sprites/chars/" + name + "/";
+	customsprite = sprite_add(dir + "atlas.png",0,0,0,0,0);
+	spritedata = read_json(dir + "atlas.json");
+	play_anim_ind(id,idle_sprite,true);
+	if file_exists(dir + "icon.png") {
+		icon = sprite_add(dir + "icon.png",2,false,false,125,75);
+		useicon = true;
+	}
+}
 
 danced = false;
 

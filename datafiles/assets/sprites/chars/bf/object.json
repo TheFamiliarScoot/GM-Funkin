@@ -1,0 +1,20 @@
+{
+	"mainoffset": [-208,-352],
+	"cameraoffset": [-150,-200],
+	"invert": true,
+	"hpcolor": [49,176,209],
+	"anims": {
+		"idle": "BF idle dance",
+		"left": "BF NOTE LEFT",
+		"down": "BF NOTE DOWN",
+		"up": "BF NOTE UP",
+		"right": "BF NOTE RIGHT"
+	},
+	"offsets": {
+		"idle": [-5,0],
+		"left": [12,-6],
+		"down": [-10,-50],
+		"up": [-29,27],
+		"right": [-38,-7]
+	}
+}

@@ -47,8 +47,8 @@ if ui.vis {
 	var rc = c_lime;
 	
 	if opt.specialcolors {
-		lc = global.dadobject.barcolor;
-		rc = global.bfobject.barcolor;
+		lc = global.dadinstance.barcolor;
+		rc = global.bfinstance.barcolor;
 	}
 	else if opt.player1 {
 		lc = c_lime;
@@ -58,11 +58,11 @@ if ui.vis {
 	draw_rectangle_color(_hx1,_hy1,_hx2,_hy2,c_black,c_black,c_black,c_black,false);
 	draw_rectangle_color((_hx1+(4*hpscale))+(4*hpscale),_hy1+(4*hpscale),_hx2-(4*hpscale),_hy2-(4*hpscale),lc,lc,lc,lc,false);
 	draw_rectangle_color(_hx2-((592*normhp)*hpscale),_hy1+(4*hpscale),_hx2-(4*hpscale),_hy2-(4*hpscale),rc,rc,rc,rc,false);
-	if global.bfobject.no_antialiasing { gpu_set_texfilter(false); }
-	draw_sprite_ext(global.bfobject.icon,rightfailing,_hx2-((592*normhp)*hpscale),hpcentery,-iconscale,iconscale,0,c_white,1);
+	if global.bfinstance.no_antialiasing { gpu_set_texfilter(false); }
+	draw_sprite_ext(global.bfinstance.icon,rightfailing,_hx2-((592*normhp)*hpscale),hpcentery,-iconscale,iconscale,0,c_white,1);
 	gpu_set_texfilter(opt.antialiasing);
-	if global.dadobject.no_antialiasing { gpu_set_texfilter(false); }
-	draw_sprite_ext(global.dadobject.icon,leftfailing,_hx2-((592*normhp)*hpscale),hpcentery,iconscale,iconscale,0,c_white,1);
+	if global.dadinstance.no_antialiasing { gpu_set_texfilter(false); }
+	draw_sprite_ext(global.dadinstance.icon,leftfailing,_hx2-((592*normhp)*hpscale),hpcentery,iconscale,iconscale,0,c_white,1);
 	gpu_set_texfilter(opt.antialiasing);
 	
 	iconscale = clamp(iconscale - d(0.01),1,1.5);

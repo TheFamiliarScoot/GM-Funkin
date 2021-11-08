@@ -102,11 +102,11 @@ repeat 8 {
 		type = ctr;
 		thisKey = strumKeys[ctr];
 		if type < 4 { 
-			tiedCharacter = global.dadobject; 
+			tiedCharacter = global.dadinstance;
 			if global.options.player1 isbot = false else isbot = true; 
 		}
 		else { 
-			tiedCharacter = global.bfobject; 
+			tiedCharacter = global.bfinstance;
 			if global.options.botplay || global.options.player1 isbot = true else isbot = false;
 		}
 		instance_change(obj_strum,true);
@@ -145,23 +145,22 @@ for (var h = 0; h < array_length(chrt.song.notes); h += 1) {
 		var notearray = chrt.song.notes[h].sectionNotes[i];
 		
 		var nspecial = 0;
+		
+		var skip = false;
 
 		for (var j = 0; j < array_length(notearray); j += 1) {
 			// psych engine bullshit - has strings
 			if !is_numeric(notearray[j]) {
-				if notearray[j] = "Hurt Note" {
-					nspecial = 1;
-				}
+				if notearray[j] = "Hurt Note" { nspecial = 1; }
+				else { skip = true; }
 			}
 		}
 		if array_length(notearray) > 3 && chrt.song.song != "ugh" {
-			if !is_ptr(notearray[3]) {
-				nspecial = notearray[3];		
-			}
+			if !is_ptr(notearray[3]) { nspecial = notearray[3]; }
 		}
 
 		
-//		if specialnote { continue; }
+		if skip { continue; }
 		
 		var pos = notearray[0];
 		var typ = notearray[1];

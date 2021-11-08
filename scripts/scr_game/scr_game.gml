@@ -20,6 +20,29 @@ function play_anim_d(inst,sprt){
 	}
 }
 
+function play_anim_ind(inst,sprt,custom,dlta) {
+	with inst {
+		if custom {
+			cursprite = variable_struct_get(spritedata,sprt);
+			curspritename = sprt;
+			animtimer = 0;
+			animspeed = 1;
+		}
+		else {
+			if dlta {
+				sprite_index = sprt;
+				image_index = 0;
+				d_image_speed = 1;
+			}
+			else {
+				sprite_index = sprt;
+				image_index = 0;
+				image_speed = 1;		
+			}
+		}
+	}
+}
+
 function change_hp (amt) {
 	var a = amt;
 	if opt.player1 { a = -amt; } 
@@ -75,3 +98,33 @@ function room_transition(rm) {
 		instance_change(obj_transition,true);
 	}
 }
+
+function create_custom_char(nm,_x,_y,_lyr,side) {
+	var inst = noone;
+	with instance_create_layer(_x,_y,_lyr,obj_blank) {
+		loadname = nm;
+		playside = side;
+		instance_change(obj_custom_char,true);
+		inst = id;
+	}
+	return inst;
+}
+
+function spawn_char(_x,_y,_layer,side,_id) {
+	var _ins = noone;
+	with instance_create_layer(_x,_y,_layer,obj_blank) {
+		playside = side;
+		instance_change(_id,true);
+		_ins = id;
+	}
+	return _ins;
+}
+
+/*
+function draw_note_tail(sprite,_x,_y,length) {
+	if length < 0 { return; }
+	for (var i = 0; i < length; i += 1) {
+		draw_sprite_part_ext(sprite,3,0,100-(i%100),200,-1,_x+i,_y+length,);
+	}
+}
+*/

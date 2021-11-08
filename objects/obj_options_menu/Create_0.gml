@@ -25,7 +25,8 @@ characters = [
 	"SENPAI (ANGRY)",
 	"SPIRIT",
 	"BOYFRIEND (PIXEL)",
-	"GIRLFRIEND (PIXEL)"
+	"GIRLFRIEND (PIXEL)",
+	"TEST"
 ];
 
 stages = [
