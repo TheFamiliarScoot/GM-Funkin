@@ -5,7 +5,7 @@ customoverlay = 0;
 customtail = 0;
 customtoverlay = 0;
 
-if global.usenoteskin {
+if opt.usenoteskin {
 	customsprite = global.noteskin;
 	customoverlay = global.noteskin_o;
 	customtail = global.noteskin_tail;
@@ -23,7 +23,7 @@ osprite = [
 ];
 
 scalemod = 1;
-if global.usenoteskin { scalemod = global.noteopt.scale; }
+if opt.usenoteskin { scalemod = global.noteopt.scale; }
 
 //if global.keyamt = 6 { scalemod = 0.8; }
 if global.pixelui { scalemod *= 7; }

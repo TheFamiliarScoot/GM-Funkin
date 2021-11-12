@@ -95,6 +95,10 @@ var tempoptions = {
 	nobg: false,
 	timedisplay: false,
 	specialnotes: true,
+	usenoteskin: false,
+	noteskin: 0,
+	hpmult: 1,
+	hpgainmult: 1,
 	customization: {
 		usepreset: true,
 		preset: 0,
@@ -109,13 +113,15 @@ var tempoptions = {
 		up: [17,246,4],
 		right: [246,56,62]
 	},
-	build: 4
+	build: 5
 }
 
 
 global.misses = 0;
 global.hp = 1;
 global.maxhp = 2;
+global.combo = 0;
+global.highcombo = 0;
 
 global.paused = false;
 
@@ -125,8 +131,13 @@ global.preset = "tutorial";
 var dir = global.gamedir + "\\options.json";
 if file_exists(dir) { 
 	opt = read_json(dir);
-	try { if opt.build != tempoptions.build { make_save(dir,tempoptions); } }
-	catch (sussy) { make_save(dir,tempoptions); }
+	var names = variable_struct_get_names(tempoptions)
+	for (var i = 0; i < array_length(names); i += 1) {
+		if is_undefined(variable_struct_get(opt,names[i])) {
+			variable_struct_set(opt,names[i],variable_struct_get(tempoptions,names[i]));
+		}
+	}
+	write_save(working_directory + "options.json");
 }
 else { make_save(dir,tempoptions); }
 
@@ -225,8 +236,10 @@ else {
 global.bfcustom = "bf";
 global.dadcustom = "hypno2";
 
-global.usenoteskin = true;
-global.curnoteskin = "sm";
+global.noteskins = read_text("assets/sprites/noteskins/skinlist.txt");
+if opt.noteskin > array_length(global.noteskins) - 1 { opt.noteskin = 0; }
+
+global.curnoteskin = global.noteskins[opt.noteskin];
 
 room_goto(room_menu);
 
@@ -236,3 +249,10 @@ uisprite = -1;
 
 lastcamerax = 0;
 lastcameray = 0;
+
+var randomstr = "hihellohi";
+show_debug_message(randomstr);
+randomstr = randomize_string(randomstr,42069);
+show_debug_message(randomstr);
+randomstr = unrandomize_string(randomstr,42069);
+show_debug_message(randomstr);

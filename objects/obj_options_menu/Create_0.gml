@@ -16,6 +16,8 @@ previouskey = 0;
 
 newkey = 0;
 
+ybegin = 180;
+
 characters = [
 	"BOYFRIEND",
 	"DADDY DEAREST",
@@ -25,8 +27,8 @@ characters = [
 	"SENPAI (ANGRY)",
 	"SPIRIT",
 	"BOYFRIEND (PIXEL)",
-	"GIRLFRIEND (PIXEL)",
-	"TEST"
+	"GIRLFRIEND (PIXEL)"/*,
+	"CUSTOM"*/
 ];
 
 stages = [

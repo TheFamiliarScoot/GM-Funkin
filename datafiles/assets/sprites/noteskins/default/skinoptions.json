@@ -1,4 +1,7 @@
 {
+	"size_note": [200,200],
+	"size_tail": [50,59],
 	"scale": 1,
-	"no_aa": false
+	"no_aa": false,
+	"no_rotate": false
 }

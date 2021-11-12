@@ -1,0 +1,18 @@
+if keyboard_check_pressed(vk_enter) {
+	switch selections.selection {
+		case 0:
+			with obj_gamemanager event_user(0);
+			global.paused = false;
+			break;
+		case 1:
+			room_transition(room_play);
+			instance_destroy(selections);
+			instance_destroy(id);
+			break;
+		case 2:
+			room_transition(room_menu);
+			instance_destroy(selections);
+			instance_destroy(id);
+			break;
+	}
+}

@@ -44,12 +44,21 @@ function play_anim_ind(inst,sprt,custom,dlta) {
 }
 
 function change_hp (amt) {
-	var a = amt;
-	if opt.player1 { a = -amt; } 
+	var a = 0;
+	var m = 0;
+	
+	if amt < 0 { m = opt.hpmult; }
+	else if amt > 0 { m = opt.hpgainmult; }
+	
+	if opt.player1 { a = -amt * m; }
+	else { a = amt * m; }
+	
 	global.hp = clamp(global.hp + a,0,global.maxhp);
+	
 	var check = false;
 	if opt.player1 { check = global.hp >= global.maxhp }
-	else { check = global.hp <= 0}
+	else { check = global.hp <= 0 }
+
 	if check && opt.blueballing && !instance_exists(obj_gameover) {
 		if room = room_play && !opt.player1 { 
 			instance_create_layer(global.bfobject.x,global.bfobject.y,"Instances",obj_gameover);
@@ -128,3 +137,15 @@ function draw_note_tail(sprite,_x,_y,length) {
 	}
 }
 */
+
+function create_scroll_menu(_x,_y,_layer,chc) {
+	var inst = noone;
+	
+	with instance_create_layer(_x,_y,_layer,obj_blank) {
+		choices = chc;
+		instance_change(obj_scrollmenu,true);
+		inst = id;
+	}
+	
+	return inst;
+}

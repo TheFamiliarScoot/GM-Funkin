@@ -1,0 +1,1 @@
+room_transition(room_menu);

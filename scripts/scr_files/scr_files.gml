@@ -11,6 +11,17 @@ function read_json(file_path){
 	return json_parse(json_text);
 }
 
+function read_json_map(file_path){
+	var file = file_text_open_read(file_path);
+	var json_text = "";
+	while !file_text_eof(file) {
+		json_text = json_text + file_text_read_string(file);
+		file_text_readln(file);
+	}
+	file_text_close(file);
+	return json_decode(json_text);
+}
+
 function read_text(file_path){
 	var file = file_text_open_read(file_path);
 	var ret = [];

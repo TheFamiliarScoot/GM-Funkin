@@ -1,1 +1,0 @@
-global.cam.angle = 45;

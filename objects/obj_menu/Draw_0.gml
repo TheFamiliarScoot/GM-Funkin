@@ -40,6 +40,18 @@ if menuenabled {
 		case 2:
 			draw_font_text("DIFFICULTY",room_width/2,200,false,40,1,true);
 			var difficulties = ["easy","normal","hard"];
+			
+			var skey = global.selectedsong + "-" + difficulties[current];
+			if ds_map_exists(stats,skey) {
+				var j = json_parse(stats[? skey]);
+
+				draw_font_text("Highscore: " + string(j.bestscore),room_width/2,room_height-100,false,40,0.6,true);
+				draw_font_text("Highest Combo: " + string(j.bestcombo),room_width/2,room_height-65,false,40,0.6,true);
+				draw_font_text("Least Misses: " + string(j.leastmisses),room_width/2,room_height-30,false,40,0.6,true);
+			}
+			else {
+				draw_font_text("No stats for this song",room_width/2,room_height-100,false,40,0.6,true);
+			}
 		
 			draw_font_text("<" + string_upper(difficulties[current]) + ">",room_width/2,400,false,40,1,true);
 			if keyboard_check_pressed(vk_left) {
@@ -72,6 +84,7 @@ if menuenabled {
 				audio_play_sound(snd_menu_cancel,0,false);
 				current = 0;
 				setupstate = 3;
+				ds_map_destroy(stats);
 			}
 			break;
 		case 3:
@@ -94,7 +107,8 @@ if menuenabled {
 				else {
 					global.selectedsong = songs[current];
 					current = 0;
-					setupstate = 2;				
+					setupstate = 2;
+					stats = ds_map_secure_load("scores.dat");
 				}
 			}
 			if keyboard_check_pressed(vk_escape) {

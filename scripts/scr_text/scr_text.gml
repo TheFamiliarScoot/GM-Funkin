@@ -1,6 +1,6 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function draw_font_text(text, xx, yy, bold, spacing = 40, scale = 1, centered = false) {
+function draw_font_text(text, xx, yy, bold, spacing = 40, scale = 1, centered = false, alpha = 1) {
 	var normchars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!.'”“?,:1234567890~=+-_*#@%$×/;()><^&|\\♥↓←↑→[]☻";
 	var boldchars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	var chars = "";
@@ -30,7 +30,7 @@ function draw_font_text(text, xx, yy, bold, spacing = 40, scale = 1, centered = 
 			scale,
 			0,
 			c_white,
-			1
+			alpha
 		); }
 		++ctr;
 	}

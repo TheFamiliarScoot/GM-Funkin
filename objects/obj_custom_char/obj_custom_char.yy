@@ -28,8 +28,8 @@
     {"propertyId":{"name":"is_custom","path":"objects/obj_character/obj_character.yy",},"objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"value":"True","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
   ],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "chars",
+    "path": "folders/Objects/chars.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_custom_char",

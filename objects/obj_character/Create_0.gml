@@ -58,7 +58,7 @@ if is_custom {
 	var dir = "assets/sprites/chars/" + name + "/";
 	customsprite = sprite_add(dir + "atlas.png",0,0,0,0,0);
 	spritedata = read_json(dir + "atlas.json");
-	play_anim_ind(id,idle_sprite,true);
+	play_anim_ind(id,idle_sprite,true,true);
 	if file_exists(dir + "icon.png") {
 		icon = sprite_add(dir + "icon.png",2,false,false,125,75);
 		useicon = true;

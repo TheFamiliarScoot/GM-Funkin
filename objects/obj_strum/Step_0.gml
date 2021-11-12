@@ -14,6 +14,9 @@ if (keyboard_check_pressed(thisKey) && !isbot) || opponentcheck {
 			if !isbot && !(lastnote.special > 0) {
 	//			show_debug_message(string(the) + " - " + check_rating(the));
 				global.combo += 1;
+				if global.combo > global.highcombo {
+					global.highcombo = global.combo;
+				}
 				rate(the);		
 				show_debug_message(global.combo);
 			}
@@ -21,18 +24,18 @@ if (keyboard_check_pressed(thisKey) && !isbot) || opponentcheck {
 				switch lastnote.special {
 					case 1:
 						with tiedCharacter event_user(k + 4);
-						obj_conductor.vocalsmuted = true;
+						if instance_exists(obj_conductor) obj_conductor.vocalsmuted = true;
 						change_hp(-0.2);
 						break;
 					case 2:
 						with tiedCharacter event_user(k);
-						obj_conductor.vocalsmuted = false;
+						if instance_exists(obj_conductor) obj_conductor.vocalsmuted = false;
 						change_hp(0.2);
 						break;
 				}
 			}
 			else {
-				obj_conductor.vocalsmuted = false;
+				if instance_exists(obj_conductor) obj_conductor.vocalsmuted = false;
 				with tiedCharacter {
 					event_user(k);
 				}
@@ -41,7 +44,7 @@ if (keyboard_check_pressed(thisKey) && !isbot) || opponentcheck {
 			lastnote.timehit = the;
 			if isbot { 
 				d_alarm[0] = 20;
-				obj_conductor.vocalsmuted = false;
+				if instance_exists(obj_conductor) obj_conductor.vocalsmuted = false;
 			}
 		}
 	}

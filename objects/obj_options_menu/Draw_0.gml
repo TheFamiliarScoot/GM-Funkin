@@ -1,5 +1,5 @@
 draw_self();
-draw_font_text(title,room_width/2,40,true,40,1,true);
+draw_font_text(title,room_width/2,40+ybegin,true,40,1,true);
 
 if opt.scrollspeed = 0 { ss = "USE CHART'S"; }
 else { ss = string(opt.scrollspeed)	}
@@ -12,6 +12,7 @@ switch submenu {
 					submenu = 11;
 					title = "KEYBINDS";
 					selection = 0;
+					ybegin = 160;
 					var file = working_directory + "keybinds.ini";
 					ini_open(file);
 					keybind = {up: ord("W"), down: ord("S"), left: ord("A"), right: ord("D")}
@@ -26,6 +27,7 @@ switch submenu {
 					title = "GAMEPLAY";
 					submenu = 12;
 					selection = 0;
+					ybegin = 15;
 				}
 				break;
 			case 2: // appearance
@@ -33,6 +35,7 @@ switch submenu {
 					title = "APPEARANCE";
 					submenu = 13;
 					selection = 0;
+					ybegin = 120;
 				}
 				break;
 		}
@@ -62,36 +65,39 @@ switch submenu {
 	case 12: // gameplay
 		switch selection {
 			case 0:
+				if keyboard_check_pressed(vk_enter) { submenu = 16; }
+				break;
+			case 1:
 				if keyboard_check_pressed(vk_right) { opt.scrollspeed += 0.1; }
 				if keyboard_check_pressed(vk_left) { opt.scrollspeed -= 0.1; }
 				if opt.scrollspeed > 4 { opt.scrollspeed = 4; }
 				if opt.scrollspeed < 0 { opt.scrollspeed = 0; }
 				break;
-			case 1:
+			case 2:
 				if keyboard_check_pressed(vk_enter) { opt.usedownscroll = !opt.usedownscroll; }
 				break;
-			case 2:
+			case 3:
 				if keyboard_check_pressed(vk_enter) { opt.ghosttapping = !opt.ghosttapping; }
 				break;
-			case 3:
+			case 4:
 				if keyboard_check_pressed(vk_enter) { opt.missnotes = !opt.missnotes; }
 				break;
-			case 4:
+			case 5:
 				if keyboard_check_pressed(vk_enter) { opt.blueballing = !opt.blueballing; }
 				break;
-			case 5:
+			case 6:
 				if keyboard_check_pressed(vk_enter) { opt.retrykey = !opt.retrykey; }
 				break;
-			case 6:
+			case 7:
 				if keyboard_check_pressed(vk_enter) { opt.player1 = !opt.player1; }
 				break;
-			case 7:
+			case 8:
 				if keyboard_check_pressed(vk_enter) { opt.botplay = !opt.botplay; }
 				break;
-			case 8:
+			case 9:
 				if keyboard_check_pressed(vk_enter) { opt.middlescroll = !opt.middlescroll; }
 				break;
-			case 9:
+			case 10:
 				if keyboard_check_pressed(vk_enter) { opt.specialnotes = !opt.specialnotes; }
 				break;
 		}
@@ -121,6 +127,14 @@ switch submenu {
 				break;
 			case 4:
 				if keyboard_check_pressed(vk_enter) { opt.timedisplay = !opt.timedisplay; }
+				break;
+			case 5:
+				if keyboard_check_pressed(vk_enter) {
+					title = "NOTE SKINS";
+					submenu = 15;
+					selection = 0;
+				}
+				break;
 		}
 		break;
 	case 14: // in-game options
@@ -168,6 +182,41 @@ switch submenu {
 					break;
 			}
 		}
+		break;
+	case 15: // note skins
+		switch selection {
+			case 0:
+				if keyboard_check_pressed(vk_enter) { opt.usenoteskin = !opt.usenoteskin; }
+				break;
+			case 1:
+				if keyboard_check_pressed(vk_right) { opt.noteskin += 1; }
+				if keyboard_check_pressed(vk_left) { opt.noteskin -= 1; }
+				if opt.noteskin > array_length(global.noteskins) - 1 { opt.noteskin = 0; }
+				if opt.noteskin < 0 { opt.noteskin = array_length(global.noteskins) - 1; }
+				break;
+		}
+		break;
+	case 16: // gameplay page 2
+		switch selection {
+			case 0:
+				if keyboard_check_pressed(vk_enter) { 
+					submenu = 12;
+				}
+				break;
+			case 1:
+				if keyboard_check_pressed(vk_right) { opt.hpmult += 0.1; }
+				if keyboard_check_pressed(vk_left) { opt.hpmult -= 0.1; }
+				if opt.hpmult > 5 { opt.hpmult = 5; }
+				if opt.hpmult < 0 { opt.hpmult = 0; }
+				break;
+			case 2:
+				if keyboard_check_pressed(vk_right) { opt.hpgainmult += 0.1; }
+				if keyboard_check_pressed(vk_left) { opt.hpgainmult -= 0.1; }
+				if opt.hpgainmult > 5 { opt.hpgainmult = 5; }
+				if opt.hpgainmult < 0 { opt.hpgainmult = 0; }
+				break;
+		}
+		break;
 }
 
 switch submenu {
@@ -188,6 +237,7 @@ switch submenu {
 		break;
 	case 12:
 		choices = [
+			"PAGE 1",
 			"SCROLL SPEED: " + ss,
 			"DOWNSCROLL: " + bool_onoff(opt.usedownscroll),
 			"GHOST TAPPING: " + bool_onoff(opt.ghosttapping),
@@ -206,7 +256,8 @@ switch submenu {
 			"ANTIALIASING: " + bool_onoff(opt.antialiasing),
 			"HEALTH BAR COLORS: " + bool_onoff(opt.specialcolors),
 			"NO BACKGROUND: " + bool_yesno(opt.nobg),
-			"TIME DISPLAY: " + bool_onoff(opt.timedisplay)
+			"TIME DISPLAY: " + bool_onoff(opt.timedisplay),
+			"NOTE SKINS"
 		];
 		break;
 	case 14:
@@ -225,13 +276,27 @@ switch submenu {
 				"MIDDLE: " + characters[gf]
 			];
 		}
+		break;
+	case 15:
+		choices = [
+			"USE NOTE SKIN: " + bool_yesno(opt.usenoteskin),
+			"NOTE SKIN: " + string_upper(global.noteskins[opt.noteskin])
+		];
+		break;
+	case 16:
+		choices = [
+			"PAGE 2",
+			"HEALTH PENALTY MULTIPLIER: " + string(opt.hpmult) + "x",
+			"HEALTH GAIN MULTIPLIER: " + string(opt.hpgainmult) + "x"
+		]
+		break;
 }
 
 for (var i = 0; i < array_length(choices); i += 1) {
-	draw_font_text(choices[i],room_width/2,120+(i*55),false,40,0.8,true);	
+	draw_font_text(choices[i],room_width/2,120+(i*55)+ybegin,false,40,0.8,true);	
 }
 
-draw_font_text("> " + string_repeat(" ",string_length(choices[selection])) + " <",room_width/2,120+(selection*55),false,40,0.9,true);
+draw_font_text("> " + string_repeat(" ",string_length(choices[selection])) + " <",room_width/2,120+(selection*55)+ybegin,false,40,0.9,true);
 
 if keyboard_check_pressed(vk_down) && !changing { selection += 1; audio_play_sound(snd_menu_scroll,0,false); }
 if keyboard_check_pressed(vk_up) && !changing { selection -= 1; audio_play_sound(snd_menu_scroll,0,false) }
@@ -251,13 +316,9 @@ if keyboard_check_pressed(vk_escape) && !instance_exists(obj_transition) {
 	else {
 		switch submenu {
 			case 10:
-				var optfile = working_directory + "options.json"
 				room_transition(room_menu);
 				audio_play_sound(snd_menu_cancel,0,false);
-				if file_exists(optfile) { file_delete(optfile) }
-				var wrfile = file_text_open_write(optfile);
-				file_text_write_string(wrfile,json_stringify(opt));
-				file_text_close(wrfile);
+				write_save(working_directory + "options.json");
 				break;
 			case 11:
 				ini_write_real("Keys","Up",keybind.up);
@@ -268,16 +329,19 @@ if keyboard_check_pressed(vk_escape) && !instance_exists(obj_transition) {
 				selection = 0;
 				title = "OPTIONS";
 				submenu = 10;
+				ybegin = 180;
 				break;
 			case 12:
 				selection = 0;
 				title = "OPTIONS";
 				submenu = 10;
+				ybegin = 180;
 				break;
 			case 13:
 				selection = 0;
 				title = "OPTIONS";
 				submenu = 10;
+				ybegin = 180;
 				break;
 			case 14:
 				opt.customization.preset = selectpreset;
@@ -288,6 +352,20 @@ if keyboard_check_pressed(vk_escape) && !instance_exists(obj_transition) {
 				selection = 0;
 				title = "APPEARANCE";
 				submenu = 13;
+				ybegin = 120;
+				break;
+			case 15:
+				global.curnoteskin = global.noteskins[opt.noteskin];
+				selection = 0;
+				title = "APPEARANCE";
+				submenu = 13;
+				ybegin = 120;
+				break;
+			case 16:
+				selection = 0;
+				title = "OPTIONS";
+				submenu = 10;
+				ybegin = 180;
 				break;
 		}
 	}

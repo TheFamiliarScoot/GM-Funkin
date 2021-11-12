@@ -34,3 +34,5 @@ packs = read_text("assets/songs/packlist.txt");
 songs = [];
 
 menuenabled = true;
+
+stats = -1;

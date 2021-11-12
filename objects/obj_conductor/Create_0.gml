@@ -38,10 +38,6 @@ cond.stephit = true;
 cond.stepcrochet = cond.crochet/4;
 cond.section = 0;
 cond.sectioncount = 0;
-global.strumgroups = {
-	left: [ds_list_create(),ds_list_create(),ds_list_create(),ds_list_create()],
-	right: [ds_list_create(),ds_list_create(),ds_list_create(),ds_list_create()]
-}
 
 global.sections = [];
 
@@ -68,6 +64,7 @@ global.bpmchange = [];
 global.score = 0;
 global.misses = 0;
 global.combo = 0;
+global.highcombo = 0;
 
 // one of the only instances of this ever being used
 global.realscroll = global.options.scrollspeed == 0 ? chrt.song.speed/2.5 : global.options.scrollspeed/2.5;
@@ -82,7 +79,6 @@ display_set_gui_size(gui_width,gui_height);
 strum_spacing = 4;
 lastbeat = 0;
 laststep = 0;
-//notes = add_section(ds_list_create(),chrt.song.notes[0]);
 
 var ctr = 0;
 

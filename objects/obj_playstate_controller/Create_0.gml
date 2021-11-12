@@ -5,13 +5,15 @@ global.dadinstance = noone;
 global.bfinstance = noone;
 global.gfinstance = noone;
 
-if global.usenoteskin {
+
+if opt.usenoteskin {
 	var ndir = "assets/sprites/noteskins/" + global.curnoteskin + "/";
-	global.noteskin = sprite_add(ndir + "note.png",3,false,false,100,100);
-	global.noteskin_o = sprite_add(ndir + "note_overlay.png",3,false,false,100,100);
-	global.noteskin_tail = sprite_add(ndir + "tail.png",2,false,false,100,0);
-	global.noteskin_tailo = sprite_add(ndir + "tail_overlay.png",2,false,false,100,0);
 	global.noteopt = read_json(ndir + "skinoptions.json");
+	var nopt = global.noteopt;
+	global.noteskin = sprite_add(ndir + "note.png",3,false,false,nopt.size_note[0]/2,nopt.size_note[1]/2);
+	global.noteskin_o = sprite_add(ndir + "note_overlay.png",3,false,false,nopt.size_note[0]/2,nopt.size_note[1]/2);
+	global.noteskin_tail = sprite_add(ndir + "tail.png",2,false,false,nopt.size_tail[0]/2,0);
+	global.noteskin_tailo = sprite_add(ndir + "tail_overlay.png",2,false,false,nopt.size_tail[0]/2,0);
 }
 
 if opt.customization.usepreset {

@@ -167,3 +167,88 @@ function make_save(dir,temp) {
 	file_text_close(optionsfile);
 	opt = temp;	
 }
+
+function write_save(optfile) {
+	if file_exists(optfile) { file_delete(optfile) }
+	var wrfile = file_text_open_write(optfile);
+	file_text_write_string(wrfile,json_stringify(opt));
+	file_text_close(wrfile);	
+}
+
+function get_from_path(struct,path) {
+	var patharray = string_split(path,".");
+	
+	var finalval = 0;
+	
+	for (var i = 0; i < array_length(patharray); i += 1) {
+		finalval = variable_struct_get(struct,patharray[i]);
+	}
+	
+	return finalval;
+}
+
+function set_from_path(struct,path,val) {
+	var patharray = string_split(path,".");
+	
+	var finalval = 0;
+	
+	for (var i = 0; i < array_length(patharray); i += 1) {
+		finalval = variable_struct_get(struct,patharray[i]);
+	}
+	
+	finalval = val;
+}
+
+function write_score(song,diff,scr,combo,misses) {
+	var file = "scores.dat";
+	var scorelist = ds_map_secure_load(file);
+	if scorelist = -1 {
+		var templist = ds_map_create();
+		ds_map_secure_save(templist,file);
+		ds_map_destroy(templist);
+		scorelist = ds_map_secure_load(file);
+	}
+
+	var key = song + "-" + diff;
+	if !ds_map_exists(scorelist,key) {
+		ds_map_add(scorelist,key,json_stringify({
+			bestscore: scr,
+			bestcombo: combo,
+			leastmisses: misses
+		}));
+	}
+	else {
+		var map = json_parse(scorelist[? key]);
+		if map.bestscore < scr { map.bestscore = scr; }
+		if map.bestcombo < combo { map.bestcombo = combo; }
+		if map.leastmisses > misses { map.leastmisses = misses; }
+		scorelist[? key] = json_stringify(map);
+	}
+	
+	ds_map_secure_save(scorelist,file);
+	ds_map_destroy(scorelist);
+}
+
+function randomize_string(str,seed) {
+	random_set_seed(seed);
+	var newstr = str;
+	for (var i = 1; i < string_length(newstr); i += 1) {
+		var char = ord(string_char_at(newstr,i));
+		char += irandom_range(-3,3);
+		string_delete(newstr,i,1);
+		string_insert(chr(char),newstr,i);
+	}
+	return newstr;
+}
+
+function unrandomize_string(str,seed) {
+	random_set_seed(seed);
+	var newstr = str;
+	for (var i = 1; i < string_length(newstr); i += 1) {
+		var char = ord(string_char_at(newstr,i));
+		char -= irandom_range(-3,3);
+		string_delete(newstr,i,1);
+		string_insert(chr(char),newstr,i);
+	}
+	return newstr;
+}
