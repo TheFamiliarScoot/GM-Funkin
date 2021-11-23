@@ -90,6 +90,8 @@ if enabled {
 	
 			var endscale = (clamp(lengthdiff,0,endh)/endh)*-global.notescroll;
 			
+			var spec = opt.notetypes[note.special + 1];
+			
 			switch note.special {
 				case 0:
 					col1 = thistype.color;
@@ -102,6 +104,10 @@ if enabled {
 				case 2:
 					col1 = c_white;
 					col2 = c_lime;
+					break;
+				case 3:
+					col1 = c_yellow;
+					col2 = c_red;
 					break;
 			}
 			if !note.completed && !tailBounds {
@@ -152,6 +158,10 @@ if enabled {
 				if !note.hit && notecheck && !note.missed && !(note.special > 0) {
 					miss(tiedCharacter,-0.04,key);
 					note.missed = true;
+				}
+				else if !note.hit && notecheck && !note.missed && spec = 3 {
+					if opt.snoteinstakill { die(); }
+					else { change_hp(-0.2); }
 				}
 				
 			}

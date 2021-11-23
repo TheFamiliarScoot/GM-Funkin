@@ -5,12 +5,12 @@ for (var i = 0; i < array_length(choices); i += 1) {
 	var notselected = i != selection;
 	draw_font_text(choices[i],x+curdrawoffsetX+(i*multX),y+curdrawoffsetY+(i*multY),true,40,scale,false,notselected ? 0.5 : 1);
 }
-if keyboard_check_pressed(vk_up) {
+if input_check_pressed(vk_up, gp_padu) {
 	selection += 1;
 	if selection > length { selection = 0; }
 	audio_play_sound(snd_menu_scroll,0,false);
 }
-if keyboard_check_pressed(vk_down) {
+if input_check_pressed(vk_down, gp_padd) {
 	selection -= 1
 	if selection < 0 { selection = length; }
 	audio_play_sound(snd_menu_scroll,0,false);

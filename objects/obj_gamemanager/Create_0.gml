@@ -99,6 +99,14 @@ var tempoptions = {
 	noteskin: 0,
 	hpmult: 1,
 	hpgainmult: 1,
+	snoteinstakill: false,
+	notetypes: [
+		1,
+		2,
+		3,
+		-1,
+		-1
+	],
 	customization: {
 		usepreset: true,
 		preset: 0,
@@ -116,6 +124,26 @@ var tempoptions = {
 	build: 5
 }
 
+var file = working_directory + "keybinds.ini";
+if !file_exists(file) {
+	ini_open(file);
+	ini_write_real("Keys","Up",ord("W"));
+	ini_write_real("Keys","Down",ord("S"));
+	ini_write_real("Keys","Left",ord("A"));
+	ini_write_real("Keys","Right",ord("D"));
+}
+else {
+	ini_open(file);
+}
+
+global.keys = {up: ord("W"), down: ord("S"), left: ord("A"), right: ord("D")}
+global.keys.up = ini_read_real("Keys","Up",ord("W"));
+global.keys.down = ini_read_real("Keys","Down",ord("S"));
+global.keys.left = ini_read_real("Keys","Left",ord("A"));
+global.keys.right = ini_read_real("Keys","Right",ord("D"));
+
+ini_close();
+
 
 global.misses = 0;
 global.hp = 1;
@@ -127,6 +155,13 @@ global.paused = false;
 
 global.usepresetsetup = false;
 global.preset = "tutorial";
+
+global.notetypes = [
+	0,
+	1,
+	2,
+	3
+];
 
 var dir = global.gamedir + "\\options.json";
 if file_exists(dir) { 

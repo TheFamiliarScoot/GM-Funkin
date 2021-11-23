@@ -154,6 +154,17 @@ function key_to_string(k) {
 function bool_onoff(b) { return b ? "ON" : "OFF"; }
 function bool_yesno(b) { return b ? "YES" : "NO"; }
 
+function specialnote_to_string(t) {
+	var typenames = [
+		"NORMAL",
+		"HURT NOTE",
+		"HEAL NOTE",
+		"DODGE NOTE"
+	];
+	if t < 0 { return "DISABLED"; }
+	else { return string_upper(typenames[t]); }
+}
+
 function var_exists(v) {
 	try { show_debug_message(v);}
 	catch (lol) { return false; }
@@ -251,4 +262,19 @@ function unrandomize_string(str,seed) {
 		string_insert(chr(char),newstr,i);
 	}
 	return newstr;
+}
+
+function input_check(kb, gp = -1) {
+	if keyboard_check(kb) || gamepad_button_check(0, gp) { return true; }
+	else { return false; }
+}
+
+function input_check_pressed(kb, gp = -1) {
+	if keyboard_check_pressed(kb) || gamepad_button_check_pressed(0, gp) { return true; }
+	else { return false; }
+}
+
+function input_check_released(kb, gp = -1) {
+	if keyboard_check_released(kb) || gamepad_button_check_released(0, gp) { return true; }
+	else { return false; }
 }

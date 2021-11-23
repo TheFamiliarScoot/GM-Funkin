@@ -93,10 +93,22 @@ var strumKeys = [
 	global.keys.right
 ]
 
+var strumKeysGp = [
+	gp_shoulderlb,
+	gp_shoulderl,
+	gp_shoulderr,
+	gp_shoulderrb,
+	gp_shoulderlb,
+	gp_shoulderl,
+	gp_shoulderr,
+	gp_shoulderrb
+]
+
 repeat 8 {
 	with instance_create_layer(0,0,"UI",obj_blank) {
 		type = ctr;
 		thisKey = strumKeys[ctr];
+		thisKeyGP = strumKeysGp[ctr];
 		if type < 4 { 
 			tiedCharacter = global.dadinstance;
 			if global.options.player1 isbot = false else isbot = true; 
@@ -117,6 +129,8 @@ var curbpm = cond.bpm;
 var curpos = 0;
 
 var donotechecks = false;
+
+var strums = global.keyamt * 2;
 
 for (var h = 0; h < array_length(chrt.song.notes); h += 1) {
 	// more code to reference here because i'm stupid
@@ -161,12 +175,12 @@ for (var h = 0; h < array_length(chrt.song.notes); h += 1) {
 		var pos = notearray[0];
 		var typ = notearray[1];
 		var len = notearray[2];
-		
-		if typ > (global.keyamt*2) - 1 {
-			nspecial = 1;
-		}
+
+		if !(nspecial > 0) { nspecial = floor(typ / strums); }
 		
 		if !opt.specialnotes && nspecial > 0 { continue; }
+		
+		if nspecial > 0 && opt.notetypes[nspecial % 5] < 0 { continue; }
 		
 		var swap = chrt.song.notes[h].mustHitSection;
 		
@@ -176,19 +190,10 @@ for (var h = 0; h < array_length(chrt.song.notes); h += 1) {
 		
 		thisNote.special = nspecial;
 		
-//		var side = floor(typ / global.keyamt) % 2;
-	
-		if swap {
-			if typ >= global.keyamt {
-				add_note(global.sections[cond.sectioncount][0][(typ - global.keyamt) % global.keyamt],thisNote);
-			}
-			else {
-				add_note(global.sections[cond.sectioncount][1][typ % global.keyamt],thisNote);	
-			}
-		}
-		else {
-			add_note(global.sections[cond.sectioncount][floor(typ / global.keyamt) % 2][typ % global.keyamt],thisNote);
-		}
+		var rt = typ % global.keyamt;
+		var side = floor(typ / global.keyamt) % 2;
+
+		add_note(global.sections[cond.sectioncount][swap ? !side : side][rt],thisNote);
 		totalnotecount += 1;
 	}
 	var dsteps = chrt.song.notes[h].lengthInSteps;

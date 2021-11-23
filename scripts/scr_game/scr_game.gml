@@ -59,7 +59,13 @@ function change_hp (amt) {
 	if opt.player1 { check = global.hp >= global.maxhp }
 	else { check = global.hp <= 0 }
 
-	if check && opt.blueballing && !instance_exists(obj_gameover) {
+	if check { die(); }
+}
+
+function die() {
+	global.hp = opt.player1 * 2;
+	
+	if opt.blueballing && !instance_exists(obj_gameover) {
 		if room = room_play && !opt.player1 { 
 			instance_create_layer(global.bfobject.x,global.bfobject.y,"Instances",obj_gameover);
 		}

@@ -20,10 +20,14 @@ if ui.vis {
 		if cond.timeleft % 60 < 10 { secs = "0" + string(floor(cond.timeleft % 60)) }
 		else { secs = string(floor(cond.timeleft % 60)); }
 		
+		
+		
 		draw_set_halign(fa_center);
 		draw_set_valign(fa_center);
 		gpu_set_texfilter(false);
-		if !obj_conductor.countingdown draw_text_transformed(global.view_width/2,tdy,minutes + ":" + secs,2,2,0);
+		if instance_exists(obj_conductor) {
+			if !obj_conductor.countingdown draw_text_transformed(global.view_width/2,tdy,minutes + ":" + secs,2,2,0);
+		}
 		gpu_set_texfilter(opt.antialiasing);
 		draw_set_valign(fa_top);
 		draw_set_halign(fa_left);

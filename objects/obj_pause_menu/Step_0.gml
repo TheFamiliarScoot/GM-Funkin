@@ -1,4 +1,4 @@
-if keyboard_check_pressed(vk_enter) {
+if input_check_pressed(vk_enter, gp_face1) {
 	switch selections.selection {
 		case 0:
 			with obj_gamemanager event_user(0);

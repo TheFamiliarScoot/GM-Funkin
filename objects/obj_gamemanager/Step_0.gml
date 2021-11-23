@@ -1,4 +1,4 @@
-if keyboard_check_pressed(vk_enter) && !global.paused && room = room_play && !instance_exists(obj_gameover) && !obj_conductor.countingdown {
+if input_check_pressed(vk_enter, gp_start) && !global.paused && room = room_play && !instance_exists(obj_gameover) && !obj_conductor.countingdown {
 	global.paused = !global.paused;
 	if global.paused {
 		pausesprite = sprite_create_from_surface(application_surface,0,0,global.view_width*global.window_scale,global.view_height*global.window_scale,0,0,0,0);
@@ -12,3 +12,5 @@ if keyboard_check_pressed(vk_enter) && !global.paused && room = room_play && !in
 		instance_create_layer(0,0,"UI",obj_pause_menu);
 	}
 }
+
+if input_check_pressed(ord("R"), gp_select) { die(); }

@@ -7,16 +7,16 @@ if menuenabled {
 			draw_font_text("PACK CHOOSER",room_width/2,200,false,40,1,true);
 		
 			draw_font_text("<" + string_upper(packs[current]) + ">",room_width/2,400,false,40,1,true);
-			if keyboard_check_pressed(vk_left) {
+			if input_check_pressed(vk_left, gp_padl) {
 				current = (current - 1) % array_length(packs);
 				if current < 0 { current = array_length(packs) - 1; }
 				audio_play_sound(snd_menu_scroll,0,false);
 			}
-			if keyboard_check_pressed(vk_right) {
+			if input_check_pressed(vk_right, gp_padr) {
 				current = (current + 1) % array_length(packs);
 				audio_play_sound(snd_menu_scroll,0,false);
 			}
-			if keyboard_check_pressed(vk_enter) {
+			if input_check_pressed(vk_enter, gp_face1) {
 				if !directory_exists("assets/songs/" + packs[current]) {
 					play_miss_sfx();
 				}
@@ -28,14 +28,11 @@ if menuenabled {
 					audio_play_sound(snd_menu_confirm,0,false);
 				}
 			}
-			if keyboard_check_pressed(vk_tab) && !instance_exists(obj_transition) {
+			if input_check_pressed(vk_tab, gp_face4) && !instance_exists(obj_transition) {
 				room_transition(room_options);
 			}
-			if keyboard_check_pressed(vk_escape) {
-				game_end();
-			}
 		
-			draw_font_text("TAB: Options",0,global.view_height-40,false,40,0.5);
+			draw_font_text("TAB/Y: Options",0,global.view_height-40,false,40,0.5);
 			break;
 		case 2:
 			draw_font_text("DIFFICULTY",room_width/2,200,false,40,1,true);
@@ -54,16 +51,16 @@ if menuenabled {
 			}
 		
 			draw_font_text("<" + string_upper(difficulties[current]) + ">",room_width/2,400,false,40,1,true);
-			if keyboard_check_pressed(vk_left) {
+			if input_check_pressed(vk_left, gp_padl) {
 				current = (current - 1) % array_length(difficulties);
 				if current < 0 { current = array_length(difficulties) - 1; }
 				audio_play_sound(snd_menu_scroll,0,false);
 			}
-			if keyboard_check_pressed(vk_right) {
+			if input_check_pressed(vk_right, gp_padr) {
 				current = (current + 1) % array_length(difficulties);
 				audio_play_sound(snd_menu_scroll,0,false);
 			}
-			if keyboard_check_pressed(vk_enter) {
+			if input_check_pressed(vk_enter, gp_face1) {
 				var str = "assets/songs/" +
 					global.selectedpack +
 					"/" +
@@ -80,7 +77,7 @@ if menuenabled {
 					room_transition(room_play);
 				}
 			}
-			if keyboard_check_pressed(vk_escape) {
+			if input_check_pressed(vk_escape, gp_face2) {
 				audio_play_sound(snd_menu_cancel,0,false);
 				current = 0;
 				setupstate = 3;
@@ -91,16 +88,16 @@ if menuenabled {
 			draw_font_text("SONG CHOOSER",room_width/2,200,false,40,1,true);
 		
 			draw_font_text("<" + string_upper(songs[current]) + ">",room_width/2,400,false,40,1,true);
-			if keyboard_check_pressed(vk_left) {
+			if input_check_pressed(vk_left, gp_padl) {
 				current = (current - 1) % array_length(songs);
 				if current < 0 { current = array_length(songs) - 1; }
 				audio_play_sound(snd_menu_scroll,0,false);
 			}
-			if keyboard_check_pressed(vk_right) {
+			if input_check_pressed(vk_right, gp_padr) {
 				current = (current + 1) % array_length(songs);
 				audio_play_sound(snd_menu_scroll,0,false);
 			}
-			if keyboard_check_pressed(vk_enter) {
+			if input_check_pressed(vk_enter, gp_face1) {
 				if !directory_exists("assets/songs/" + global.selectedpack + "/" + songs[current]) {
 					play_miss_sfx();	
 				}
@@ -111,7 +108,7 @@ if menuenabled {
 					stats = ds_map_secure_load("scores.dat");
 				}
 			}
-			if keyboard_check_pressed(vk_escape) {
+			if input_check_pressed(vk_escape, gp_face2) {
 				audio_play_sound(snd_menu_cancel,0,false);
 				current = 0;
 				setupstate = 1;

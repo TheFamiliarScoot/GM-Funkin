@@ -3,10 +3,11 @@ var p = global.pixelui;
 var leniency = global.options.inputleniency * clamp(global.realscroll,1,1.5);
 var key = type % 4;
 var opponentcheck = (isbot && find_note_in_range(global.sections, cond.section, group, key, 0, 500) != noone);
-if (keyboard_check_pressed(thisKey) && !isbot) || opponentcheck {
+if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
 	if isbot { lastnote = find_note_in_range(global.sections,cond.section,group,key, 0, 500); }
 	else { lastnote = find_note_in_range(global.sections,cond.section,group,key, -leniency, leniency); }
 	if lastnote != noone {
+//		var spec = opt.notetypes[lastnote.special + 1];
 		if !(isbot && lastnote.special > 0) {
 			var k = type % 4;
 			var the = cond.notepos - lastnote.position;
@@ -25,12 +26,18 @@ if (keyboard_check_pressed(thisKey) && !isbot) || opponentcheck {
 					case 1:
 						with tiedCharacter event_user(k + 4);
 						if instance_exists(obj_conductor) obj_conductor.vocalsmuted = true;
-						change_hp(-0.2);
+						if opt.snoteinstakill { die(); }
+						else { change_hp(-0.2); }
 						break;
 					case 2:
 						with tiedCharacter event_user(k);
 						if instance_exists(obj_conductor) obj_conductor.vocalsmuted = false;
 						change_hp(0.2);
+						break;
+					case 3:
+//						with tiedCharacter event_user(k + 4);
+						if instance_exists(obj_conductor) obj_conductor.vocalsmuted = false;
+//						change_hp(-0.2);
 						break;
 				}
 			}
@@ -55,7 +62,7 @@ if (keyboard_check_pressed(thisKey) && !isbot) || opponentcheck {
 		}
 	}
 }
-if keyboard_check(thisKey) || (isbot && lastnote != noone && lastnote.length > 0) {
+if input_check(thisKey, thisKeyGP) || (isbot && lastnote != noone && lastnote.length > 0) {
 	if lastnote != noone {
 		var k = type % 4;
 		if !(lastnote.length < 0) && !(lastnote.covered >= lastnote.length) {
@@ -65,7 +72,7 @@ if keyboard_check(thisKey) || (isbot && lastnote != noone && lastnote.length > 0
 		else { lastnote.completed = true; }
 	}
 }
-if !isbot && keyboard_check_released(thisKey) {
+if !isbot && input_check_released(thisKey, thisKeyGP) {
 	var k = type % 4;
 	if lastnote != noone {
 		// leniency check - lets you off if you at least covered MOST of the note

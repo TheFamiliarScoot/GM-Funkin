@@ -536,6 +536,11 @@
     {"CopyToMask":-1,"filePath":"datafiles/assets/sprites/noteskins/sm","resourceVersion":"1.0","name":"note.png","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/assets/sprites/noteskins/sm","resourceVersion":"1.0","name":"tail.png","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/assets/sprites/noteskins/sm","resourceVersion":"1.0","name":"tail_overlay.png","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/assets/songs/hank/accelerant","resourceVersion":"1.0","name":"accelerant-hard.json","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/assets/songs/hank/accelerant","resourceVersion":"1.0","name":"accelerant.json","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/assets/songs/hank/accelerant","resourceVersion":"1.0","name":"Inst.ogg","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/assets/songs/hank/accelerant","resourceVersion":"1.0","name":"Voices.ogg","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/assets/songs/hank","resourceVersion":"1.0","name":"songlist.txt","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
     "IDEVersion": "2.3.6.595",
