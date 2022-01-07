@@ -6,6 +6,7 @@
 #macro ins global.inst
 #macro opt global.options
 #macro keybind global.keys
+#macro buttonbind global.buttons
 
 #macro intfps = 120;
 
@@ -131,6 +132,10 @@ if !file_exists(file) {
 	ini_write_real("Keys","Down",ord("S"));
 	ini_write_real("Keys","Left",ord("A"));
 	ini_write_real("Keys","Right",ord("D"));
+	ini_write_real("Buttons","Up",gp_shoulderr);
+	ini_write_real("Buttons","Down",gp_shoulderl);
+	ini_write_real("Buttons","Left",gp_shoulderlb);
+	ini_write_real("Buttons","Right",gp_shoulderrb);
 }
 else {
 	ini_open(file);
@@ -142,6 +147,12 @@ global.keys.down = ini_read_real("Keys","Down",ord("S"));
 global.keys.left = ini_read_real("Keys","Left",ord("A"));
 global.keys.right = ini_read_real("Keys","Right",ord("D"));
 
+global.buttons = {up: gp_shoulderr, down: gp_shoulderl, left: gp_shoulderlb, right: gp_shoulderrb};
+global.buttons.up =	ini_read_real("Buttons","Up",gp_shoulderr);
+global.buttons.down = ini_read_real("Buttons","Down",gp_shoulderl);
+global.buttons.left = ini_read_real("Buttons","Left",gp_shoulderlb);
+global.buttons.right = ini_read_real("Buttons","Right",gp_shoulderrb);
+
 ini_close();
 
 
@@ -150,6 +161,15 @@ global.hp = 1;
 global.maxhp = 2;
 global.combo = 0;
 global.highcombo = 0;
+global.ratings = {
+	shit: 0,
+	bad: 0,
+	good: 0,
+	sick: 0
+}
+global.notesplayed = 0;
+global.noteshit = 0;
+global.accuracy = -1;
 
 global.paused = false;
 
@@ -291,3 +311,5 @@ randomstr = randomize_string(randomstr,42069);
 show_debug_message(randomstr);
 randomstr = unrandomize_string(randomstr,42069);
 show_debug_message(randomstr);
+
+show_debug_message(global.buttons);

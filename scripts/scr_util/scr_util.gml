@@ -210,7 +210,7 @@ function set_from_path(struct,path,val) {
 	finalval = val;
 }
 
-function write_score(song,diff,scr,combo,misses) {
+function write_score(song,diff,scr,combo,misses,rating,acc) {
 	var file = "scores.dat";
 	var scorelist = ds_map_secure_load(file);
 	if scorelist = -1 {
@@ -225,7 +225,9 @@ function write_score(song,diff,scr,combo,misses) {
 		ds_map_add(scorelist,key,json_stringify({
 			bestscore: scr,
 			bestcombo: combo,
-			leastmisses: misses
+			leastmisses: misses,
+			ratings: rating,
+			highestaccuracy: acc
 		}));
 	}
 	else {
@@ -233,6 +235,11 @@ function write_score(song,diff,scr,combo,misses) {
 		if map.bestscore < scr { map.bestscore = scr; }
 		if map.bestcombo < combo { map.bestcombo = combo; }
 		if map.leastmisses > misses { map.leastmisses = misses; }
+		if map.ratings.sick < rating.sick { map.ratings.sick = rating.sick; }
+		if map.ratings.good < rating.good { map.ratings.good = rating.good; }
+		if map.ratings.bad < rating.bad { map.ratings.bad = rating.bad; }
+		if map.ratings.shit < rating.shit { map.ratings.shit = rating.shit; }
+		if map.highestaccuracy < acc { map.highestaccuracy = acc; }
 		scorelist[? key] = json_stringify(map);
 	}
 	
@@ -277,4 +284,56 @@ function input_check_pressed(kb, gp = -1) {
 function input_check_released(kb, gp = -1) {
 	if keyboard_check_released(kb) || gamepad_button_check_released(0, gp) { return true; }
 	else { return false; }
+}
+
+function check_controller_buttons() {
+	var buttons = [
+		gp_face1,
+		gp_face2,
+		gp_face3,
+		gp_face4,
+		gp_shoulderl,
+		gp_shoulderlb,
+		gp_shoulderr,
+		gp_shoulderrb,
+		gp_stickl,
+		gp_stickr,
+		gp_padu,
+		gp_padd,
+		gp_padl,
+		gp_padr
+	];
+	
+	for (var i = 0; i < array_length(buttons); i += 1) {
+		if gamepad_button_check_pressed(0, buttons[i]) { return buttons[i]; }
+	}
+	return -1;
+}
+
+function button_to_string(but) {
+	switch but {
+		case 0: return "...";
+		case gp_face1: return "FACE BUTTON 1";
+		case gp_face2: return "FACE BUTTON 2";
+		case gp_face3: return "FACE BUTTON 3";
+		case gp_face4: return "FACE BUTTON 4";
+		case gp_shoulderl: return "LEFT SHOULDER";
+		case gp_shoulderr: return "RIGHT SHOULDER";
+		case gp_shoulderlb: return "LEFT TRIGGER";
+		case gp_shoulderrb: return "RIGHT TRIGGER";
+		case gp_stickl: return "L3";
+		case gp_stickr: return "R3";
+		case gp_padu: return "DPAD UP";
+		case gp_padd: return "DPAD DOWN";
+		case gp_padl: return "DPAD LEFT";
+		case gp_padr: return "DPAD RIGHT";
+		default: return "?";
+	}
+}
+
+function get_score(key) {
+	if !ds_exists(global.stats, ds_type_map) {
+		global.stats = try_load_scores("scores.dat")
+	}
+	return global.stats[? key];
 }

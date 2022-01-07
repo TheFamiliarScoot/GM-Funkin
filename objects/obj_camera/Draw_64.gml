@@ -76,8 +76,20 @@ if ui.vis {
 	var centerx = global.view_width/2;
 	var centery = useds ? 80 : global.view_height - 50;
 	var scoretext = "";
+	var acc = "???"
+	if global.accuracy > 0 { acc = string(global.accuracy) + "%"; }
 	if opt.botplay && !opt.player1 { scoretext = "BOTPLAY"; }
-	else { scoretext = "Score: " + string(global.score) + " | Misses: " + string(global.misses); }
+	else { scoretext =
+		"Score: " + string(global.score) +
+		" | Misses: " + string(global.misses) +
+		" | Accuracy: " + acc;
+	}
+	var ratingtext = 
+		"Sicks: " + string(global.ratings.sick) + "\n" +
+		"Goods: " + string(global.ratings.good) + "\n" +
+		"Bads: " + string(global.ratings.bad) + "\n" +
+		"Shits: " + string(global.ratings.shit) + "\n" +
+		"Highest Combo: " + string(global.highcombo);
 	draw_set_color(c_black);
 	draw_text(centerx+1,centery,scoretext);
 	draw_text(centerx-1,centery,scoretext);
@@ -86,6 +98,15 @@ if ui.vis {
 	draw_set_color(c_white);
 	draw_text(centerx,centery,scoretext);
 	draw_set_halign(fa_left);
+	draw_set_valign(fa_bottom);
+	draw_set_color(c_black);
+	draw_text(1,centery,ratingtext);
+	draw_text(-1,centery,ratingtext);
+	draw_text(0,centery+1,ratingtext);
+	draw_text(0,centery-1,ratingtext);
+	draw_set_color(c_white);
+	draw_text(0,centery,ratingtext);
+	draw_set_valign(fa_top);
 
 	surface_reset_target();
 	if global.pixelui { gpu_set_texfilter(false); }

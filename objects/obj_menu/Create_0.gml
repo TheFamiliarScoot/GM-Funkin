@@ -8,13 +8,14 @@ setupstate = 1;
 
 current = 0;
 
-global.selectedsong = "";
+global.selectedsong = {};
 global.selecteddifficulty = "";
 global.selectedpack = "";
 
-packs = read_text("assets/songs/packlist.txt");
+packs = get_packs("assets/songs");
 songs = [];
 
 menuenabled = true;
 
-stats = -1;
+global.stats = try_load_scores("scores.dat")
+deletingstats = false;

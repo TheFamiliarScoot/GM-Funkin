@@ -158,12 +158,13 @@ if enabled {
 				if !note.hit && notecheck && !note.missed && !(note.special > 0) {
 					miss(tiedCharacter,-0.04,key);
 					note.missed = true;
+					global.notesplayed += 1;
+					recalc_accuracy();
 				}
 				else if !note.hit && notecheck && !note.missed && spec = 3 {
 					if opt.snoteinstakill { die(); }
 					else { change_hp(-0.2); }
 				}
-				
 			}
 
 			++ctr;

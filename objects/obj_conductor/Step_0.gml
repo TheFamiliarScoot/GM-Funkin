@@ -95,7 +95,7 @@ if !stepmode && !global.paused {
 if FMODGMS_Chan_Get_Position(chi) >= FMODGMS_Snd_Get_Length(ins) && !instance_exists(obj_transition) {
 	room_transition(room_menu);
 	if !opt.botplay {
-		write_score(global.selectedsong,global.selecteddifficulty,global.score,global.highcombo,global.misses);
+		write_score(global.selectedsong.name,global.selecteddifficulty,global.score,global.highcombo,global.misses,global.ratings,global.accuracy);
 	}
 }
 

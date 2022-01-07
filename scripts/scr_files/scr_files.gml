@@ -38,3 +38,65 @@ function difficulty_to_file(song,diff) {
 	if diff != "normal" {diffaddstring = "-" + diff}
 	return song + diffaddstring + ".json";
 }
+
+function get_packs(dir) {
+	var packs = []
+	var file = file_find_first(dir + "/*",fa_directory)
+	if file != "" {
+		while file != "" {
+			if directory_exists(dir + "/" + file) {
+				if file_exists(dir + "/" + file + "/songlist.txt") {
+					array_push(packs,file);	
+				}
+			}
+			file = file_find_next();
+		}
+	}
+	file_find_close();
+	
+	return packs;
+}
+
+function get_songs(pack) {
+	var list = read_text("assets/songs/" + pack + "/songlist.txt");
+	var songs = []
+	
+	for (var i = 0; i < array_length(list); i += 1) {
+		try {
+			var finalsong = {
+				name: "",
+				difficulties: []
+			}
+			var split = string_split(list[i],":");
+			finalsong.name = split[0];
+			if array_length(split) < 2 {
+				finalsong.difficulties = ["easy","normal","hard"];
+			}
+			else {
+				var diffs = string_split(split[1],",");
+				if diffs[0] = "" && array_length(diffs) = 1 {
+					finalsong.difficulties = ["easy","normal","hard"];	
+				}
+				else {
+					finalsong.difficulties = diffs;
+				}
+			}
+			array_push(songs,finalsong);
+		}
+		catch (e) {
+			show_debug_message("weird malformity in songlist.txt");
+		}
+	}
+	show_debug_message(songs);
+	return songs;
+}
+
+function try_load_scores(file) {
+	var stats = ds_map_secure_load(file);
+	if !ds_exists(stats, ds_type_map) {
+		show_debug_message("did not load")
+		stats = ds_map_create();
+	}
+	ds_map_add(stats,"dummy",-69);
+	return stats;
+}

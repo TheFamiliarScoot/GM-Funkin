@@ -22,7 +22,7 @@ if menuenabled {
 				}
 				else {
 					global.selectedpack = packs[current];
-					songs = read_text("assets/songs/" + packs[current] + "/songlist.txt");
+					songs = get_songs(global.selectedpack);
 					current = 0;
 					setupstate = 3;
 					audio_play_sound(snd_menu_confirm,0,false);
@@ -36,18 +36,29 @@ if menuenabled {
 			break;
 		case 2:
 			draw_font_text("DIFFICULTY",room_width/2,200,false,40,1,true);
-			var difficulties = ["easy","normal","hard"];
+			var difficulties = global.selectedsong.difficulties
 			
-			var skey = global.selectedsong + "-" + difficulties[current];
-			if ds_map_exists(stats,skey) {
-				var j = json_parse(stats[? skey]);
+			var skey = global.selectedsong.name + "-" + difficulties[current];
+			if !ds_exists(global.stats, ds_type_map) { global.stats = try_load_scores("scores.dat") }
+			if ds_map_exists(global.stats,skey) {
+				var j = json_parse(global.stats[? skey]);
 
-				draw_font_text("Highscore: " + string(j.bestscore),room_width/2,room_height-100,false,40,0.6,true);
-				draw_font_text("Highest Combo: " + string(j.bestcombo),room_width/2,room_height-65,false,40,0.6,true);
-				draw_font_text("Least Misses: " + string(j.leastmisses),room_width/2,room_height-30,false,40,0.6,true);
+				draw_font_text("Highscore: " + string(j.bestscore),room_width/2,room_height-160,false,40,0.6,true);
+				draw_font_text("Highest Combo: " + string(j.bestcombo),room_width/2,room_height-130,false,40,0.6,true);
+				draw_font_text("Least Misses: " + string(j.leastmisses),room_width/2,room_height-100,false,40,0.6,true);
+				draw_font_text("Highest Accuracy: " + string(j.highestaccuracy),room_width/2,room_height-65,false,40,0.6,true);
+				var ratingtext = 
+					"Sicks: " + string(j.ratings.sick) + ", " +
+					"Goods: " + string(j.ratings.good) + ", " +
+					"Bads: " + string(j.ratings.bad) + ", " +
+					"Shits: " + string(j.ratings.shit) + ", ";
+				draw_font_text(ratingtext,room_width/2,room_height-30,false,40,0.6,true);
+			}
+			else if deletingstats {
+				draw_font_text("Delete these stats?\nPress DEL again to confirm",room_width/2,room_height-100,false,40,0.6,true);	
 			}
 			else {
-				draw_font_text("No stats for this song",room_width/2,room_height-100,false,40,0.6,true);
+				draw_font_text("No stats for this song",room_width/2,room_height-100,false,40,0.6,true);		
 			}
 		
 			draw_font_text("<" + string_upper(difficulties[current]) + ">",room_width/2,400,false,40,1,true);
@@ -64,9 +75,9 @@ if menuenabled {
 				var str = "assets/songs/" +
 					global.selectedpack +
 					"/" +
-					global.selectedsong +
+					global.selectedsong.name +
 					"/" +
-					difficulty_to_file(global.selectedsong,difficulties[current]);
+					difficulty_to_file(global.selectedsong.name,difficulties[current]);
 				if !file_exists(str) {
 					play_miss_sfx();
 				}
@@ -81,13 +92,24 @@ if menuenabled {
 				audio_play_sound(snd_menu_cancel,0,false);
 				current = 0;
 				setupstate = 3;
-				ds_map_destroy(stats);
+				ds_map_destroy(global.stats);
+			}
+			if keyboard_check_pressed(vk_delete) {
+				if deletingstats {
+					ds_map_delete(global.stats,skey);
+					ds_map_secure_save(global.stats,"scores.dat");
+					audio_play_sound(snd_menu_confirm,0,false);
+					deletingstats = false;
+				}
+				else {
+					deletingstats = true;
+				}
 			}
 			break;
 		case 3:
 			draw_font_text("SONG CHOOSER",room_width/2,200,false,40,1,true);
 		
-			draw_font_text("<" + string_upper(songs[current]) + ">",room_width/2,400,false,40,1,true);
+			draw_font_text("<" + string_upper(songs[current].name) + ">",room_width/2,400,false,40,1,true);
 			if input_check_pressed(vk_left, gp_padl) {
 				current = (current - 1) % array_length(songs);
 				if current < 0 { current = array_length(songs) - 1; }
@@ -98,14 +120,13 @@ if menuenabled {
 				audio_play_sound(snd_menu_scroll,0,false);
 			}
 			if input_check_pressed(vk_enter, gp_face1) {
-				if !directory_exists("assets/songs/" + global.selectedpack + "/" + songs[current]) {
+				if !directory_exists("assets/songs/" + global.selectedpack + "/" + songs[current].name) {
 					play_miss_sfx();	
 				}
 				else {
 					global.selectedsong = songs[current];
 					current = 0;
 					setupstate = 2;
-					stats = ds_map_secure_load("scores.dat");
 				}
 			}
 			if input_check_pressed(vk_escape, gp_face2) {

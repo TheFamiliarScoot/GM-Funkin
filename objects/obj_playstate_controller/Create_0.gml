@@ -41,3 +41,4 @@ object = obj_gfspawn
 if !gfisdad { global.gfinstance = spawn_char(object.x,object.y,object.layer,2,global.gfobject); }
 
 if !opt.nobg { instance_create_layer(0,0,layer,global.bgobject); }
+else { instance_create_layer(0,0,layer,obj_static_bg) }

@@ -18,7 +18,12 @@ if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
 				if global.combo > global.highcombo {
 					global.highcombo = global.combo;
 				}
-				rate(the);		
+				rate(the);
+				if lastnote.length <= 0 {
+					global.notesplayed += 1;
+					global.noteshit += 1;
+					recalc_accuracy();
+				}
 				show_debug_message(global.combo);
 			}
 			if lastnote.special > 0 {
@@ -69,17 +74,28 @@ if input_check(thisKey, thisKeyGP) || (isbot && lastnote != noone && lastnote.le
 			lastnote.covered += cond.notepos - lasttime;
 			with tiedCharacter { event_user(k); }
 		}
-		else { lastnote.completed = true; }
+		else { 
+			lastnote.completed = true;
+		}
 	}
 }
 if !isbot && input_check_released(thisKey, thisKeyGP) {
 	var k = type % 4;
 	if lastnote != noone {
 		// leniency check - lets you off if you at least covered MOST of the note
-		if lastnote.length - lastnote.covered < 100 { lastnote.completed = true; }
+		if lastnote.length - lastnote.covered < 100 { 
+			lastnote.completed = true;
+			if lastnote.length > 0 {
+				global.noteshit += 1;				
+			}
+		}
 		else if global.options.missnotes {
 			miss(tiedCharacter,-0.075,key);
 			lastnote.missed = true;
+		}
+		if lastnote.length > 0 {
+			global.notesplayed += 1;
+			recalc_accuracy();
 		}
 		lastnote = noone;
 	}

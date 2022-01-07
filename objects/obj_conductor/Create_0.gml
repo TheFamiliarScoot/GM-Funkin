@@ -1,16 +1,16 @@
 var diffaddstring = "";
 if global.selecteddifficulty != "normal" {diffaddstring = "-" + global.selecteddifficulty}
 
-jsonlocation = "assets\\songs\\" + global.selectedpack + "\\" + global.selectedsong + "\\" + global.selectedsong + diffaddstring + ".json";
+jsonlocation = "assets\\songs\\" + global.selectedpack + "\\" + global.selectedsong.name + "\\" + global.selectedsong.name + diffaddstring + ".json";
 chrt = read_json(jsonlocation);
 
-songlocation = "assets\\songs\\" + global.selectedpack + "\\" + global.selectedsong + "\\Inst.ogg";
+songlocation = "assets\\songs\\" + global.selectedpack + "\\" + global.selectedsong.name + "\\Inst.ogg";
 if !file_exists(songlocation) {
 	show_message("Couldn't find the instrumental! :(");
 	game_end();
 }
 ins = FMODGMS_Snd_LoadSound(songlocation);
-vocalslocation = "assets\\songs\\" + global.selectedpack + "\\" + global.selectedsong + "\\Voices.ogg";
+vocalslocation = "assets\\songs\\" + global.selectedpack + "\\" + global.selectedsong.name + "\\Voices.ogg";
 if file_exists(vocalslocation) { voc = FMODGMS_Snd_LoadSound(vocalslocation); }
 else { voc = "none" }
 
@@ -65,6 +65,15 @@ global.score = 0;
 global.misses = 0;
 global.combo = 0;
 global.highcombo = 0;
+global.accuracy = 0;
+global.notesplayed = 0;
+global.noteshit = 0;
+global.ratings = {
+	sick: 0,
+	good: 0,
+	bad: 0,
+	shit: 0
+}
 
 // one of the only instances of this ever being used
 global.realscroll = global.options.scrollspeed == 0 ? chrt.song.speed/2.5 : global.options.scrollspeed/2.5;

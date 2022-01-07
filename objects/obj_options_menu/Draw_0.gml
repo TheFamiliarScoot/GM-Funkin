@@ -1,5 +1,6 @@
 draw_self();
 draw_font_text(title,room_width/2,40+ybegin,true,40,1,true);
+draw_font_text(check_controller_buttons(),0,40,false);
 
 if opt.scrollspeed = 0 { ss = "USE CHART'S"; }
 else { ss = string(opt.scrollspeed)	}
@@ -10,7 +11,7 @@ switch submenu {
 			case 0: // keybinds
 				if input_check_pressed(vk_enter, gp_face1) { 
 					submenu = 11;
-					title = "KEYBINDS";
+					title = "BINDINGS";
 					selection = 0;
 					ybegin = 160;
 					var file = working_directory + "keybinds.ini";
@@ -41,25 +42,33 @@ switch submenu {
 		}
 		break;
 	case 11: // keybinds
-		if input_check_pressed(vk_enter, gp_face1) && !changing {
-			changing = true;
-			switch selection {
-				case 0: previouskey = keybind.left; keybind.left = 0; break;
-				case 1: previouskey = keybind.down; keybind.down = 0; break;
-				case 2: previouskey = keybind.up; keybind.up = 0; break;
-				case 3: previouskey = keybind.right; keybind.right = 0; break;
+		if selection != 0 {
+			if input_check_pressed(vk_enter, gp_face1) && !changing {
+				changing = true;
+				switch selection {
+					case 1: previouskey = keybind.left; keybind.left = 0; break;
+					case 2: previouskey = keybind.down; keybind.down = 0; break;
+					case 3: previouskey = keybind.up; keybind.up = 0; break;
+					case 4: previouskey = keybind.right; keybind.right = 0; break;
+				}
+			}
+			if keyboard_lastkey != -1 && changing && keyboard_lastkey != vk_enter && keyboard_lastkey != vk_escape {
+				newkey = keyboard_lastkey;
+				keyboard_lastkey = -1;
+				switch selection {
+					case 1: keybind.left = newkey; break;
+					case 2: keybind.down = newkey; break;
+					case 3: keybind.up = newkey; break;
+					case 4: keybind.right = newkey; break;
+				}
+				changing = false;
 			}
 		}
-		if input_lastkey != -1 && changing && input_lastkey != vk_enter && input_lastkey != vk_escape {
-			newkey = input_lastkey;
-			input_lastkey = -1;
-			switch selection {
-				case 0: keybind.left = newkey; break;
-				case 1: keybind.down = newkey; break;
-				case 2: keybind.up = newkey; break;
-				case 3: keybind.right = newkey; break;
+		else {
+			if input_check_pressed(vk_enter, gp_face1) {
+				submenu = 18;
+				selection = 0;
 			}
-			changing = false;
 		}
 		break;
 	case 12: // gameplay
@@ -244,7 +253,40 @@ switch submenu {
 				break;
 		}
 		break;
-		
+	case 18: // controller keybinds
+		if selection != 0 {
+			if input_check_pressed(vk_enter, gp_face1) && !changing {
+				changing = true;
+				switch selection {
+					case 1: previouskey = buttonbind.left; buttonbind.left = 0; break;
+					case 2: previouskey = buttonbind.down; buttonbind.down = 0; break;
+					case 3: previouskey = buttonbind.up; buttonbind.up = 0; break;
+					case 4: previouskey = buttonbind.right; buttonbind.right = 0; break;
+				}
+			}
+			var button = check_controller_buttons();
+			if changing && button != -1 && button != gp_face2 {
+				newkey = button;
+				switch selection {
+					case 1: buttonbind.left = newkey; break;
+					case 2: buttonbind.down = newkey; break;
+					case 3: buttonbind.up = newkey; break;
+					case 4: buttonbind.right = newkey; break;
+				}
+				changing = false;
+			}
+		}
+		else {
+			if input_check_pressed(vk_enter, gp_face1) {
+				submenu = 11;
+				selection = 0;
+			}
+		}
+		var gpstring = "No Controller Connected";
+		if gamepad_is_connected(0) {
+			gpstring = "Connected Controller: " + gamepad_get_description(0);
+		}
+		draw_font_text(gpstring, room_width/2, room_height - 40, false, 40, 0.5, true);
 }
 
 switch submenu {
@@ -257,6 +299,7 @@ switch submenu {
 		break;
 	case 11:
 		choices = [
+			"KEYBOARD",
 			"KEY LEFT: " + key_to_string(keybind.left),
 			"KEY DOWN: " + key_to_string(keybind.down),
 			"KEY UP: " + key_to_string(keybind.up),
@@ -283,7 +326,7 @@ switch submenu {
 			"IN-GAME OPTIONS",
 			"ANTIALIASING: " + bool_onoff(opt.antialiasing),
 			"HEALTH BAR COLORS: " + bool_onoff(opt.specialcolors),
-			"NO BACKGROUND: " + bool_yesno(opt.nobg),
+			"STATIC BACKGROUND: " + bool_yesno(opt.nobg),
 			"TIME DISPLAY: " + bool_onoff(opt.timedisplay),
 			"NOTE SKINS"
 		];
@@ -329,6 +372,15 @@ switch submenu {
 			"NOTE TYPE 5: " + specialnote_to_string(opt.notetypes[4])
 		]
 		break;
+	case 18:
+		choices = [
+			"CONTROLLER",
+			"BUTTON LEFT: " + button_to_string(keybind.left),
+			"BUTTON DOWN: " + button_to_string(keybind.down),
+			"BUTTON UP: " + button_to_string(keybind.up),
+			"BUTTON RIGHT: " + button_to_string(keybind.right)
+		];
+		break;
 }
 
 for (var i = 0; i < array_length(choices); i += 1) {
@@ -344,12 +396,25 @@ if selection < 0 { selection = array_length(choices) - 1; }
 
 if input_check_pressed(vk_escape, gp_face2) && !instance_exists(obj_transition) {
 	if changing {
-		switch selection {
-			case 0: keybind.left = previouskey; break;
-			case 1: keybind.down = previouskey; break;
-			case 2: keybind.up = previouskey; break;
-			case 3: keybind.right = previouskey; break;
+		switch submenu {
+			case 11:
+				switch selection {
+					case 1: keybind.left = previouskey; break;
+					case 2: keybind.down = previouskey; break;
+					case 3: keybind.up = previouskey; break;
+					case 4: keybind.right = previouskey; break;
+				}		
+				break;
+			case 18:
+				switch selection {
+					case 1: buttonbind.left = previouskey; break;
+					case 2: buttonbind.down = previouskey; break;
+					case 3: buttonbind.up = previouskey; break;
+					case 4: buttonbind.right = previouskey; break;
+				}		
+				break;
 		}
+
 		changing = false;
 	}
 	else {
@@ -364,6 +429,10 @@ if input_check_pressed(vk_escape, gp_face2) && !instance_exists(obj_transition) 
 				ini_write_real("Keys","Down",keybind.down);
 				ini_write_real("Keys","Left",keybind.left);
 				ini_write_real("Keys","Right",keybind.right);
+				ini_write_real("Buttons","Up",buttonbind.up);
+				ini_write_real("Buttons","Down",buttonbind.down);
+				ini_write_real("Buttons","Left",buttonbind.left);
+				ini_write_real("Buttons","Right",buttonbind.right);
 				ini_close();
 				selection = 0;
 				title = "OPTIONS";
@@ -411,6 +480,21 @@ if input_check_pressed(vk_escape, gp_face2) && !instance_exists(obj_transition) 
 				title = "GAMEPLAY";
 				ybegin = 15;
 				submenu = 12;
+				break;
+			case 18:
+				ini_write_real("Keys","Up",keybind.up);
+				ini_write_real("Keys","Down",keybind.down);
+				ini_write_real("Keys","Left",keybind.left);
+				ini_write_real("Keys","Right",keybind.right);
+				ini_write_real("Buttons","Up",buttonbind.up);
+				ini_write_real("Buttons","Down",buttonbind.down);
+				ini_write_real("Buttons","Left",buttonbind.left);
+				ini_write_real("Buttons","Right",buttonbind.right);
+				ini_close();
+				selection = 0;
+				title = "OPTIONS";
+				submenu = 10;
+				ybegin = 180;
 				break;
 		}
 	}

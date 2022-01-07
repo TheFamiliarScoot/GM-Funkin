@@ -28,10 +28,10 @@ function rate(ms) {
 	}
 	
 	switch rat {
-		case "sick": ind = 0; global.score += 350; change_hp(0.1); break;
-		case "good": ind = 1; global.score += 200; change_hp(0.04); break;
-		case "bad": ind = 2; change_hp(-0.06); break;
-		case "shit": ind = 3; global.score -= 300; change_hp(-0.2); break;
+		case "sick": ind = 0; global.score += 350; change_hp(0.1); global.ratings.sick += 1 break;
+		case "good": ind = 1; global.score += 200; change_hp(0.04); global.ratings.good += 1 break;
+		case "bad": ind = 2; change_hp(-0.06); global.ratings.bad += 1 break;
+		case "shit": ind = 3; global.score -= 300; change_hp(-0.2); global.ratings.shit += 1 break;
 		default: ind = 0; break;
 	}
 	
@@ -40,4 +40,8 @@ function rate(ms) {
 		time = ms;
 		instance_change(obj_rating,true);
 	}
+}
+
+function recalc_accuracy() {
+	global.accuracy = max(0, global.noteshit / global.notesplayed * 100)	
 }
