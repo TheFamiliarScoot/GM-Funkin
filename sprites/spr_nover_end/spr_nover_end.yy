@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_nover_end","path":"sprites/spr_nover_end/spr_nover_end.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_nover_end",
     "tags": [],
     "resourceType": "GMSequence",

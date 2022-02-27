@@ -215,7 +215,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_bg_evilschool","path":"sprites/spr_bg_evilschool/spr_bg_evilschool.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_bg_evilschool",
     "tags": [],
     "resourceType": "GMSequence",

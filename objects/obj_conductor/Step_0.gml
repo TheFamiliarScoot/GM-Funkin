@@ -38,8 +38,15 @@ try {
 }
 catch (a) { 
 	cursection = {
-		mustHitSection: false	
+		mustHitSection: false,
+		gfSection: false
 	}
+}
+if variable_struct_exists(cursection,"gfSection") {
+	global.gfsection = cursection.gfSection	
+}
+else {
+	global.gfsection = false
 }
 
 /*
@@ -71,7 +78,10 @@ catch (e3) {
 }
 */
 try {
-	if cursection.mustHitSection { global.target = global.bfinstance; }
+	if cursection.mustHitSection { 
+		if global.gfsection { global.target = global.gfinstance; }
+		else { global.target = global.bfinstance; }
+	}
 	else { global.target = global.dadinstance; }
 }
 catch (wtf) {}

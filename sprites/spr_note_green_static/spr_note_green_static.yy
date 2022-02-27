@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_note_green_static","path":"sprites/spr_note_green_static/spr_note_green_static.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_note_green_static",
     "tags": [],
     "resourceType": "GMSequence",

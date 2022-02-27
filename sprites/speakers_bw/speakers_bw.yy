@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"speakers_bw","path":"sprites/speakers_bw/speakers_bw.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "speakers_bw",
     "tags": [],
     "resourceType": "GMSequence",

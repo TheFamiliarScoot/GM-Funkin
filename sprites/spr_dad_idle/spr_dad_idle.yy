@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_dad_idle","path":"sprites/spr_dad_idle/spr_dad_idle.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_dad_idle",
     "tags": [],
     "resourceType": "GMSequence",

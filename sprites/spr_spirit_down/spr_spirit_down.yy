@@ -135,7 +135,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_spirit_down","path":"sprites/spr_spirit_down/spr_spirit_down.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_spirit_down",
     "tags": [],
     "resourceType": "GMSequence",

@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_bf_die_retry","path":"sprites/spr_bf_die_retry/spr_bf_die_retry.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_bf_die_retry",
     "tags": [],
     "resourceType": "GMSequence",

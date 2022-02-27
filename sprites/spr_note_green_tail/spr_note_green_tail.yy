@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_note_green_tail","path":"sprites/spr_note_green_tail/spr_note_green_tail.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_note_green_tail",
     "tags": [],
     "resourceType": "GMSequence",

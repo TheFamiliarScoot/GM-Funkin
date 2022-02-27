@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_dad_up","path":"sprites/spr_dad_up/spr_dad_up.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_dad_up",
     "tags": [],
     "resourceType": "GMSequence",

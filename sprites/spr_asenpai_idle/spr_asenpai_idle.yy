@@ -75,7 +75,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_asenpai_idle","path":"sprites/spr_asenpai_idle/spr_asenpai_idle.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_asenpai_idle",
     "tags": [],
     "resourceType": "GMSequence",

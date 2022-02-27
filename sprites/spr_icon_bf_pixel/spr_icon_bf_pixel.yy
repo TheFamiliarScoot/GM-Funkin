@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_icon_bf_pixel","path":"sprites/spr_icon_bf_pixel/spr_icon_bf_pixel.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_icon_bf_pixel",
     "tags": [],
     "resourceType": "GMSequence",

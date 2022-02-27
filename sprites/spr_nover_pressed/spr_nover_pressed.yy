@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_nover_pressed","path":"sprites/spr_nover_pressed/spr_nover_pressed.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_nover_pressed",
     "tags": [],
     "resourceType": "GMSequence",

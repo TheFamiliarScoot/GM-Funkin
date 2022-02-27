@@ -63,7 +63,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_senpai_left","path":"sprites/spr_senpai_left/spr_senpai_left.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_senpai_left",
     "tags": [],
     "resourceType": "GMSequence",

@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_gf_danceright","path":"sprites/spr_gf_danceright/spr_gf_danceright.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_gf_danceright",
     "tags": [],
     "resourceType": "GMSequence",

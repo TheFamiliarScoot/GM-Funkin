@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_button_options","path":"sprites/spr_button_options/spr_button_options.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_button_options",
     "tags": [],
     "resourceType": "GMSequence",

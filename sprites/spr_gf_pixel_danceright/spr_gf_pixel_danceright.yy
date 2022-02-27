@@ -75,7 +75,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_gf_pixel_danceright","path":"sprites/spr_gf_pixel_danceright/spr_gf_pixel_danceright.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_gf_pixel_danceright",
     "tags": [],
     "resourceType": "GMSequence",

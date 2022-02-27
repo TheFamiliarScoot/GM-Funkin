@@ -67,7 +67,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"hair_bw","path":"sprites/hair_bw/hair_bw.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "hair_bw",
     "tags": [],
     "resourceType": "GMSequence",

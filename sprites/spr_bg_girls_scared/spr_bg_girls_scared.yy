@@ -175,7 +175,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_bg_girls_scared","path":"sprites/spr_bg_girls_scared/spr_bg_girls_scared.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_bg_girls_scared",
     "tags": [],
     "resourceType": "GMSequence",

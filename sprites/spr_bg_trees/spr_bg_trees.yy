@@ -135,7 +135,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_bg_trees","path":"sprites/spr_bg_trees/spr_bg_trees.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_bg_trees",
     "tags": [],
     "resourceType": "GMSequence",

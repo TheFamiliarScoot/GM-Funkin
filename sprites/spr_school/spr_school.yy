@@ -71,7 +71,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_school","path":"sprites/spr_school/spr_school.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_school",
     "tags": [],
     "resourceType": "GMSequence",

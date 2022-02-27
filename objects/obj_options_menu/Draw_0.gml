@@ -1,6 +1,5 @@
 draw_self();
 draw_font_text(title,room_width/2,40+ybegin,true,40,1,true);
-draw_font_text(check_controller_buttons(),0,40,false);
 
 if opt.scrollspeed = 0 { ss = "USE CHART'S"; }
 else { ss = string(opt.scrollspeed)	}
@@ -107,12 +106,7 @@ switch submenu {
 				if input_check_pressed(vk_enter, gp_face1) { opt.middlescroll = !opt.middlescroll; }
 				break;
 			case 10:
-				if input_check_pressed(vk_enter, gp_face1) {
-					title = "SPECIAL NOTES";
-					selection = 0;
-					ybegin = 100;
-					submenu = 17;
-				}
+				if input_check_pressed(vk_enter, gp_face1) { opt.specialnotes = !opt.specialnotes; }
 				break;
 		}
 		break;
@@ -144,9 +138,14 @@ switch submenu {
 				break;
 			case 5:
 				if input_check_pressed(vk_enter, gp_face1) {
-					title = "NOTE SKINS";
-					submenu = 15;
-					selection = 0;
+					if array_length(global.noteskins) = 0 {
+						play_miss_sfx();
+					}
+					else {
+						title = "NOTE SKINS";
+						submenu = 15;
+						selection = 0;	
+					}
 				}
 				break;
 		}
@@ -318,7 +317,7 @@ switch submenu {
 			"PLAY AS P1: " + bool_yesno(opt.player1),
 			"BOTPLAY: " + bool_onoff(opt.botplay),
 			"MIDDLESCROLL: " + bool_onoff(opt.middlescroll),
-			"SPECIAL NOTES"
+			"SPECIAL NOTES: " + bool_onoff(opt.specialnotes)
 		]
 		break;
 	case 13:

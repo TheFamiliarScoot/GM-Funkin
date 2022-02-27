@@ -63,7 +63,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_bf_pixel_up","path":"sprites/spr_bf_pixel_up/spr_bf_pixel_up.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_bf_pixel_up",
     "tags": [],
     "resourceType": "GMSequence",

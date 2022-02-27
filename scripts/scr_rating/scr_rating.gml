@@ -45,3 +45,22 @@ function rate(ms) {
 function recalc_accuracy() {
 	global.accuracy = max(0, global.noteshit / global.notesplayed * 100)	
 }
+
+function rating_text() {
+	if global.misses = 0 && global.ratings.good = 0 && global.ratings.bad = 0 && global.ratings.shit = 0 {
+		return "Funkin' Sweet! (MFC)"	
+	}
+	if global.misses = 0 && global.ratings.bad = 0 && global.ratings.shit = 0 {
+		return "Awesome! (GFC)"
+	}
+	if global.misses = 0 && global.ratings.shit = 0 {
+		return "Nice (BFC)"
+	}
+	if global.misses = 0 {
+		return "Cool (FC)"
+	}
+	if global.misses < 10 {
+		return "Good (SDCB)"
+	}
+	return "Meh (Clear)"
+}

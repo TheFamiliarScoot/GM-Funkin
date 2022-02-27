@@ -122,7 +122,7 @@ var tempoptions = {
 		up: [17,246,4],
 		right: [246,56,62]
 	},
-	build: 5
+	build: 6
 }
 
 var file = working_directory + "keybinds.ini";
@@ -291,10 +291,17 @@ else {
 global.bfcustom = "bf";
 global.dadcustom = "hypno2";
 
-global.noteskins = read_text("assets/sprites/noteskins/skinlist.txt");
-if opt.noteskin > array_length(global.noteskins) - 1 { opt.noteskin = 0; }
+global.noteskins = get_folders("assets/sprites/noteskins","skinoptions.json");
+global.customchars = get_folders("assets/sprites/chars","object.json");
+global.ignoredtags = read_text("assets/etc/ignored-tags.txt");
+if array_length(global.noteskins) = 0 {
+	global.noteskins = ["???"];
+}
+else if opt.noteskin > array_length(global.noteskins) - 1 { opt.noteskin = 0; }
 
 global.curnoteskin = global.noteskins[opt.noteskin];
+
+global.gimmicks = -1;
 
 room_goto(room_menu);
 
@@ -305,11 +312,4 @@ uisprite = -1;
 lastcamerax = 0;
 lastcameray = 0;
 
-var randomstr = "hihellohi";
-show_debug_message(randomstr);
-randomstr = randomize_string(randomstr,42069);
-show_debug_message(randomstr);
-randomstr = unrandomize_string(randomstr,42069);
-show_debug_message(randomstr);
-
-show_debug_message(global.buttons);
+show_counter = true;

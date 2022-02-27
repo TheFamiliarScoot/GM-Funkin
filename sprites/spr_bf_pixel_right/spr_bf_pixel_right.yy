@@ -63,7 +63,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_bf_pixel_right","path":"sprites/spr_bf_pixel_right/spr_bf_pixel_right.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_bf_pixel_right",
     "tags": [],
     "resourceType": "GMSequence",

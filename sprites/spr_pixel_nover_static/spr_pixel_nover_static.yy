@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_pixel_nover_static","path":"sprites/spr_pixel_nover_static/spr_pixel_nover_static.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_pixel_nover_static",
     "tags": [],
     "resourceType": "GMSequence",

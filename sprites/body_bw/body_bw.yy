@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"body_bw","path":"sprites/body_bw/body_bw.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "body_bw",
     "tags": [],
     "resourceType": "GMSequence",

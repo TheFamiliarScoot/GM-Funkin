@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_stage_back","path":"sprites/spr_stage_back/spr_stage_back.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_stage_back",
     "tags": [],
     "resourceType": "GMSequence",

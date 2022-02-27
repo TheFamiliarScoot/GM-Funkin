@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_spooky_danceleft","path":"sprites/spr_spooky_danceleft/spr_spooky_danceleft.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_spooky_danceleft",
     "tags": [],
     "resourceType": "GMSequence",

@@ -67,7 +67,6 @@ function format_string() {
 		++ctr;
 	}
 	ctr = 0;
-	show_debug_message(str);
 	
 	return str;
 }

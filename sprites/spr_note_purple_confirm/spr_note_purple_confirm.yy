@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_note_purple_confirm","path":"sprites/spr_note_purple_confirm/spr_note_purple_confirm.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_note_purple_confirm",
     "tags": [],
     "resourceType": "GMSequence",

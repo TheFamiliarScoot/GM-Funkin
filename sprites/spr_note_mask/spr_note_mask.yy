@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_note_mask","path":"sprites/spr_note_mask/spr_note_mask.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_note_mask",
     "tags": [],
     "resourceType": "GMSequence",

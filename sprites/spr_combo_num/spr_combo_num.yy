@@ -95,7 +95,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_combo_num","path":"sprites/spr_combo_num/spr_combo_num.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_combo_num",
     "tags": [],
     "resourceType": "GMSequence",

@@ -337,3 +337,15 @@ function get_score(key) {
 	}
 	return global.stats[? key];
 }
+
+function note_special_string_id(str) {
+	show_debug_message(str)
+	switch str {
+		case "normal": return 0; break;
+		case "hurt": return 1; break;
+		case "heal": return 2; break;
+		case "dodge": return 3; break;
+		case "instakill": return 4; break;
+		default: return -1; break;
+	}
+}

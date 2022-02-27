@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_halloweenbg","path":"sprites/spr_halloweenbg/spr_halloweenbg.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_halloweenbg",
     "tags": [],
     "resourceType": "GMSequence",

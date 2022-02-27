@@ -67,7 +67,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_bf_pixel_right_miss","path":"sprites/spr_bf_pixel_right_miss/spr_bf_pixel_right_miss.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_bf_pixel_right_miss",
     "tags": [],
     "resourceType": "GMSequence",

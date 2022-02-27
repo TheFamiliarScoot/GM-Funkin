@@ -1,4 +1,0 @@
-safety-lullaby:easy,normal,hard
-left-unchecked:easy,normal,hard
-monochrome:normal
-missingno:easy,normal,hard

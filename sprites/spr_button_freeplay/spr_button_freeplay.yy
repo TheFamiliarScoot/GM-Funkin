@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_button_freeplay","path":"sprites/spr_button_freeplay/spr_button_freeplay.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_button_freeplay",
     "tags": [],
     "resourceType": "GMSequence",

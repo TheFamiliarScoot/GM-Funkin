@@ -71,7 +71,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_gf_pixel_danceleft","path":"sprites/spr_gf_pixel_danceleft/spr_gf_pixel_danceleft.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_gf_pixel_danceleft",
     "tags": [],
     "resourceType": "GMSequence",

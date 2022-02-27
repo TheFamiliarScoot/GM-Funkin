@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_button_storymode","path":"sprites/spr_button_storymode/spr_button_storymode.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_button_storymode",
     "tags": [],
     "resourceType": "GMSequence",

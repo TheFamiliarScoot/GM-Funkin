@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_letters_bold","path":"sprites/spr_letters_bold/spr_letters_bold.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_letters_bold",
     "tags": [],
     "resourceType": "GMSequence",

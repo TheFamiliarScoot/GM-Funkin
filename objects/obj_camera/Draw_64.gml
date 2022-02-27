@@ -75,14 +75,17 @@ if ui.vis {
 	draw_set_halign(fa_center);
 	var centerx = global.view_width/2;
 	var centery = useds ? 80 : global.view_height - 50;
+	var mosty = useds ? 0 : global.view_height;
 	var scoretext = "";
-	var acc = "???"
+	var acc = "???";
+	var rating = rating_text();
 	if global.accuracy > 0 { acc = string(global.accuracy) + "%"; }
 	if opt.botplay && !opt.player1 { scoretext = "BOTPLAY"; }
 	else { scoretext =
 		"Score: " + string(global.score) +
 		" | Misses: " + string(global.misses) +
-		" | Accuracy: " + acc;
+		" | Accuracy: " + acc +
+		" | Rating: " + rating;
 	}
 	var ratingtext = 
 		"Sicks: " + string(global.ratings.sick) + "\n" +
@@ -98,14 +101,14 @@ if ui.vis {
 	draw_set_color(c_white);
 	draw_text(centerx,centery,scoretext);
 	draw_set_halign(fa_left);
-	draw_set_valign(fa_bottom);
+	draw_set_valign(useds ? fa_top : fa_bottom);
 	draw_set_color(c_black);
-	draw_text(1,centery,ratingtext);
-	draw_text(-1,centery,ratingtext);
-	draw_text(0,centery+1,ratingtext);
-	draw_text(0,centery-1,ratingtext);
+	draw_text(1,mosty,ratingtext);
+	draw_text(-1,mosty,ratingtext);
+	draw_text(0,mosty+1,ratingtext);
+	draw_text(0,mosty-1,ratingtext);
 	draw_set_color(c_white);
-	draw_text(0,centery,ratingtext);
+	draw_text(0,mosty,ratingtext);
 	draw_set_valign(fa_top);
 
 	surface_reset_target();

@@ -63,7 +63,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_asenpai_left","path":"sprites/spr_asenpai_left/spr_asenpai_left.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_asenpai_left",
     "tags": [],
     "resourceType": "GMSequence",

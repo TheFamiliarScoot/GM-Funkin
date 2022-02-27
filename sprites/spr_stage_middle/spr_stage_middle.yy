@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_stage_middle","path":"sprites/spr_stage_middle/spr_stage_middle.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_stage_middle",
     "tags": [],
     "resourceType": "GMSequence",

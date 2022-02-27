@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_ui_go","path":"sprites/spr_ui_go/spr_ui_go.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_ui_go",
     "tags": [],
     "resourceType": "GMSequence",

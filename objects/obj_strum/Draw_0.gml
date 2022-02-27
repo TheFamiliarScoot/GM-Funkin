@@ -90,8 +90,6 @@ if enabled {
 	
 			var endscale = (clamp(lengthdiff,0,endh)/endh)*-global.notescroll;
 			
-			var spec = opt.notetypes[note.special + 1];
-			
 			switch note.special {
 				case 0:
 					col1 = thistype.color;
@@ -108,6 +106,10 @@ if enabled {
 				case 3:
 					col1 = c_yellow;
 					col2 = c_red;
+					break;
+				case 4:
+					col1 = c_red;
+					col2 = c_black;
 					break;
 			}
 			if !note.completed && !tailBounds {
@@ -155,15 +157,18 @@ if enabled {
 				var notecheck = false;
 				if !global.options.usedownscroll { notecheck = real_y < -global.options.inputleniency }
 				else { notecheck = real_y > global.options.inputleniency }
-				if !note.hit && notecheck && !note.missed && !(note.special > 0) {
-					miss(tiedCharacter,-0.04,key);
-					note.missed = true;
-					global.notesplayed += 1;
-					recalc_accuracy();
-				}
-				else if !note.hit && notecheck && !note.missed && spec = 3 {
-					if opt.snoteinstakill { die(); }
-					else { change_hp(-0.2); }
+				if !note.hit && notecheck && !note.missed {
+					if note.special <= 0 {
+						miss(tiedCharacter,-0.04,key);
+						note.missed = true;
+						global.notesplayed += 1;
+						recalc_accuracy();		
+					}
+					else {
+						if note.special = 3 {
+							die();
+						}
+					}
 				}
 			}
 

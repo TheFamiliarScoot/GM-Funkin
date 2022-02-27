@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_bf_down_miss","path":"sprites/spr_bf_down_miss/spr_bf_down_miss.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_bf_down_miss",
     "tags": [],
     "resourceType": "GMSequence",

@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_pixel_note_tail","path":"sprites/spr_pixel_note_tail/spr_pixel_note_tail.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_pixel_note_tail",
     "tags": [],
     "resourceType": "GMSequence",

@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"face_bw","path":"sprites/face_bw/face_bw.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "face_bw",
     "tags": [],
     "resourceType": "GMSequence",

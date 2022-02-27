@@ -16,7 +16,7 @@ function add_note(list,note) {
 	for (var i = 0; i < array_length(list); i += 1) {
 		var cur = list[i];
 		if cur.position = note.position {
-			show_debug_message("duplicate note");
+//			show_debug_message("duplicate note");
 			return;	
 		}
 	}

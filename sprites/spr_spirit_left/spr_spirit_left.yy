@@ -135,7 +135,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_spirit_left","path":"sprites/spr_spirit_left/spr_spirit_left.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_spirit_left",
     "tags": [],
     "resourceType": "GMSequence",

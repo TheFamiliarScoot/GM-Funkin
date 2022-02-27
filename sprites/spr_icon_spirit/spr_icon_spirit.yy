@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_icon_spirit","path":"sprites/spr_icon_spirit/spr_icon_spirit.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_icon_spirit",
     "tags": [],
     "resourceType": "GMSequence",

@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_spooky_down","path":"sprites/spr_spooky_down/spr_spooky_down.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_spooky_down",
     "tags": [],
     "resourceType": "GMSequence",

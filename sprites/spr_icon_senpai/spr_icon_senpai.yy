@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_icon_senpai","path":"sprites/spr_icon_senpai/spr_icon_senpai.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_icon_senpai",
     "tags": [],
     "resourceType": "GMSequence",

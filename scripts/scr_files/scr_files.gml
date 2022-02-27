@@ -34,19 +34,17 @@ function read_text(file_path){
 }
 
 function difficulty_to_file(song,diff) {
-	var diffaddstring = "";
-	if diff != "normal" {diffaddstring = "-" + diff}
-	return song + diffaddstring + ".json";
+	return song + (diff != "normal" ? ("-" + diff) : "") + ".json";
 }
 
-function get_packs(dir) {
-	var packs = []
+function get_folders(dir,file_to_exist) {
+	var dirs = []
 	var file = file_find_first(dir + "/*",fa_directory)
 	if file != "" {
 		while file != "" {
 			if directory_exists(dir + "/" + file) {
-				if file_exists(dir + "/" + file + "/songlist.txt") {
-					array_push(packs,file);	
+				if file_exists(dir + "/" + file + "/" + file_to_exist) {
+					array_push(dirs,file);	
 				}
 			}
 			file = file_find_next();
@@ -54,7 +52,7 @@ function get_packs(dir) {
 	}
 	file_find_close();
 	
-	return packs;
+	return dirs;
 }
 
 function get_songs(pack) {
@@ -87,7 +85,6 @@ function get_songs(pack) {
 			show_debug_message("weird malformity in songlist.txt");
 		}
 	}
-	show_debug_message(songs);
 	return songs;
 }
 
@@ -99,4 +96,20 @@ function try_load_scores(file) {
 	}
 	ds_map_add(stats,"dummy",-69);
 	return stats;
+}
+
+function get_gimmicks_song(song) {
+	var path = "assets/songs/" + global.selectedpack + "/" + song + "/gimmicks.json";
+	if !file_exists(path) { return global.gimmicks; }
+	var gimmicks = read_json(path);
+
+	return gimmicks;
+}
+
+function get_gimmicks_pack(pack) {
+	var path = "assets/songs/" + pack + "/gimmicks.json";
+	if !file_exists(path) { return -1; }
+	var gimmicks = read_json(path);
+
+	return gimmicks;
 }

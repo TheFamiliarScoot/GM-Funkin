@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_bg_philly","path":"sprites/spr_bg_philly/spr_bg_philly.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_bg_philly",
     "tags": [],
     "resourceType": "GMSequence",

@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_pixel_note_end","path":"sprites/spr_pixel_note_end/spr_pixel_note_end.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_pixel_note_end",
     "tags": [],
     "resourceType": "GMSequence",

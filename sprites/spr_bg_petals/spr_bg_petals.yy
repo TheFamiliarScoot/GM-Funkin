@@ -279,7 +279,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_bg_petals","path":"sprites/spr_bg_petals/spr_bg_petals.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_bg_petals",
     "tags": [],
     "resourceType": "GMSequence",

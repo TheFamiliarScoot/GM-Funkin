@@ -1,0 +1,1 @@
+show_counter = !show_counter;

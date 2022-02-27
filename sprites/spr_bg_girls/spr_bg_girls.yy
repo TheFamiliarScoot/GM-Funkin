@@ -175,7 +175,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_bg_girls","path":"sprites/spr_bg_girls/spr_bg_girls.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_bg_girls",
     "tags": [],
     "resourceType": "GMSequence",

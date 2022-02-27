@@ -135,7 +135,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_spirit_idle","path":"sprites/spr_spirit_idle/spr_spirit_idle.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_spirit_idle",
     "tags": [],
     "resourceType": "GMSequence",

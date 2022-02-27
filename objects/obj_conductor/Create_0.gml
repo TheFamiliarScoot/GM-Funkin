@@ -7,7 +7,7 @@ chrt = read_json(jsonlocation);
 songlocation = "assets\\songs\\" + global.selectedpack + "\\" + global.selectedsong.name + "\\Inst.ogg";
 if !file_exists(songlocation) {
 	show_message("Couldn't find the instrumental! :(");
-	game_end();
+	room_goto(room_menu);
 }
 ins = FMODGMS_Snd_LoadSound(songlocation);
 vocalslocation = "assets\\songs\\" + global.selectedpack + "\\" + global.selectedsong.name + "\\Voices.ogg";
@@ -166,30 +166,54 @@ for (var h = 0; h < array_length(chrt.song.notes); h += 1) {
 		var nspecial = 0;
 		
 		var skip = false;
+		var ignore = false;
+		
+		var do_strum_ids = false;
 
-		for (var j = 0; j < array_length(notearray); j += 1) {
-			// psych engine bullshit - has strings
-			if !is_numeric(notearray[j]) {
-				if notearray[j] = "Hurt Note" { nspecial = 1; }
-				else { skip = true; }
+		if global.gimmicks != -1 {
+			switch global.gimmicks.special_note_type {
+				case "strum_ids":
+					var typeid = floor(notearray[1] / strums) - 1;
+					if typeid > -1 {
+						nspecial = note_special_string_id(global.gimmicks.map[typeid]);
+					}
+					break;
+				case "psych_tags":
+					if array_length(notearray) > 3 {
+						if variable_struct_exists(global.gimmicks,"ignore") {
+							for (var h = 0; h < global.gimmicks.ignore; h += 1) {
+								if notearray[3] = global.gimmicks.ignore[h] { ignore = true; }
+							}
+						}
+						if notearray[1] < 0 { skip = true; }
+						if !skip { nspecial = note_special_string_id(variable_struct_get(global.gimmicks.map,notearray[3])); }
+					}
+					break;
+				case "fourth_value":
+					if array_length(notearray) > 3 {
+						nspecial = note_special_string_id(global.gimmicks.map[notearray[3]]);
+					}
+					break;
 			}
 		}
-		if array_length(notearray) > 3 && chrt.song.song != "ugh" {
-			if !is_ptr(notearray[3]) { nspecial = notearray[3]; }
+		else {
+			if array_length(notearray) > 3 {
+				skip = true;
+			}
+			for (var j = 0; j < array_length(notearray); j += 1) {
+				if !is_numeric(notearray[j]) { skip = true; }
+			}
 		}
-
+		if notearray[1] < 0 { skip = true; }
 		
 		if skip { continue; }
 		
 		var pos = notearray[0];
 		var typ = notearray[1];
 		var len = notearray[2];
-
-		if !(nspecial > 0) { nspecial = floor(typ / strums); }
 		
-		if !opt.specialnotes && nspecial > 0 { continue; }
-		
-		if nspecial > 0 && opt.notetypes[nspecial % 5] < 0 { continue; }
+		if !opt.specialnotes && nspecial > 0 && !ignore { continue; }
+		if ignore { nspecial = 0; }
 		
 		var swap = chrt.song.notes[h].mustHitSection;
 		
@@ -204,19 +228,18 @@ for (var h = 0; h < array_length(chrt.song.notes); h += 1) {
 
 		add_note(global.sections[cond.sectioncount][swap ? !side : side][rt],thisNote);
 		totalnotecount += 1;
+		show_debug_message(nspecial);
 	}
 	var dsteps = chrt.song.notes[h].lengthInSteps;
 	cursteps += dsteps;
-	show_debug_message(cursteps);
 	curpos = ((60 / cond.bpm) * 1000 / 4) * cursteps;
 	cond.sectioncount += 1;
 }
 
-show_debug_message(global.bpmchange);
-
 //global.target = global.camchange[0];
 global.target = global.bfobject;
 global.paused = false;
+global.gfsection = false;
 slowmode = false;
 conductordisplay = false;
 

@@ -71,7 +71,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_rating","path":"sprites/spr_rating/spr_rating.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_rating",
     "tags": [],
     "resourceType": "GMSequence",

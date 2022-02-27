@@ -12,6 +12,11 @@ if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
 			var k = type % 4;
 			var the = cond.notepos - lastnote.position;
 			play_anim_d(id,nsprite[p][2]);
+			if variable_struct_exists(global.gimmicks,"opponent_deals_damage") {
+				if global.gimmicks.opponent_deals_damage && opponentcheck {
+					change_hp(-0.02,false);
+				}
+			}
 			if !isbot && !(lastnote.special > 0) {
 	//			show_debug_message(string(the) + " - " + check_rating(the));
 				global.combo += 1;
@@ -24,15 +29,13 @@ if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
 					global.noteshit += 1;
 					recalc_accuracy();
 				}
-				show_debug_message(global.combo);
 			}
 			if lastnote.special > 0 {
 				switch lastnote.special {
 					case 1:
 						with tiedCharacter event_user(k + 4);
 						if instance_exists(obj_conductor) obj_conductor.vocalsmuted = true;
-						if opt.snoteinstakill { die(); }
-						else { change_hp(-0.2); }
+						change_hp(-0.2);
 						break;
 					case 2:
 						with tiedCharacter event_user(k);
@@ -43,6 +46,9 @@ if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
 //						with tiedCharacter event_user(k + 4);
 						if instance_exists(obj_conductor) obj_conductor.vocalsmuted = false;
 //						change_hp(-0.2);
+						break;
+					case 4:
+						die();
 						break;
 				}
 			}
@@ -103,3 +109,8 @@ if !isbot && input_check_released(thisKey, thisKeyGP) {
 	play_anim_d(id,nsprite[p][5]);
 }
 lasttime = cond.notepos;
+
+if group = 1 {
+	if global.gfsection { tiedCharacter = global.gfinstance; }
+	else { tiedCharacter = global.bfinstance; }
+}

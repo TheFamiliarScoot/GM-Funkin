@@ -63,7 +63,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_icon_spookykids","path":"sprites/spr_icon_spookykids/spr_icon_spookykids.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_icon_spookykids",
     "tags": [],
     "resourceType": "GMSequence",

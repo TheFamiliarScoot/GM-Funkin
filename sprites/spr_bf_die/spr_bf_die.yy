@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_bf_die","path":"sprites/spr_bf_die/spr_bf_die.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_bf_die",
     "tags": [],
     "resourceType": "GMSequence",
