@@ -3,6 +3,7 @@
   "glyphOperations": 0,
   "interpreter": 0,
   "pointRounding": 0,
+  "applyKerning": 0,
   "fontName": "VCR OSD Mono",
   "styleName": "Regular",
   "size": 16.0,
@@ -20,6 +21,7 @@
     "path": "texturegroups/Default",
   },
   "ascenderOffset": 0,
+  "ascender": 0,
   "glyphs": {
     "32": {"x":2,"y":2,"w":12,"h":23,"character":32,"shift":12,"offset":0,},
     "33": {"x":227,"y":52,"w":2,"h":23,"character":33,"shift":12,"offset":4,},

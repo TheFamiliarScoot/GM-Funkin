@@ -101,6 +101,7 @@ var tempoptions = {
 	hpmult: 1,
 	hpgainmult: 1,
 	snoteinstakill: false,
+	bump: true,
 	notetypes: [
 		1,
 		2,

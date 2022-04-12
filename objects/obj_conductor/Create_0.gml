@@ -4,23 +4,6 @@ if global.selecteddifficulty != "normal" {diffaddstring = "-" + global.selectedd
 jsonlocation = "assets\\songs\\" + global.selectedpack + "\\" + global.selectedsong.name + "\\" + global.selectedsong.name + diffaddstring + ".json";
 chrt = read_json(jsonlocation);
 
-songlocation = "assets\\songs\\" + global.selectedpack + "\\" + global.selectedsong.name + "\\Inst.ogg";
-if !file_exists(songlocation) {
-	show_message("Couldn't find the instrumental! :(");
-	room_goto(room_menu);
-}
-ins = FMODGMS_Snd_LoadSound(songlocation);
-vocalslocation = "assets\\songs\\" + global.selectedpack + "\\" + global.selectedsong.name + "\\Voices.ogg";
-if file_exists(vocalslocation) { voc = FMODGMS_Snd_LoadSound(vocalslocation); }
-else { voc = "none" }
-
-
-chi = FMODGMS_Chan_CreateChannel();
-chv = FMODGMS_Chan_CreateChannel();
-vocalsmuted = false;
-
-audio_group_load(audiogroup_countdown);
-
 global.keyamt = 4;
 
 cond = {}
@@ -39,9 +22,11 @@ cond.stepcrochet = cond.crochet/4;
 cond.section = 0;
 cond.sectioncount = 0;
 
+global.camchange = [];
+global.bpmchange = [];
 global.sections = [];
 
-for (var i = 0; i < array_length(chrt.song.notes); i += 1) {
+for (var i = 0; i < array_length(chrt.song.notes) + 1; i += 1) {
 	global.sections[i] = [];
 	for (var h = 0; h < global.keyamt; h += 1) {
 		global.sections[i][0][h] = [];
@@ -51,6 +36,139 @@ for (var i = 0; i < array_length(chrt.song.notes); i += 1) {
 	}
 }
 
+var totalnotecount = 0;
+var cursteps = 0;
+var curbpm = cond.bpm;
+var curpos = 0;
+
+var donotechecks = false;
+
+var strums = global.keyamt * 2;
+
+cond.sectioncount = array_length(chrt.song.notes);
+
+try {
+	for (var h = 0; h < array_length(chrt.song.notes); h += 1) {
+		// more code to reference here because i'm stupid
+		// the way the original game checks bpm changes is by essentially simulating the song over a loop
+		// we'll do it here while loading it
+	
+		// all engines i've looked at charts for have lengthInSteps so it should be fine
+		/*
+		try {
+			if (chrt.song.notes[h].changeBPM && chrt.song.notes[h].bpm != curbpm) {
+				curbpm = chrt.song.notes[h].bpm;
+				array_push(global.bpmchange,new c_bpmchange(curbpm,cursteps,curpos));
+			}
+		}
+		catch (e) {
+			array_push(global.bpmchange,noone);
+		}
+		*/
+	
+	
+		// this down here is my own though
+	
+		for (var i = 0; i < array_length(chrt.song.notes[h].sectionNotes); i += 1) {
+			var notearray = chrt.song.notes[h].sectionNotes[i];
+		
+			var nspecial = 0;
+		
+			var skip = false;
+			var ignore = false;
+		
+			var do_strum_ids = false;
+
+			if global.gimmicks != -1 {
+				switch global.gimmicks.special_note_type {
+					case "strum_ids":
+						var typeid = floor(notearray[1] / strums) - 1;
+						if typeid > -1 {
+							nspecial = note_special_string_id(global.gimmicks.map[typeid]);
+						}
+						break;
+					case "psych_tags":
+						if array_length(notearray) > 3 {
+							if variable_struct_exists(global.gimmicks,"ignore") {
+								for (var h = 0; h < array_length(global.gimmicks.ignore); h += 1) {
+									if notearray[3] = global.gimmicks.ignore[h] { ignore = true; }
+								}
+							}
+							if notearray[1] < 0 { skip = true; }
+							if !skip { nspecial = note_special_string_id(variable_struct_get(global.gimmicks.map,notearray[3])); }
+						}
+						break;
+					case "fourth_value":
+						if array_length(notearray) > 3 {
+							nspecial = note_special_string_id(global.gimmicks.map[notearray[3]]);
+						}
+						break;
+				}
+			}
+			else {
+				if array_length(notearray) > 3 {
+					skip = true;
+				}
+				for (var j = 0; j < array_length(notearray); j += 1) {
+					if !is_numeric(notearray[j]) { skip = true; }
+				}
+			}
+			if notearray[1] < 0 { skip = true; }
+		
+			if skip { continue; }
+		
+			var pos = notearray[0];
+			var typ = notearray[1];
+			var len = notearray[2];
+		
+			if !opt.specialnotes && nspecial > 0 && !ignore { continue; }
+			if ignore { nspecial = 0; }
+		
+			var swap = chrt.song.notes[h].mustHitSection;
+		
+			if len < 0 { len = 0 };	
+		
+			var thisNote = new c_note(pos,typ,len);
+		
+			thisNote.special = nspecial;
+		
+			var rt = typ % global.keyamt;
+			var side = floor(typ / global.keyamt) % 2;
+
+			add_note(global.sections[h][swap ? !side : side][rt],thisNote);
+			totalnotecount += 1;
+		}
+		var dsteps = chrt.song.notes[h].lengthInSteps;
+		cursteps += dsteps;
+		curpos = ((60 / cond.bpm) * 1000 / 4) * cursteps;
+	}
+}
+catch (e) {
+	var msg = "Could not load the chart :(\n\nTHIS IS NOT A CRASH!\n\n"
+	+ e.longMessage;
+	show_message(msg);
+	instance_deactivate_all(false);
+	room_goto(room_menu);
+	exit;
+}
+
+songlocation = "assets\\songs\\" + global.selectedpack + "\\" + global.selectedsong.name + "\\Inst.ogg";
+if !file_exists(songlocation) {
+	show_message("Couldn't find the instrumental! :(");
+	room_goto(room_menu);
+}
+ins = FMODGMS_Snd_LoadSound(songlocation);
+vocalslocation = "assets\\songs\\" + global.selectedpack + "\\" + global.selectedsong.name + "\\Voices.ogg";
+if file_exists(vocalslocation) { voc = FMODGMS_Snd_LoadSound(vocalslocation); }
+else { voc = "none" }
+
+
+chi = FMODGMS_Chan_CreateChannel();
+chv = FMODGMS_Chan_CreateChannel();
+vocalsmuted = false;
+
+audio_group_load(audiogroup_countdown);
+
 /*
 global.sections = array_create(array_length(chrt.song.notes),[
 	array_create(global.keyamt,[]),
@@ -58,9 +176,6 @@ global.sections = array_create(array_length(chrt.song.notes),[
 ]);
 */
 
-
-global.camchange = [];
-global.bpmchange = [];
 global.score = 0;
 global.misses = 0;
 global.combo = 0;
@@ -131,110 +246,6 @@ repeat 8 {
 	++ctr;
 }
 ctr = 0;
-
-var totalnotecount = 0;
-var cursteps = 0;
-var curbpm = cond.bpm;
-var curpos = 0;
-
-var donotechecks = false;
-
-var strums = global.keyamt * 2;
-
-for (var h = 0; h < array_length(chrt.song.notes); h += 1) {
-	// more code to reference here because i'm stupid
-	// the way the original game checks bpm changes is by essentially simulating the song over a loop
-	// we'll do it here while loading it
-	
-	// all engines i've looked at charts for have lengthInSteps so it should be fine
-	try {
-		if (chrt.song.notes[h].changeBPM && chrt.song.notes[h].bpm != curbpm) {
-			curbpm = chrt.song.notes[h].bpm;
-			array_push(global.bpmchange,new c_bpmchange(curbpm,cursteps,curpos));
-		}
-	}
-	catch (e) {
-		array_push(global.bpmchange,noone);
-	}
-	
-	
-	// this down here is my own though
-	
-	for (var i = 0; i < array_length(chrt.song.notes[h].sectionNotes); i += 1) {
-		var notearray = chrt.song.notes[h].sectionNotes[i];
-		
-		var nspecial = 0;
-		
-		var skip = false;
-		var ignore = false;
-		
-		var do_strum_ids = false;
-
-		if global.gimmicks != -1 {
-			switch global.gimmicks.special_note_type {
-				case "strum_ids":
-					var typeid = floor(notearray[1] / strums) - 1;
-					if typeid > -1 {
-						nspecial = note_special_string_id(global.gimmicks.map[typeid]);
-					}
-					break;
-				case "psych_tags":
-					if array_length(notearray) > 3 {
-						if variable_struct_exists(global.gimmicks,"ignore") {
-							for (var h = 0; h < global.gimmicks.ignore; h += 1) {
-								if notearray[3] = global.gimmicks.ignore[h] { ignore = true; }
-							}
-						}
-						if notearray[1] < 0 { skip = true; }
-						if !skip { nspecial = note_special_string_id(variable_struct_get(global.gimmicks.map,notearray[3])); }
-					}
-					break;
-				case "fourth_value":
-					if array_length(notearray) > 3 {
-						nspecial = note_special_string_id(global.gimmicks.map[notearray[3]]);
-					}
-					break;
-			}
-		}
-		else {
-			if array_length(notearray) > 3 {
-				skip = true;
-			}
-			for (var j = 0; j < array_length(notearray); j += 1) {
-				if !is_numeric(notearray[j]) { skip = true; }
-			}
-		}
-		if notearray[1] < 0 { skip = true; }
-		
-		if skip { continue; }
-		
-		var pos = notearray[0];
-		var typ = notearray[1];
-		var len = notearray[2];
-		
-		if !opt.specialnotes && nspecial > 0 && !ignore { continue; }
-		if ignore { nspecial = 0; }
-		
-		var swap = chrt.song.notes[h].mustHitSection;
-		
-		if len < 0 { len = 0 };	
-		
-		var thisNote = new c_note(pos,typ,len);
-		
-		thisNote.special = nspecial;
-		
-		var rt = typ % global.keyamt;
-		var side = floor(typ / global.keyamt) % 2;
-
-		add_note(global.sections[cond.sectioncount][swap ? !side : side][rt],thisNote);
-		totalnotecount += 1;
-		show_debug_message(nspecial);
-	}
-	var dsteps = chrt.song.notes[h].lengthInSteps;
-	cursteps += dsteps;
-	curpos = ((60 / cond.bpm) * 1000 / 4) * cursteps;
-	cond.sectioncount += 1;
-}
 
 //global.target = global.camchange[0];
 global.target = global.bfobject;

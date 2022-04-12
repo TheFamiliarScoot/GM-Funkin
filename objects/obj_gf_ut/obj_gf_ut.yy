@@ -1,10 +1,13 @@
 {
   "spriteId": null,
   "solid": false,
-  "visible": true,
+  "visible": false,
   "spriteMaskId": null,
   "persistent": false,
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_character",
+    "path": "objects/obj_character/obj_character.yy",
+  },
   "physicsObject": false,
   "physicsSensor": false,
   "physicsShape": 1,
@@ -22,7 +25,12 @@
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
-  "overriddenProperties": [],
+  "overriddenProperties": [
+    {"propertyId":{"name":"name","path":"objects/obj_character/obj_character.yy",},"objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"value":"gf_ut","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"icon","path":"objects/obj_character/obj_character.yy",},"objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"value":"spr_icon_gf","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"barcolor","path":"objects/obj_character/obj_character.yy",},"objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"value":"$FFFFFFFF","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"no_antialiasing","path":"objects/obj_character/obj_character.yy",},"objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"value":"True","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+  ],
   "parent": {
     "name": "chars",
     "path": "folders/Objects/chars.yy",

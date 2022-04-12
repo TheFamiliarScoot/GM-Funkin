@@ -339,7 +339,6 @@ function get_score(key) {
 }
 
 function note_special_string_id(str) {
-	show_debug_message(str)
 	switch str {
 		case "normal": return 0; break;
 		case "hurt": return 1; break;

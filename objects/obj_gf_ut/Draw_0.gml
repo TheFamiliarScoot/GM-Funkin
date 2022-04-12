@@ -1,3 +1,4 @@
+gpu_set_texfilter(false);
 var timer = (cond.gstep * pi) * gfspeed;
 var face_x = (x-(1*sclx)) + ((sin(timer)*3)*sclx);
 var face_y = (y-(68*scly)) + (abs(sin(timer) * 7)*scly);
@@ -24,3 +25,4 @@ else {
 draw_sprite_ext(sprites[3],0,x,y,speaker_xscale,speaker_yscale,0,c_white,1);
 draw_sprite_ext(sprites[0],0,x-(2*sclx),body_y,sclx,body_yscale,0,c_white,1);
 draw_sprite_ext(sprites[1],0,face_x,face_y,sclx,scly,face_rot,c_white,1);
+gpu_set_texfilter(opt.antialiasing);

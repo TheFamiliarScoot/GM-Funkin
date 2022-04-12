@@ -137,6 +137,9 @@ switch submenu {
 				if input_check_pressed(vk_enter, gp_face1) { opt.timedisplay = !opt.timedisplay; }
 				break;
 			case 5:
+				if input_check_pressed(vk_enter, gp_face1) { opt.bump = !opt.bump; }
+				break;
+			case 6:
 				if input_check_pressed(vk_enter, gp_face1) {
 					if array_length(global.noteskins) = 0 {
 						play_miss_sfx();
@@ -327,6 +330,7 @@ switch submenu {
 			"HEALTH BAR COLORS: " + bool_onoff(opt.specialcolors),
 			"STATIC BACKGROUND: " + bool_yesno(opt.nobg),
 			"TIME DISPLAY: " + bool_onoff(opt.timedisplay),
+			"VIEW BUMPING: " + bool_onoff(opt.bump),
 			"NOTE SKINS"
 		];
 		break;
@@ -459,14 +463,14 @@ if input_check_pressed(vk_escape, gp_face2) && !instance_exists(obj_transition) 
 				selection = 0;
 				title = "APPEARANCE";
 				submenu = 13;
-				ybegin = 120;
+				ybegin = 105;
 				break;
 			case 15:
 				global.curnoteskin = global.noteskins[opt.noteskin];
 				selection = 0;
 				title = "APPEARANCE";
 				submenu = 13;
-				ybegin = 120;
+				ybegin = 105;
 				break;
 			case 16:
 				selection = 0;

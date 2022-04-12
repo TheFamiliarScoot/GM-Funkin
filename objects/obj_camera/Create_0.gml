@@ -3,7 +3,6 @@ window_set_size(global.view_width*global.window_scale,global.view_height*global.
 
 surface_resize(application_surface,global.view_width*global.window_scale,global.view_height*global.window_scale);
 
-
 ui = {
 	surface: -1,
 	center_x: global.view_width/2,
@@ -22,7 +21,6 @@ global.cam = {
 
 display_set_gui_size(global.view_width,global.view_height);
 
-
 x = global.target.x + global.target.camOffX;
 y = global.target.y + global.target.camOffY;
 
@@ -33,6 +31,6 @@ alarm[0] = 1;
 curzoom = global.cam.zoom;
 curangle = global.cam.angle;
 
-ct = 0;
-
 window_set_color(c_black);
+
+bump = 1;

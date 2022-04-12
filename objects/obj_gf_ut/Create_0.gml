@@ -1,6 +1,7 @@
+event_inherited();
 gfspeed = 1;
-sclx = 4;
-scly = 4;
+sclx = 6;
+scly = 6;
 
 isbw = true;
 hairblow = false;

@@ -6,7 +6,10 @@ if instance_exists(global.target) {
 	y += ((global.target.y + global.target.camOffY) - y) * _spd;
 	curzoom += (global.cam.zoom - curzoom) * _spd;
 	curangle += (global.cam.angle - curangle) * _spd;
-	camera_set_view_size(view,global.view_width*curzoom,global.view_height*curzoom);
+	var _vw = global.view_width*curzoom;
+	var _vh = global.view_height*curzoom;
+	var _vb = (bump - 1) * 0.75;
+	camera_set_view_size(view,_vw - (_vw * _vb),_vh - (_vh * _vb));
 	var _cur_w = camera_get_view_width(view);
 	var _cur_h = camera_get_view_height(view);
 	camera_set_view_pos(view,x-_cur_w/2,y-_cur_h/2);

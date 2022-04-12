@@ -1,9 +1,10 @@
 var useds = opt.usedownscroll;
 if ui.vis {
-	if cond.beathit {
-		ui.scale = 1.025;	
+	if cond.beathit && opt.bump {
+		bump = 1.03;	
 	}
-	ui.scale = lerp(ui.scale,1,d(0.05));
+	bump = lerp(bump,1,d(0.05));
+	ui.scale = bump;
 
 	if !surface_exists(ui.surface) {
 		ui.surface = surface_create(global.view_width,global.view_height);
@@ -70,7 +71,7 @@ if ui.vis {
 	gpu_set_texfilter(opt.antialiasing);
 	
 	iconscale = clamp(iconscale - d(0.01),1,1.5);
-	if cond.stephit { iconscale = 1.25; }
+	if cond.stephit && opt.bump { iconscale = 1.25; }
 
 	draw_set_halign(fa_center);
 	var centerx = global.view_width/2;

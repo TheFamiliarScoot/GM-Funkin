@@ -11,7 +11,7 @@ if cond.beathit {
 	image_index = 0;
 	image_speed = 1;
 }
-for (var i = 0; i < 3; i += 1) {
+for (var i = 0; i < 2; i += 1) {
 	draw_bg_sprite(sprite_index,image_index,(xcenter-1098)+(1200*i),ycenter,view_camera[0],6,0.1,0.1);	
 }
 gpu_set_tex_filter(opt.antialiasing);
