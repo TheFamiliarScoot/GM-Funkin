@@ -7,30 +7,32 @@ Built from the ground up (with references to source code and other assets), and 
 Because I could. One day I learned GameMaker had support for .swf sprites and then I finished a proof of concept I had from a while ago.
 
 # Features
-- Most of everything from the original game
+- Most songs from the original game
+- Week 1, 2, and 6 graphics
 - Ability to add your own modpacks & customize to your will
 
 # Drawbacks
 As of now there's no way to import external .swf sprites, so graphics modding is a little impossible without the source code - but you have it here so why bother?
-Support for custom atlas sprites may be added in the future.
+Support for custom atlas sprites was worked on, but I don't plan on finishing it.
 
 # Can I use this?
-Yes! Just, PLEASE I beg of you give credit (and optionally to the original FNF devs)
+If you really want to, then go ahead. This is mostly a proof of concept with a lot of performance problems, so I don't recommend using it.
 
-You may use it to develop your own mods, but **I wouldn't recommend it.**
-If you have a complex mod, **there's a chance of there being performance drawbacks.**
-This is still mainly a proof of concept, so using it for mods isn't necessarily reliable.
+It's also heavily unfinished - there's a lot missing (like tempo change events) and based on technology from late 2021.
 
-TL;DR - You can, but why would you when there's other engines out there?
+If you do end up using it, please credit me (and the other people listed) for it.
 
 # Technologies / Libraries
-fmod
-FMODGMS by M.S.T.O.P
-Delta by gm-core
+[fmod](https://www.fmod.com/)
+
+[FMODGMS by M.S.T.O.P](https://github.com/mstop4/FMODGMS)
+
+[Delta by gm-core](https://gmcore.io/delta/)
 
 # Credits
 ninjamuffin99, PhantomArcade, KawaiSprite and evilsk8r - Friday Night Funkin'
-Banbuds, Kade Dev and Rozebud - Tricky Mod
+
+Banbuds, Kade Dev and Rozebud - Tricky Mod (the one example included in the engine)
 
 
 # PLEASE CONTACT ME IF YOU HAVE AN ISSUE WITH THIS PROJECT'S ASSETS OR OTHER USAGE YOU'D LIKE TO BE ADDRESSED!
