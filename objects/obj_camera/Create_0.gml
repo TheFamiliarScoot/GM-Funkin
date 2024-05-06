@@ -19,6 +19,8 @@ global.cam = {
 	angle: 0,
 }
 
+targets = [ global.dadinstance, global.bfinstance, global.gfinstance ];
+
 display_set_gui_size(global.view_width,global.view_height);
 
 x = global.target.x + global.target.camOffX;

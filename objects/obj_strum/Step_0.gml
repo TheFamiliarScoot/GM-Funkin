@@ -2,10 +2,10 @@ var p = global.pixelui;
 
 var leniency = global.options.inputleniency * clamp(global.realscroll,1,1.5);
 var key = type % 4;
-var opponentcheck = (isbot && find_note_in_range(global.sections, cond.section, group, key, 0, 500) != noone);
+var opponentcheck = (isbot && find_note_in_range(global.notes, clamp_side_and_type(group, key), 0, 500) != noone);
 if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
-	if isbot { lastnote = find_note_in_range(global.sections,cond.section,group,key, 0, 500); }
-	else { lastnote = find_note_in_range(global.sections,cond.section,group,key, -leniency, leniency); }
+	if isbot { lastnote = find_note_in_range(global.notes, clamp_side_and_type(group, key), 0, 500); }
+	else { lastnote = find_note_in_range(global.notes, clamp_side_and_type(group, key), -leniency, leniency); }
 	if lastnote != noone {
 //		var spec = opt.notetypes[lastnote.special + 1];
 		if !(isbot && lastnote.special > 0) {
@@ -34,17 +34,17 @@ if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
 				switch lastnote.special {
 					case 1:
 						with tiedCharacter event_user(k + 4);
-						if instance_exists(obj_conductor) obj_conductor.vocalsmuted = true;
+						if instance_exists(obj_conductor) obj_conductor.vocalsmuted[tiedCharacter.playside] = true;
 						change_hp(-0.2);
 						break;
 					case 2:
 						with tiedCharacter event_user(k);
-						if instance_exists(obj_conductor) obj_conductor.vocalsmuted = false;
+						if instance_exists(obj_conductor) obj_conductor.vocalsmuted[tiedCharacter.playside] = false;
 						change_hp(0.2);
 						break;
 					case 3:
 //						with tiedCharacter event_user(k + 4);
-						if instance_exists(obj_conductor) obj_conductor.vocalsmuted = false;
+						if instance_exists(obj_conductor) obj_conductor.vocalsmuted[tiedCharacter.playside] = false;
 //						change_hp(-0.2);
 						break;
 					case 4:
@@ -53,7 +53,7 @@ if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
 				}
 			}
 			else {
-				if instance_exists(obj_conductor) obj_conductor.vocalsmuted = false;
+				if instance_exists(obj_conductor) obj_conductor.vocalsmuted[tiedCharacter.playside] = false;
 				with tiedCharacter {
 					event_user(k);
 				}
@@ -62,7 +62,7 @@ if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
 			lastnote.timehit = the;
 			if isbot { 
 				d_alarm[0] = 20;
-				if instance_exists(obj_conductor) obj_conductor.vocalsmuted = false;
+				if instance_exists(obj_conductor) obj_conductor.vocalsmuted[tiedCharacter.playside] = false;
 			}
 		}
 	}

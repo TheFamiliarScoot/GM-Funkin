@@ -4,7 +4,7 @@ if input_check_pressed(vk_enter, gp_face1) {
 		FMODGMS_Chan_StopChannel(deathmusic);
 		FMODGMS_Snd_PlaySound(dsnd_end,deathmusic);
 		retried = true;
-		alarm[1] = room_speed * 4;
+		alarm[1] = game_get_speed(gamespeed_fps) * 4;
 	}
 	else if retried && alarm[1] > 0 {
 		room_transition(room_play);

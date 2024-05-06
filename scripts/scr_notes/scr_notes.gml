@@ -12,6 +12,13 @@ function c_note(t,str,l) constructor {
 	special = 0;       // special note type
 }
 
+function c_event(t,str,v) constructor {
+	position = t;      // position of the event
+	type = str;        // type of the event
+	value = v;         // value struct of the event
+	played = false;    // if the event was played
+}
+
 function add_note(list,note) {
 	for (var i = 0; i < array_length(list); i += 1) {
 		var cur = list[i];
@@ -23,25 +30,20 @@ function add_note(list,note) {
 	array_push(list,note);
 }
 
-function find_note_in_range(group,sect,side,type,minn,maxx) {
+function find_note_in_range(group,column,minn,maxx) {
 	var ctr = 0;
 	var viablenotes = [];
-	for (var i = -2; i < 3; i += 1) {
-		if i + sect < 0 { continue; }
-		if i + sect >= cond.sectioncount { continue; }
-		repeat array_length(group[sect + i][side][type]) { // finding the closest notes
-			var ourNote = group[sect + i][side][type][ctr];
-			var calcPos = cond.notepos - ourNote.position; // position relative to judgement line
-			var rmn = ourNote.special > 0 ? minn/2 : minn;
-			var rmx = ourNote.special > 0 ? maxx/2 : maxx;
-			if (calcPos < rmx) && (calcPos > rmn) && !ourNote.hit && !ourNote.missed {
-				// if this is in range, this is a viable note we can hit
-				// the note cannot already be hit or missed
-				array_push(viablenotes,ourNote);
-			}
-			++ctr;
+	var glength = array_length(group);
+	for (var i = 0; i < glength; i++) {
+		var ourNote = group[column][i];
+		var calcPos = cond.notepos - ourNote.position; // position relative to judgement line
+		var rmn = ourNote.special > 0 ? minn/2 : minn;
+		var rmx = ourNote.special > 0 ? maxx/2 : maxx;
+		if (calcPos < rmx) && (calcPos > rmn) && !ourNote.hit && !ourNote.missed {
+			// if this is in range, this is a viable note we can hit
+			// the note cannot already be hit or missed
+			array_push(viablenotes,ourNote);
 		}
-		ctr = 0;
 	}
 	if array_length(viablenotes) = 0 { return noone; } // found nothing? return nothing
 	else {
@@ -55,7 +57,6 @@ function find_note_in_range(group,sect,side,type,minn,maxx) {
 		return viablenotes[0];
 	}
 	// my best solution to shitty jack timing :)
-	return noone;
 }
 
 function ovalpha(on) {
@@ -68,4 +69,8 @@ function ovalpha(on) {
 		gpu_set_blendmode(bm_normal);
 		gpu_set_alphatestenable(false);
 	}
+}
+
+function clamp_side_and_type(side, type) {
+	return (side * global.keyamt) + type;
 }

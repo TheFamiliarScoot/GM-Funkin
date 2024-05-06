@@ -340,11 +340,11 @@ function get_score(key) {
 
 function note_special_string_id(str) {
 	switch str {
-		case "normal": return 0; break;
-		case "hurt": return 1; break;
-		case "heal": return 2; break;
-		case "dodge": return 3; break;
-		case "instakill": return 4; break;
-		default: return -1; break;
+		case "normal": return 0;
+		case "hurt": return 1;
+		case "heal": return 2;
+		case "dodge": return 3;
+		case "instakill": return 4;
+		default: return -1;
 	}
 }

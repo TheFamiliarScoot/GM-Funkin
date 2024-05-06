@@ -1,14 +1,18 @@
 #macro cond global.conductor
-#macro chrt global.chart
-#macro chi global.channel_i
-#macro chv global.channel_v
-#macro voc global.vocals
+#macro mus global.music
 #macro ins global.inst
+#macro voc global.vocals
+#macro voc1 global.vocals[0]
+#macro voc2 global.vocals[1]
+#macro chi global.inst_index
+#macro chv global.vocals_index
+#macro chv1 global.vocals_index[0]
+#macro chv2 global.vocals_index[1]
 #macro opt global.options
 #macro keybind global.keys
 #macro buttonbind global.buttons
 
-#macro intfps = 120;
+#macro intfps = 120
 
 global.view_width = 1280;
 global.view_height = 720;
@@ -19,7 +23,7 @@ global.window_scale = global.windowscales[1];
 
 global.gamedir = environment_get_variable("LOCALAPPDATA") + "\\GM_Funkin";
 
-room_speed = 120;
+game_set_speed(120, gamespeed_fps);
 delta_init();
 
 exception_unhandled_handler(function(ex) {
@@ -48,10 +52,10 @@ exception_unhandled_handler(function(ex) {
 	show_message(message_text);
 });
 
-// Create the system
-FMODGMS_Sys_Create();
-// Initialize the system
-FMODGMS_Sys_Initialize(32);
+global.fmod_system = fmod_system_create();
+fmod_system_init(1024, FMOD_INIT.NORMAL);
+
+//lua_error_handler = scr_lua_error;W
 
 texture_prefetch("Default");
 audio_group_load(audiogroup_default);
@@ -314,3 +318,9 @@ lastcamerax = 0;
 lastcameray = 0;
 
 show_counter = true;
+
+global.parappamode = false;
+
+global.undertale = false;
+
+global.cursongstate = -1;

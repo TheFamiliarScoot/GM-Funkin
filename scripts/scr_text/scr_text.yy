@@ -1,12 +1,13 @@
 {
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "Scripts",
-    "path": "folders/Scripts.yy",
+  "$GMScript":"",
+  "%Name":"scr_text",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_text",
+  "parent":{
+    "name":"game",
+    "path":"folders/Scripts/game.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "scr_text",
-  "tags": [],
-  "resourceType": "GMScript",
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

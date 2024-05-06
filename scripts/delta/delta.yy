@@ -1,12 +1,13 @@
 {
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "delta",
-    "path": "folders/Scripts/delta.yy",
+  "$GMScript":"",
+  "%Name":"delta",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"delta",
+  "parent":{
+    "name":"delta",
+    "path":"folders/Scripts/delta.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "delta",
-  "tags": [],
-  "resourceType": "GMScript",
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

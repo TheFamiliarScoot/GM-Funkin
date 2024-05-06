@@ -10,4 +10,3 @@ if conductordisplay {
 			   "Section: " + string(cond.section);
 	draw_text(0,200,text);	
 }
-lastposition = FMODGMS_Chan_Get_Position(chi);

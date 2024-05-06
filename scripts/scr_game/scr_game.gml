@@ -92,7 +92,7 @@ function miss(char, penalty, key) {
 		with char { event_user(key + 4); }
 		change_hp(penalty);
 		if instance_exists(obj_conductor) {
-			obj_conductor.vocalsmuted = true;
+			obj_conductor.vocalsmuted[char.playside] = true;
 		}
 		global.misses += 1;
 		global.combo = 0;
@@ -122,31 +122,15 @@ function draw_ui_fake(ui, spr) {
 }
 
 function room_transition(rm) {
-	with instance_create_layer(0,0,"Instances",obj_blank) {
-		roomtogoto = rm;
-		instance_change(obj_transition,true);
-	}
+	instance_create_layer(0,0,"Instances",obj_transition,{roomtogoto: rm});
 }
 
 function create_custom_char(nm,_x,_y,_lyr,side) {
-	var inst = noone;
-	with instance_create_layer(_x,_y,_lyr,obj_blank) {
-		loadname = nm;
-		playside = side;
-		instance_change(obj_custom_char,true);
-		inst = id;
-	}
-	return inst;
+	return instance_create_layer(_x,_y,_lyr,obj_custom_char,{loadname: nm, playside: side});
 }
 
 function spawn_char(_x,_y,_layer,side,_id) {
-	var _ins = noone;
-	with instance_create_layer(_x,_y,_layer,obj_blank) {
-		playside = side;
-		instance_change(_id,true);
-		_ins = id;
-	}
-	return _ins;
+	return instance_create_layer(_x,_y,_layer,_id,{playside: side});
 }
 
 /*
@@ -159,13 +143,5 @@ function draw_note_tail(sprite,_x,_y,length) {
 */
 
 function create_scroll_menu(_x,_y,_layer,chc) {
-	var inst = noone;
-	
-	with instance_create_layer(_x,_y,_layer,obj_blank) {
-		choices = chc;
-		instance_change(obj_scrollmenu,true);
-		inst = id;
-	}
-	
-	return inst;
+	return instance_create_layer(_x,_y,_layer,obj_scrollmenu,{choices: chc});
 }

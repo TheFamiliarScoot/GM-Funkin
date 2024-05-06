@@ -17,6 +17,6 @@ draw_sprite_part_ext(
 	c_white,
 	1
 );
-animtimer += animspeed * d((room_speed / 24) * 0.1) * 0.25;
+animtimer += animspeed * d((game_get_speed(gamespeed_fps) / 24) * 0.1) * 0.25;
 if floor(animtimer) = array_length(cursprite.frames) - 1 { animspeed = 0; }
 gpu_set_texfilter(opt.antialiasing);

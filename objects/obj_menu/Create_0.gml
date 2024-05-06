@@ -21,7 +21,7 @@ global.stats = try_load_scores("scores.dat")
 deletingstats = false;
 
 menu = create_scroll_menu(140,400,layer_get_id("Menus"),
-	["pack chooser", "options", "exit"],
+	["pack chooser", "options", "exit"]
 );
 
 lastchoices = [];

@@ -5,8 +5,7 @@ if room = room_play {
 		uicopy = -1;
 		instance_destroy(obj_pause_menu);
 	}
-	FMODGMS_Snd_Unload(ins);
-	FMODGMS_Snd_Unload(voc);
-	FMODGMS_Chan_RemoveChannel(chi);
-	FMODGMS_Chan_RemoveChannel(chv);
+	fmod_sound_release(ins);
+	if voc1 > -1 { fmod_sound_release(voc1); }
+	if voc2 > -1 { fmod_sound_release(voc2); }
 }

@@ -87,6 +87,10 @@ if menuenabled {
 						setupstate = 3;
 						audio_play_sound(snd_menu_confirm,0,false);
 						global.gimmicks = get_gimmicks_pack(global.selectedpack);
+						global.cursongstate = new_lua_state();
+						var scriptpath = "assets/songs/" + packs[menu.selection] + "/script.lua";
+						if file_exists(scriptpath)
+							lua_add_file(global.cursongstate, scriptpath);
 						var newchoices = [];
 						for (var i = 0; i < array_length(songs); i += 1) {
 							array_push(newchoices, songs[i].name);
@@ -326,6 +330,7 @@ if menuenabled {
 				array_push(newchoices, "back");
 				menu.choices = newchoices;
 				menu.selection = 0;
+				lua_state_destroy(global.cursongstate);
 				audio_play_sound(snd_menu_cancel,0,false);
 			}
 			break;

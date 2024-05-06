@@ -1,8 +1,7 @@
 with obj_ui_parent { instance_destroy(id); }
 with obj_strum_parent { instance_destroy(id); }
 instance_destroy(obj_conductor);
-FMODGMS_Chan_StopChannel(chi);
-FMODGMS_Chan_StopChannel(chv);
+audio_stop_sync_group(mus);
 obj_camera.ui.vis = false;
 instance_destroy(global.bgobject);
 audio_play_sound(snd_death,0,false);

@@ -1,7 +1,7 @@
 #macro view view_camera[0]
 
 if instance_exists(global.target) {
-	var _spd = d(2/room_speed);
+	var _spd = d(2/game_get_speed(gamespeed_fps));
 	x += ((global.target.x + global.target.camOffX) - x) * _spd;
 	y += ((global.target.y + global.target.camOffY) - y) * _spd;
 	curzoom += (global.cam.zoom - curzoom) * _spd;

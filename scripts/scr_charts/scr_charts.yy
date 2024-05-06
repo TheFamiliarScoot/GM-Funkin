@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"scr_charts",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_charts",
+  "parent":{
+    "name":"game",
+    "path":"folders/Scripts/game.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
