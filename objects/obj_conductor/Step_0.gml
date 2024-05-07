@@ -1,3 +1,4 @@
+var timeunit = FMOD_TIMEUNIT.MS;
 var ev_length = array_length(global.events);
 var i = 0;
 repeat (ev_length)
@@ -9,8 +10,10 @@ repeat (ev_length)
 			case "FocusCamera":
 				global.target = targets[ev.value.char];
 				break;
-			case "ChangeBPM":
-				cond.bpm = cursection.bpm;
+			case "ChangeTime":
+				cond.bpm = ev.value.bpm;
+				cond.timenumerator = ev.value.n;
+				cond.timedenominator = ev.value.d;
 				cond.crochet = 60 / cond.bpm;
 				break;
 		}
@@ -23,7 +26,7 @@ if countingdown {
 	cond.songpos += delta_time / 1000000;
 }
 else {
-	cond.songpos += (fmod_channel_get_position(chi, FMOD_TIMEUNIT.MS) / 1000) - cond.lastpos;
+	cond.songpos = fmod_channel_get_position(chi, FMOD_TIMEUNIT.MS) / 1000;
 }
 if cond.songpos >= 0 && countingdown {
 	countingdown = false;
@@ -35,21 +38,23 @@ if cond.songpos >= 0 && countingdown {
 	if chv2 > -1 { fmod_channel_set_position(chv2, 0, FMOD_TIMEUNIT.MS); }
 	audiovolume = 0.5;
 }
+var sdelta = cond.songpos - cond.lastpos;
 cond.notepos = cond.songpos * 1000;
-cond.gstep = cond.songpos / cond.crochet;
-cond.gbeat = cond.gstep / 4;
+cond.gstep += sdelta / cond.crochet;
+cond.gbeat += (sdelta / cond.crochet) / cond.timenumerator;
 cond.cbeat = floor(cond.gbeat);
-cond.cstep = floor(cond.gstep) % 4;
-if countingdown {
-	cond.section = 0;
-}
-else {
-	cond.section = clamp(cond.cbeat,0,cond.sectioncount - 1);
-}
+cond.cstep = floor(cond.gstep) % cond.timenumerator;
 
 if !countingdown {
-	// TODO: reimplement
-	cond.timeleft = fmod_sound_get_length(ins, FMOD_TIMEUNIT.MS) - fmod_channel_get_position(chi, FMOD_TIMEUNIT.MS);
+	cond.timeleft = fmod_sound_get_length(ins, timeunit) - fmod_channel_get_position(chi, timeunit);
+}
+
+if cond.stephit {
+	var inspos = fmod_channel_get_position(chi, timeunit);
+	var voc1pos = chv1 > -1 ? fmod_channel_get_position(chv1, timeunit) : inspos;
+	var voc2pos = chv2 > -1 ? fmod_channel_get_position(chv2, timeunit) : inspos;
+	if voc1pos != inspos { fmod_channel_set_position(chv1, inspos, timeunit); }
+	if voc2pos != inspos { fmod_channel_set_position(chv2, inspos, timeunit); }	
 }
 
 // Conductor display
@@ -59,9 +64,9 @@ if cond.beathit {
 else if cond.stephit && conductordisplay { audio_play_sound(sfx_bar,0,false); }
 
 // Audio volume
-if ins > -1 && chi > -1 { fmod_channel_control_set_volume(chi, audiovolume); }
-if voc1 > -1 && chv1 > -1 { fmod_channel_control_set_volume(chv1, !vocalsmuted[0]*audiovolume); }
-if voc2 > -1 && chv2 > -1 { fmod_channel_control_set_volume(chv2, !vocalsmuted[1]*audiovolume); }
+fmod_channel_control_set_volume(chi, audiovolume);
+if chv1 > -1 { fmod_channel_control_set_volume(chv1, !vocalsmuted[0]*audiovolume); }
+if chv2 > -1 { fmod_channel_control_set_volume(chv2, !vocalsmuted[1]*audiovolume); }
 
 // Pausing
 if !stepmode && !global.paused {
@@ -82,9 +87,9 @@ var c = abs(cond.cstep);
 if countingdown && c != count {
 	switch c {
 		case 0: audio_play_sound(snd_cd_three,3,false); break;
-		case 3: audio_play_sound(snd_cd_two,2,false); break;
+		case 1: audio_play_sound(snd_cd_two,2,false); break;
 		case 2: audio_play_sound(snd_cd_one,1,false); break;
-		case 1: audio_play_sound(snd_cd_go,0,false); break;
+		case 3: audio_play_sound(snd_cd_go,0,false); break;
 	}
 	if !(c < 1) {
 		instance_create_layer(global.view_width/2,global.view_height/2,"UI",obj_countdown,{countspr: c});

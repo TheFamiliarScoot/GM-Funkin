@@ -6,7 +6,6 @@ if conductordisplay {
 			   "Current Beat: " + string(cond.cbeat) + "\n" +
 			   "Song Position: " + string(cond.songpos) + "\n" +
 			   "Visual Position: " + string(cond.notepos) + "\n" +
-			   "Offset: " + string(cond.offset) + "\n" + 
-			   "Section: " + string(cond.section);
+			   "Offset: " + string(cond.offset);
 	draw_text(0,200,text);	
 }

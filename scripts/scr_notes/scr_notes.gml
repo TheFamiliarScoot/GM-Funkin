@@ -33,7 +33,7 @@ function add_note(list,note) {
 function find_note_in_range(group,column,minn,maxx) {
 	var ctr = 0;
 	var viablenotes = [];
-	var glength = array_length(group);
+	var glength = array_length(group[column]);
 	for (var i = 0; i < glength; i++) {
 		var ourNote = group[column][i];
 		var calcPos = cond.notepos - ourNote.position; // position relative to judgement line

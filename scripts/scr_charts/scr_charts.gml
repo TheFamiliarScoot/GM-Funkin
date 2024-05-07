@@ -1,17 +1,36 @@
-function load_chart_old(pack, song_name, difficulty) {
-	var diffaddstring = "";
-	if global.selecteddifficulty != "normal" {diffaddstring = "-" + global.selecteddifficulty};
-	
-	var jsonlocation = "assets\\songs\\" + pack + "\\" + song_name + "\\" + global.selectedsong.name + diffaddstring + ".json";
+function init_conductor(pack, song, difficulty) {
+	cond = {}
+	switch song.chartType {
+		case "old":
+			load_chart_old(pack, song, difficulty);
+			break;
+		case "funkinv3":
+			load_chart_funkin_v3(pack, song, difficulty);
+			break;
+	}
+	cond.crochet = 60 / cond.bpm;
+	cond.lastpos = -cond.crochet * 4;
+	cond.songpos = -cond.crochet * 4;
+	cond.notepos = (-cond.crochet * 4) * 1000;
+	cond.gbeat = 0;
+	cond.gstep = 0;
+	cond.cbeat = 0;
+	cond.cstep = 0;
+	cond.beathit = false;
+	cond.stephit = false;
+}
+
+function load_chart_old(pack, song, difficulty) {
+	var diffaddstring = "-" + difficulty;
+	if difficulty == "normal" { diffaddstring = ""; }
+	var jsonlocation = "assets\\songs\\" + pack + "\\" + song.fileName + "\\" + song.fileName + diffaddstring + ".json";
 	var chrt = read_json(jsonlocation);
-	global.scrollspeed = chrt.song.speed;
-	cond.sectioncount = array_length(chrt.song.notes);
 
 	var totalnotecount = 0;
 	var cursteps = 0;
 	var curbpm = chrt.song.bpm;
 	var curpos = 0;
-	var lastswap = false;
+	var lastswap = -1;
 
 	var donotechecks = false;
 
@@ -80,12 +99,14 @@ function load_chart_old(pack, song_name, difficulty) {
 		
 				var swap = chrt.song.notes[h].mustHitSection;
 				if swap != lastswap {
-					array_push(global.events, new c_event(curpos, "FocusCamera", { char: swap ? 1 : 0 }));
+					var ch = swap ? 0 : 1;
+					if ch == 0 && variable_struct_exists(chrt.song.notes[h], "gfSection") && chrt.song.notes[h].gfSection { ch = 2; }
+					array_push(global.events, new c_event(curpos, "FocusCamera", { char: ch }));
 				}
 				lastswap = swap;
 				
 				if variable_struct_exists(chrt.song.notes[h], "changeBPM") && chrt.song.notes[h].changeBPM {
-					array_push(global.events, new c_event(curpos, "ChangeBPM", { bpm: chrt.song.notes[h].bpm }))	
+					array_push(global.events, new c_event(curpos, "ChangeTime", { bpm: chrt.song.notes[h].bpm, n: 4, d: 4 }))	
 				}
 		
 				if len < 0 { len = 0 };	
@@ -94,9 +115,9 @@ function load_chart_old(pack, song_name, difficulty) {
 		
 				thisNote.special = nspecial;
 		
-				var rt = typ % global.keyamt;
+				var rt = (typ + global.keyamt) % global.keyamt;
 				var side = floor(typ / global.keyamt) % 2;
-				if swap ? !side : side {
+				if swap ? side : !side {
 					rt += global.keyamt;
 				}
 				add_note(global.notes[rt], thisNote);
@@ -113,38 +134,72 @@ function load_chart_old(pack, song_name, difficulty) {
 		show_message(msg);
 		instance_deactivate_all(false);
 		room_goto(room_menu);
-		exit;
+		return -1;
 	}
 
-	var songlocation = "assets\\songs\\" + pack + "\\" + song_name + "\\Inst.ogg";
+	var songlocation = "assets\\songs\\" + pack + "\\" + song.instLocation;
 	if !file_exists(songlocation) {
 		show_message("Couldn't find the instrumental! :(");
 		room_goto(room_menu);
+		return -1;
 	}
 	ins = fmod_system_create_stream(songlocation, FMOD_MODE.LOOP_OFF);
 	voc = [];
-	var voices1loc = "assets\\songs\\" + pack + "\\" + song_name + "\\Voices.ogg";
-	if file_exists(voices1loc) { voc1 = fmod_system_create_stream(voices1loc, FMOD_MODE.LOOP_OFF); }
-	else { voc1 = -1 }
-	voc2 = -1;
+	var voicesloc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[1];
+	if file_exists(voicesloc) { voc2 = fmod_system_create_stream(voicesloc, FMOD_MODE.LOOP_OFF); }
+	else { voc2 = -1 }
+	voc1 = -1;
 
 	obj_conductor.vocalsmuted = [false, false];
 	
-	cond.scrollspeed = chrt.song.speed / 2;
-	
-	return chrt.song.bpm;
+	cond.scrollspeed = chrt.song.speed;
+	cond.bpm = chrt.song.bpm;
+	cond.timedenominator = 4;
+	cond.timenumerator = 4;	
+	cond.offset = -10;
 }
 
-function load_chart_funkin_v3(pack, song_name, difficulty) {
-	var metadata = read_json("assets\\songs\\" + pack + "\\" + song_name + "\\" + song_name + "_metadata.json");
-	var chart = read_json("assets\\songs\\" + pack + "\\" + song_name + "\\" + song_name + "_chart.json");
+function load_chart_funkin_v3(pack, song, difficulty) {
+	var metadata = read_json("assets\\songs\\" + pack + "\\" + song.fileName + "\\" + song.fileName + "-metadata.json");
+	var chart = read_json("assets\\songs\\" + pack + "\\" + song.fileName + "\\" + song.fileName + "-chart.json");
 	
 	for (var i = 0; i < array_length(chart.events); i++) {
 		var ev = chart.events[i];
-		array_push(global.events, new c_event(ev.t, ev.e, ev.v));
+		add_note(global.events, new c_event(ev.t, ev.e, ev.v));
 	}
 	
-	var notes = chart.notes[difficulty];
+	var strums = global.keyamt * 2;
+	repeat strums {
+		array_push(global.notes, []);	
+	}
 	
-	return metadata.timeChanges[0].bpm;
+	var notes = variable_struct_get(chart.notes, difficulty);
+	for (var i = 0; i < array_length(notes); i++) {
+		var note = notes[i];
+		add_note(global.notes[note.d], new c_note(note.t, note.d, note.l));
+	}
+	
+	var songlocation = "assets\\songs\\" + pack + "\\" + song.instLocation;
+	if !file_exists(songlocation) {
+		show_message("Couldn't find the instrumental! :(");
+		room_goto(room_menu);
+		return -1;
+	}
+	ins = fmod_system_create_stream(songlocation, FMOD_MODE.LOOP_OFF);
+	
+	voc = [];
+	var voices1loc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[0];
+	if file_exists(voices1loc) { voc1 = fmod_system_create_stream(voices1loc, FMOD_MODE.LOOP_OFF); }
+	else { voc1 = -1 }
+	var voices2loc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[1];
+	if file_exists(voices2loc) { voc2 = fmod_system_create_stream(voices2loc, FMOD_MODE.LOOP_OFF); }
+	else { voc2 = -1 }
+	
+	obj_conductor.vocalsmuted = [false, false];
+	
+	cond.scrollspeed = variable_struct_get(chart.scrollSpeed, difficulty);
+	cond.bpm = metadata.timeChanges[0].bpm;
+	cond.timedenominator = metadata.timeChanges[0].d;
+	cond.timenumerator = metadata.timeChanges[0].n;
+	cond.offset = metadata.offsets.instrumental;
 }

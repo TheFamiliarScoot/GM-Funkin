@@ -6,9 +6,9 @@ event_inherited();
 
 counts = [
 	noone,
-	spr_ui_go,
-	spr_ui_set,
 	spr_ui_ready,
+	spr_ui_set,
+	spr_ui_go,
 ]
 
 sprite_index = counts[countspr];

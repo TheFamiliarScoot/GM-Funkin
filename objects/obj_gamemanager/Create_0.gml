@@ -14,6 +14,8 @@
 
 #macro intfps = 120
 
+#macro debug true
+
 global.view_width = 1280;
 global.view_height = 720;
 
@@ -26,31 +28,33 @@ global.gamedir = environment_get_variable("LOCALAPPDATA") + "\\GM_Funkin";
 game_set_speed(120, gamespeed_fps);
 delta_init();
 
-exception_unhandled_handler(function(ex) {
-	randomize();
-	var file = global.gamedir + "\\crash.txt";
-	var random_text = [
-		"i forgor ☠",
-		"shit happens",
-		"actually how?",
-		"bruh moment",
-		"skill issue",
-		"honestly deserved",
-		"#RIPBOZO"
-	]
-	if file_exists(file) file_delete(file);
-	var _f = file_text_open_write(file);
-	file_text_write_string(_f, ex.longMessage);
-	file_text_close(_f);
+if !debug {
+	exception_unhandled_handler(function(ex) {
+		randomize();
+		var file = global.gamedir + "\\crash.txt";
+		var random_text = [
+			"i forgor ☠",
+			"shit happens",
+			"actually how?",
+			"bruh moment",
+			"skill issue",
+			"honestly deserved",
+			"#RIPBOZO"
+		]
+		if file_exists(file) file_delete(file);
+		var _f = file_text_open_write(file);
+		file_text_write_string(_f, ex.longMessage);
+		file_text_close(_f);
 	
-	var funnymessage = random_text[irandom_range(0,array_length(random_text) - 1)];
-	var message_text = "Game broke - " + funnymessage + "\n" +
-	"Error log: \n\n" + ex.longMessage + "\n" +
-	"Crash log saved to " + file +
-	"\nPlease send this file in the #gmfunkin channel!!! TY!!! - Scoot";
+		var funnymessage = random_text[irandom_range(0,array_length(random_text) - 1)];
+		var message_text = "Game broke - " + funnymessage + "\n" +
+		"Error log: \n\n" + ex.longMessage + "\n" +
+		"Crash log saved to " + file +
+		"\nPlease send this file in the #gmfunkin channel!!! TY!!! - Scoot";
 		
-	show_message(message_text);
-});
+		show_message(message_text);
+	});
+}
 
 global.fmod_system = fmod_system_create();
 fmod_system_init(1024, FMOD_INIT.NORMAL);

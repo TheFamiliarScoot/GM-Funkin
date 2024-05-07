@@ -1,12 +1,11 @@
 {
   "FolderOrderSettings":[
-    {"name":"Fmod","order":1,"path":"folders/Fmod.yy",},
-    {"name":"Extensions","order":1,"path":"folders/Fmod/Extensions.yy",},
     {"name":"fmod","order":18,"path":"folders/Scripts/fmod.yy",},
     {"name":"game","order":19,"path":"folders/Scripts/game.yy",},
     {"name":"Palette Swap","order":1,"path":"folders/Scripts/Palette Swap.yy",},
   ],
   "ResourceOrderSettings":[
+    {"name":"Apollo","order":2,"path":"extensions/Apollo/Apollo.yy",},
     {"name":"FMOD","order":1,"path":"extensions/FMOD/FMOD.yy",},
     {"name":"DeltaObject","order":24,"path":"objects/DeltaObject/DeltaObject.yy",},
     {"name":"obj_bf_pixel","order":5,"path":"objects/obj_bf_pixel/obj_bf_pixel.yy",},

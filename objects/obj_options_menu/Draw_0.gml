@@ -22,7 +22,9 @@ switch submenu {
 					keybind.right = ini_read_real("Keys","Right",ord("D"));
 				}
 				break;
-			case 1: // gameplay
+			case 1: // profile
+				break;
+			case 2: // gameplay
 				if input_check_pressed(vk_enter, gp_face1) {
 					title = "GAMEPLAY";
 					submenu = 12;
@@ -30,7 +32,7 @@ switch submenu {
 					ybegin = 15;
 				}
 				break;
-			case 2: // appearance
+			case 3: // appearance
 				if input_check_pressed(vk_enter, gp_face1) {
 					title = "APPEARANCE";
 					submenu = 13;
@@ -295,6 +297,7 @@ switch submenu {
 	case 10:
 		choices = [
 			"KEYBINDS",
+			"PROFILE",
 			"GAMEPLAY",
 			"APPEARANCE"
 		];
@@ -317,7 +320,7 @@ switch submenu {
 			"MISS NOTES?: " + bool_yesno(opt.missnotes),
 			"BLUEBALLING: " + bool_onoff(opt.blueballing),
 			"RETRY KEY:" + bool_onoff(opt.retrykey),
-			"PLAY AS P1: " + bool_yesno(opt.player1),
+			"PLAY AS OPPONENT: " + bool_yesno(opt.player1),
 			"BOTPLAY: " + bool_onoff(opt.botplay),
 			"MIDDLESCROLL: " + bool_onoff(opt.middlescroll),
 			"SPECIAL NOTES: " + bool_onoff(opt.specialnotes)

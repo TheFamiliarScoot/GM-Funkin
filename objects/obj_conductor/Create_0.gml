@@ -1,22 +1,8 @@
-global.scrollspeed = 1;
 global.notes = [];
 global.events = [];
 global.keyamt = 4;
 
-cond = {}
-cond.bpm = load_chart_old(global.selectedpack, global.selectedsong.name, global.selecteddifficulty);
-cond.crochet = 60 / cond.bpm;
-cond.lastpos = -cond.crochet * 4;
-cond.songpos = -cond.crochet * 4;
-cond.notepos = (-cond.crochet * 4) * 1000;
-cond.gbeat = 0;
-cond.gstep = 0;
-cond.cbeat = 0;
-cond.cstep = 0;
-cond.offset = -10;
-cond.beathit = false;
-cond.stephit = true;
-cond.section = 0;
+init_conductor(global.selectedpack, global.selectedsong, global.selecteddifficulty);
 
 chi = fmod_system_play_sound(ins, true);
 chv = [-1, -1];
@@ -40,7 +26,7 @@ global.ratings = {
 }
 
 // one of the only instances of this ever being used
-global.realscroll = global.options.scrollspeed == 0 ? global.scrollspeed/2.5 : global.options.scrollspeed/2.5;
+global.realscroll = global.options.scrollspeed == 0 ? cond.scrollspeed/2.5 : global.options.scrollspeed/2.5;
 global.notescroll = global.options.usedownscroll ? global.realscroll : -global.realscroll;
 
 global.hp = 1;
@@ -82,7 +68,7 @@ repeat 8 {
 		type = ctr;
 		thisKey = strumKeys[ctr];
 		thisKeyGP = strumKeysGp[ctr];
-		if type < 4 { 
+		if floor(type / global.keyamt) % 2 {
 			tiedCharacter = global.dadinstance;
 			if global.options.player1 isbot = false else isbot = true; 
 		}
@@ -98,7 +84,6 @@ ctr = 0;
 
 global.target = global.bfobject;
 global.paused = false;
-global.gfsection = false;
 slowmode = false;
 conductordisplay = false;
 
@@ -108,4 +93,4 @@ stepmode = false;
 
 count = -2;
 
-targets = [ global.dadinstance, global.bfinstance, global.gfinstance ];
+targets = [ global.bfinstance, global.dadinstance, global.gfinstance ];

@@ -38,8 +38,8 @@ enabled = true;
 group = 0;
 // this kinda sucks a little
 
-if tiedCharacter = global.dadinstance { group = 0; }
-if tiedCharacter = global.bfinstance { group = 1; }
+if tiedCharacter = global.dadinstance { group = 1; }
+if tiedCharacter = global.bfinstance { group = 0; }
 
 if global.keyamt = 6 {
 	positions = [
@@ -55,14 +55,14 @@ if global.keyamt = 6 {
 }
 else {
 	positions = [
-		centerLeft-(24*strum_spacing),
-		centerLeft-(8*strum_spacing),
-		centerLeft+(8*strum_spacing),
-		centerLeft+(24*strum_spacing),
 		centerRight-(24*strum_spacing),
 		centerRight-(8*strum_spacing),
 		centerRight+(8*strum_spacing),
-		centerRight+(24*strum_spacing)
+		centerRight+(24*strum_spacing),
+		centerLeft-(24*strum_spacing),
+		centerLeft-(8*strum_spacing),
+		centerLeft+(8*strum_spacing),
+		centerLeft+(24*strum_spacing)
 	];
 }
 
@@ -82,10 +82,10 @@ image_yscale = 0.75 * scalemod;
 if opt.middlescroll {
 	x = positionmid[type % 4];
 	if opt.player1 {
-		if type > 3 { enabled = false; }
+		if type < 4 { enabled = false; }
 	}
 	else { 
-		if type < 4 { enabled = false; }
+		if type > 3 { enabled = false; }
 	}
 }
 else { x = positions[type % 8]; }

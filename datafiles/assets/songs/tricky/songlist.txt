@@ -1,4 +1,0 @@
-improbable-outset:easy,normal,hard
-madness:easy,normal,hard
-hellclown:easy,normal,hard
-expurgation:hard

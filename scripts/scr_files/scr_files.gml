@@ -11,6 +11,10 @@ function read_json(file_path){
 	return json_parse(json_text);
 }
 
+function read_json_lua(file_path) {
+	return read_json("assets/songs/" + global.selectedpack + "/" + file_path);	
+}
+
 function read_json_map(file_path){
 	var file = file_text_open_read(file_path);
 	var json_text = "";

@@ -109,8 +109,3 @@ if !isbot && input_check_released(thisKey, thisKeyGP) {
 	play_anim_d(id,nsprite[p][5]);
 }
 lasttime = cond.notepos;
-
-if group = 1 {
-	if global.gfsection { tiedCharacter = global.gfinstance; }
-	else { tiedCharacter = global.bfinstance; }
-}
