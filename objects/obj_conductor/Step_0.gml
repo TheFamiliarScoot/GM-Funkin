@@ -6,17 +6,7 @@ repeat (ev_length)
 	var ev = global.events[i];
 	if !ev.played && cond.notepos >= ev.position {
 		ev.played = true;
-		switch ev.type {
-			case "FocusCamera":
-				global.target = targets[ev.value.char];
-				break;
-			case "ChangeTime":
-				cond.bpm = ev.value.bpm;
-				cond.timenumerator = ev.value.n;
-				cond.timedenominator = ev.value.d;
-				cond.crochet = 60 / cond.bpm;
-				break;
-		}
+		handle_event(ev);
 	}
 	i++;
 }
@@ -49,6 +39,7 @@ if !countingdown {
 	cond.timeleft = fmod_sound_get_length(ins, timeunit) - fmod_channel_get_position(chi, timeunit);
 }
 
+/*
 if cond.stephit {
 	var inspos = fmod_channel_get_position(chi, timeunit);
 	var voc1pos = chv1 > -1 ? fmod_channel_get_position(chv1, timeunit) : inspos;
@@ -56,6 +47,7 @@ if cond.stephit {
 	if voc1pos != inspos { fmod_channel_set_position(chv1, inspos, timeunit); }
 	if voc2pos != inspos { fmod_channel_set_position(chv2, inspos, timeunit); }	
 }
+*/
 
 // Conductor display
 if cond.beathit {
@@ -94,6 +86,5 @@ if countingdown && c != count {
 	if !(c < 1) {
 		instance_create_layer(global.view_width/2,global.view_height/2,"UI",obj_countdown,{countspr: c});
 	}
-	show_debug_message(c);
 }
 count = c;

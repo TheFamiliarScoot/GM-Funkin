@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"scr_events",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_events",
+  "parent":{
+    "name":"game",
+    "path":"folders/Scripts/game.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

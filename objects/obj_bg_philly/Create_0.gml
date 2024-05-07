@@ -1,3 +1,5 @@
+event_inherited();
+
 wincolors = [
 	c_aqua,
 	c_lime,

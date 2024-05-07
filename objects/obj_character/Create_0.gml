@@ -1,5 +1,7 @@
 event_inherited();
 
+depth = 0;
+
 if texture != "none" {
 	texture_prefetch(texture);
 }

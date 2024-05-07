@@ -69,7 +69,7 @@ if enabled {
 	repeat nlength {
 		var note = notes[ctr];
 		var pos = cond.notepos - note.position;
-		var range = 1000 * cond.scrollspeed;
+		var range = 3000 / cond.scrollspeed;
 		
 		// dont draw if out of range
 		if pos < range + note.length && pos > -range {
