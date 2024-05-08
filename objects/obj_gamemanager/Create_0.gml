@@ -255,6 +255,7 @@ global.presets = [
 	[obj_gf,obj_gf,obj_bf,obj_bg_stage], // tutorial
 	[obj_dad,obj_gf,obj_bf,obj_bg_stage], // week 1
 	[obj_spookykids,obj_gf,obj_bf,obj_bg_spooky], // week 2
+	[obj_pico,obj_gf,obj_bf,obj_bg_philly], // week 3
 	[obj_senpai,obj_gf_pixel,obj_bf_pixel,obj_bg_school], // week 6 senpai
 	[obj_senpai_angry,obj_gf_pixel,obj_bf_pixel,obj_bg_school_roses], // week 6 roses
 	[obj_spirit,obj_gf_pixel,obj_bf_pixel,obj_bg_evilschool], // week 6 thorns
@@ -265,11 +266,13 @@ global.chars = [
 	obj_dad,
 	obj_gf,
 	obj_spookykids,
+	obj_pico,
 	obj_senpai,
 	obj_senpai_angry,
 	obj_spirit,
 	obj_bf_pixel,
 	obj_gf_pixel,
+	obj_nene,
 	obj_custom_char
 ];
 

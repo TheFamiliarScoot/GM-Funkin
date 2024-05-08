@@ -8,13 +8,6 @@ if texture != "none" {
 
 self.holding = false;
 self.lastStep = 0;
-if !is_custom {
-	idle_sprite = asset_get_index(idle_sprite);	
-	up_sprite = asset_get_index(up_sprite);	
-	down_sprite = asset_get_index(down_sprite);	
-	left_sprite = asset_get_index(left_sprite);	
-	right_sprite = asset_get_index(right_sprite);	
-}
 
 var templeft = left_sprite;
 var tempright = right_sprite;
@@ -49,5 +42,6 @@ else {
 image_yscale = scale;
 
 danced = false;
+missed = false;
 
 //custom_sprite = load_json_sprite(name);

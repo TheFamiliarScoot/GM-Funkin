@@ -23,12 +23,13 @@ characters = [
 	"DADDY DEAREST",
 	"GIRLFRIEND",
 	"SKID & PUMP",
+	"PICO",
 	"SENPAI",
 	"SENPAI (ANGRY)",
 	"SPIRIT",
 	"BOYFRIEND (PIXEL)",
-	"GIRLFRIEND (PIXEL)"/*,
-	"CUSTOM"*/
+	"GIRLFRIEND (PIXEL)",
+	"NENE"
 ];
 
 stages = [
@@ -50,6 +51,7 @@ presets = [
 	"tutorial",
 	"week1",
 	"week2",
+	"week3",
 	"week6-senpai",
 	"week6-roses",
 	"week6-thorns"
