@@ -67,10 +67,16 @@ function get_songs(pack) {
 		try {
 			var finalsong = {
 				name: "",
-				difficulties: []
+				chartType: "",
+				difficulties: [],
+				instLocation: "",
+				voicesLocations: ["", ""]
 			}
 			var split = string_split(list[i],":");
 			finalsong.name = split[0];
+			finalsong.chartType = "old";
+			finalsong.instLocation = split[0] + "/Inst.ogg";
+			finalsong.voicesLocations[1] = split[0] + "/Voices.ogg";
 			if array_length(split) < 2 {
 				finalsong.difficulties = ["easy","normal","hard"];
 			}
@@ -116,4 +122,26 @@ function get_gimmicks_pack(pack) {
 	var gimmicks = read_json(path);
 
 	return gimmicks;
+}
+
+function get_songs_from_current_pack() {
+	if global.packscript > -1 {
+		var songlist = lua_call(global.packscript, "getSongList");
+		if !is_undefined(songlist) && is_array(songlist) {
+			var songs = [];
+			for (var i = 0; i < array_length(songlist); i++) {
+				var songinfo = lua_call(global.packscript, "getSong", songlist[i]);
+				if !is_undefined(songinfo) {
+					array_push(songs, songinfo);	
+				}
+			}
+			if array_length(songs) > 0 {
+				return songs;	
+			}
+		}
+	}
+	if file_exists("assets/songs/" + global.selectedpack + "/songlist.txt") {
+		return get_songs(global.selectedpack);
+	}
+	return undefined;
 }

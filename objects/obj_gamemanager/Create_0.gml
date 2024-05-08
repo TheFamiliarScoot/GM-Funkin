@@ -47,9 +47,9 @@ if !debug {
 		file_text_close(_f);
 	
 		var funnymessage = random_text[irandom_range(0,array_length(random_text) - 1)];
-		var message_text = "Game broke - " + funnymessage + "\n" +
-		"Error log: \n\n" + ex.longMessage + "\n" +
-		"Crash log saved to " + file +
+		var message_text = "Game broke - " + funnymessage +
+		"\nError log: \n\n" + ex.longMessage +
+		"\nCrash log saved to " + file +
 		"\nPlease send this file in the #gmfunkin channel!!! TY!!! - Scoot";
 		
 		show_message(message_text);
@@ -326,5 +326,3 @@ show_counter = true;
 global.parappamode = false;
 
 global.undertale = false;
-
-global.cursongstate = -1;

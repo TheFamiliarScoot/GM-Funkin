@@ -286,8 +286,6 @@
     {"$GMIncludedFile":"","%Name":"skinoptions.json","CopyToMask":-1,"filePath":"datafiles/assets/sprites/noteskins/sm","name":"skinoptions.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"tail_overlay.png","CopyToMask":-1,"filePath":"datafiles/assets/sprites/noteskins/sm","name":"tail_overlay.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"tail.png","CopyToMask":-1,"filePath":"datafiles/assets/sprites/noteskins/sm","name":"tail.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-    {"$GMIncludedFile":"","%Name":"GMEXT-FMOD Unix Docs.html","CopyToMask":-1,"filePath":"datafiles","name":"GMEXT-FMOD Unix Docs.html","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-    {"$GMIncludedFile":"","%Name":"GMEXT-FMOD Win Docs.lnk","CopyToMask":-1,"filePath":"datafiles","name":"GMEXT-FMOD Win Docs.lnk","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
   ],
   "isEcma":false,
   "LibraryEmitters":[],
