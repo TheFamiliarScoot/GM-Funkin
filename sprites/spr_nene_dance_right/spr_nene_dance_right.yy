@@ -5,21 +5,21 @@
   "bbox_bottom":798,
   "bbox_left":13,
   "bbox_right":823,
-  "bbox_top":138,
+  "bbox_top":148,
   "collisionKind":1,
   "collisionTolerance":0,
   "DynamicTexturePage":false,
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"f6789ae4-0fea-426a-ad7b-b81a5548e078","name":"f6789ae4-0fea-426a-ad7b-b81a5548e078","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"cabf0907-faad-4197-8114-b764f7c849a7","name":"cabf0907-faad-4197-8114-b764f7c849a7","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":839,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"877cb19b-ac2e-4c47-b242-2e04826b6962","blendMode":0,"displayName":"default","isLocked":false,"name":"877cb19b-ac2e-4c47-b242-2e04826b6962","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"8b5d2b26-72cc-44e5-b88a-411da794aae1","blendMode":0,"displayName":"default","isLocked":false,"name":"8b5d2b26-72cc-44e5-b88a-411da794aae1","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_nene_dance_right",
   "nineSlice":null,
@@ -69,8 +69,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"f6789ae4-0fea-426a-ad7b-b81a5548e078","path":"sprites/spr_nene_dance_right/spr_nene_dance_right.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"c8f040f7-34e9-4d70-9560-af6708e026f0","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"cabf0907-faad-4197-8114-b764f7c849a7","path":"sprites/spr_nene_dance_right/spr_nene_dance_right.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"ddcff87c-a3d4-4a2b-b4d6-3ffc617026cf","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

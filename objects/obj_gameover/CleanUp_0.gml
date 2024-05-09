@@ -1,3 +1,3 @@
-FMODGMS_Chan_RemoveChannel(deathmusic);
-FMODGMS_Snd_Unload(dsnd_end);
-FMODGMS_Snd_Unload(dsnd_loop);
+fmod_channel_control_stop(deathmusic);
+fmod_sound_release(dsnd_loop);
+fmod_sound_release(dsnd_end);

@@ -18,6 +18,7 @@ function init_conductor(pack, song, difficulty) {
 	cond.cstep = 0;
 	cond.beathit = false;
 	cond.stephit = false;
+	cond.timeleft = 0;
 }
 
 function load_chart_old(pack, song, difficulty) {

@@ -18,41 +18,8 @@ newkey = 0;
 
 ybegin = 180;
 
-characters = [
-	"BOYFRIEND",
-	"DADDY DEAREST",
-	"GIRLFRIEND",
-	"SKID & PUMP",
-	"PICO",
-	"SENPAI",
-	"SENPAI (ANGRY)",
-	"SPIRIT",
-	"BOYFRIEND (PIXEL)",
-	"GIRLFRIEND (PIXEL)",
-	"NENE"
-];
-
-stages = [
-	"THE STAGE",
-	"HAUNTED MANSION",
-	"PHILLY",
-	"SCHOOL",
-	"SCHOOL?",
-	"GLITCHED SCHOOL"
-];
-
 selectpreset = 1;
 bf = 0;
 dad = 1;
 gf = 2;
 stage = 0;
-
-presets = [
-	"tutorial",
-	"week1",
-	"week2",
-	"week3",
-	"week6-senpai",
-	"week6-roses",
-	"week6-thorns"
-];

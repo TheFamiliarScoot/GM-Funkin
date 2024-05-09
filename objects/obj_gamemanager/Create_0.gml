@@ -272,6 +272,7 @@ global.chars = [
 	obj_spirit,
 	obj_bf_pixel,
 	obj_gf_pixel,
+	obj_darnell,
 	obj_nene,
 	obj_custom_char
 ];
@@ -283,6 +284,40 @@ global.stages = [
 	obj_bg_school,
 	obj_bg_school_roses,
 	obj_bg_evilschool,
+];
+
+global.preset_names = [
+	"tutorial",
+	"week1",
+	"week2",
+	"week3",
+	"week6-senpai",
+	"week6-roses",
+	"week6-thorns"
+];
+
+global.char_names = [
+	"BOYFRIEND",
+	"DADDY DEAREST",
+	"GIRLFRIEND",
+	"SKID & PUMP",
+	"PICO",
+	"SENPAI",
+	"SENPAI (ANGRY)",
+	"SPIRIT",
+	"BOYFRIEND (PIXEL)",
+	"GIRLFRIEND (PIXEL)",
+	"DARNELL",
+	"NENE"
+];
+
+global.stage_names = [
+	"THE STAGE",
+	"HAUNTED MANSION",
+	"PHILLY",
+	"SCHOOL",
+	"SCHOOL?",
+	"GLITCHED SCHOOL"
 ];
 
 var set = global.presets[global.preset];

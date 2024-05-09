@@ -15,6 +15,7 @@
     {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"propertyId":{"name":"camOffY","path":"objects/obj_character/obj_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"-250",},
     {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"propertyId":{"name":"misscolor","path":"objects/obj_character/obj_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"$FFFFFFFF",},
     {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"propertyId":{"name":"barcolor","path":"objects/obj_character/obj_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"$FFD1B031",},
+    {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"propertyId":{"name":"gameover_obj","path":"objects/obj_character/obj_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"obj_gameover",},
   ],
   "parent":{
     "name":"chars",

@@ -20,4 +20,4 @@ bands = array_create(7, 0);
 band_buffer = array_create(7, 0);
 buffer_decrease = array_create(7, 0);
 
-meter_intensity = 10;
+meter_intensity = 8;

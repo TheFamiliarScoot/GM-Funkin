@@ -67,6 +67,7 @@
     {"$GMObjectProperty":"","%Name":"right_miss_sprite","filters":[],"listItems":[],"multiselect":false,"name":"right_miss_sprite","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"noone","varType":5,},
     {"$GMObjectProperty":"","%Name":"up_miss_sprite","filters":[],"listItems":[],"multiselect":false,"name":"up_miss_sprite","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"noone","varType":5,},
     {"$GMObjectProperty":"","%Name":"down_miss_sprite","filters":[],"listItems":[],"multiselect":false,"name":"down_miss_sprite","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"noone","varType":5,},
+    {"$GMObjectProperty":"","%Name":"gameover_obj","filters":[],"listItems":[],"multiselect":false,"name":"gameover_obj","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"noone","varType":5,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

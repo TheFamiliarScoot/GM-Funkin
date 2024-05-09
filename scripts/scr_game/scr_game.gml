@@ -79,11 +79,19 @@ function change_hp(amt,cankill=true) {
 function die() {
 	global.hp = opt.player1 * 2;
 	
-	if opt.blueballing && !instance_exists(obj_gameover) {
-		if room = room_play && !opt.player1 { 
-			instance_create_layer(global.bfobject.x,global.bfobject.y,"Instances",obj_gameover);
-		}
-		else if room = room_play { room_transition(room_menu);	}
+	if room = room_play {
+		if opt.blueballing && !instance_exists(obj_gameover) {
+			var obj = global.bfinstance;
+			if opt.player1 { 
+				obj = global.dadinstance;	
+			}
+			if obj.gameover_obj != noone {
+				instance_create_layer(obj.x,obj.y,"Instances",obj.gameover_obj);	
+			}
+			else {
+				room_transition(room_menu);
+			}
+		}	
 	}
 }
 

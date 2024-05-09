@@ -1,16 +1,19 @@
 if input_check_pressed(vk_enter, gp_face1) {
 	if !retried {
-		sprite_index = spr_bf_die_retry;
-		FMODGMS_Chan_StopChannel(deathmusic);
-		FMODGMS_Snd_PlaySound(dsnd_end,deathmusic);
+		sprite_index = die_retry_sprite;
+		fmod_channel_control_stop(deathmusic);
+		deathmusic = fmod_system_play_sound(dsnd_end, false);
+		fmod_channel_control_set_volume(deathmusic, 0.5);
 		retried = true;
+		alarm[0] = 1;
 		alarm[1] = game_get_speed(gamespeed_fps) * 4;
+		alarm[2] = 0;
 	}
 	else if retried && alarm[1] > 0 {
 		room_transition(room_play);
-		FMODGMS_Chan_RemoveChannel(deathmusic);
-		FMODGMS_Snd_Unload(dsnd_end);
-		FMODGMS_Snd_Unload(dsnd_loop);
+		fmod_channel_control_stop(deathmusic);
+		fmod_sound_release(dsnd_loop);
+		fmod_sound_release(dsnd_end);
 		visible = false;
 	}	
 }
