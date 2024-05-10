@@ -267,11 +267,14 @@ global.chars = [
 	obj_gf,
 	obj_spookykids,
 	obj_pico,
+	obj_mom,
 	obj_senpai,
 	obj_senpai_angry,
 	obj_spirit,
 	obj_bf_pixel,
 	obj_gf_pixel,
+	obj_tankman,
+	obj_bf_gf,
 	obj_darnell,
 	obj_nene,
 	obj_custom_char
@@ -302,11 +305,14 @@ global.char_names = [
 	"GIRLFRIEND",
 	"SKID & PUMP",
 	"PICO",
+	"MOMMY MEAREST",
 	"SENPAI",
 	"SENPAI (ANGRY)",
 	"SPIRIT",
 	"BOYFRIEND (PIXEL)",
 	"GIRLFRIEND (PIXEL)",
+	"TANKMAN",
+	"BOYFRIEND (HOLDING GIRLFRIEND)",
 	"DARNELL",
 	"NENE"
 ];
@@ -364,3 +370,6 @@ show_counter = true;
 global.parappamode = false;
 
 global.undertale = false;
+
+chi = -1;
+chv = [-1, -1];

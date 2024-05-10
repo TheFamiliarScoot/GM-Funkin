@@ -26,7 +26,7 @@ scalemod = 1;
 if opt.usenoteskin { scalemod = global.noteopt.scale; }
 
 //if global.keyamt = 6 { scalemod = 0.8; }
-if global.pixelui { scalemod *= 7; }
+if global.pixelui { scalemod *= 8; }
 
 centerLeft = 300;
 centerRight = global.view_width - 300;

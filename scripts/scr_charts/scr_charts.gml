@@ -1,4 +1,8 @@
 function init_conductor(pack, song, difficulty) {
+	global.notes = [];
+	global.events = [];
+	global.keyamt = 4;
+
 	cond = {}
 	switch song.chartType {
 		case "old":
@@ -25,6 +29,7 @@ function load_chart_old(pack, song, difficulty) {
 	var diffaddstring = "-" + difficulty;
 	if difficulty == "normal" { diffaddstring = ""; }
 	var jsonlocation = "assets\\songs\\" + pack + "\\" + song.fileName + "\\" + song.fileName + diffaddstring + ".json";
+	show_debug_message(jsonlocation);
 	var chrt = read_json(jsonlocation);
 
 	var totalnotecount = 0;
@@ -150,8 +155,6 @@ function load_chart_old(pack, song, difficulty) {
 	if file_exists(voicesloc) { voc2 = fmod_system_create_stream(voicesloc, FMOD_MODE.LOOP_OFF); }
 	else { voc2 = -1 }
 	voc1 = -1;
-
-	obj_conductor.vocalsmuted = [false, false];
 	
 	cond.scrollspeed = chrt.song.speed;
 	cond.bpm = chrt.song.bpm;
@@ -195,8 +198,6 @@ function load_chart_funkin_v3(pack, song, difficulty) {
 	var voices2loc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[1];
 	if file_exists(voices2loc) { voc2 = fmod_system_create_stream(voices2loc, FMOD_MODE.LOOP_OFF); }
 	else { voc2 = -1 }
-	
-	obj_conductor.vocalsmuted = [false, false];
 	
 	cond.scrollspeed = variable_struct_get(chart.scrollSpeed, difficulty);
 	cond.bpm = metadata.timeChanges[0].bpm;

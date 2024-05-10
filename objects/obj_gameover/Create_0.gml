@@ -1,7 +1,8 @@
 sprite_index = die_sprite;
+image_xscale = scale;
+image_yscale = scale;
 with obj_ui_parent { instance_destroy(id); }
 with obj_strum_parent { instance_destroy(id); }
-instance_destroy(obj_conductor);
 obj_camera.ui.vis = false;
 instance_destroy(global.bgobject);
 audio_play_sound(die_sound,0,false);

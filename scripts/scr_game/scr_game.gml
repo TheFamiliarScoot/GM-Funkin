@@ -80,6 +80,9 @@ function die() {
 	global.hp = opt.player1 * 2;
 	
 	if room = room_play {
+		if instance_exists(obj_conductor) {
+			instance_destroy(obj_conductor);	
+		}
 		if opt.blueballing && !instance_exists(obj_gameover) {
 			var obj = global.bfinstance;
 			if opt.player1 { 
@@ -129,8 +132,8 @@ function draw_ui_fake(ui, spr) {
 	draw_sprite_ext(spr,0,rc_x - (_c * _x - _s * _y) * ui.scale, rc_y - (_c * _y + _s * _x) * ui.scale,ui.scale,ui.scale,ui.angle,c_white,1);
 }
 
-function room_transition(rm) {
-	instance_create_layer(0,0,"Instances",obj_transition,{roomtogoto: rm});
+function room_transition(rm, inst = false) {
+	instance_create_layer(0,0,"Instances",obj_transition,{roomtogoto: rm, instant: inst});
 }
 
 function create_custom_char(nm,_x,_y,_lyr,side) {

@@ -136,7 +136,7 @@ if menuenabled {
 						global.selecteddifficulty = difficulties[menu.selection];
 						ini_close();
 						menuenabled = false;
-						room_transition(room_play);
+						room_transition(room_load);
 					//}
 				}
 			}
