@@ -62,8 +62,7 @@ global.ratings = {
 	shit: 0
 }
 global.player = opt.player1 ? global.dadinstance : global.bfinstance;
-
-global.target = global.bfobject;
+global.target = global.player;
 global.paused = false;
 
 gui_width = room_width/2;
