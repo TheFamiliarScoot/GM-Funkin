@@ -36,7 +36,7 @@ cond.cbeat = floor(cond.gbeat);
 cond.cstep = floor(cond.gstep) % cond.timenumerator;
 
 if !countingdown {
-	cond.timeleft = fmod_sound_get_length(ins, timeunit) - fmod_channel_get_position(chi, timeunit);
+	cond.timeleft = (fmod_sound_get_length(ins, timeunit) - fmod_channel_get_position(chi, timeunit)) / 1000;
 }
 
 /*

@@ -18,6 +18,12 @@ if menuenabled {
 						audio_play_sound(snd_menu_confirm,0,false);
 					}
 					break;
+				case 1:
+					if input_check_pressed(vk_enter, gp_face1) {
+						room_transition(room_mp_lobby);
+						menuenabled = false;
+					}
+					break;
 				case 3:
 					if input_check_pressed(vk_enter, gp_face1) {
 						room_transition(room_options);

@@ -19,10 +19,10 @@ if opt.usenoteskin {
 if opt.customization.usepreset {
 	var set = global.presets[opt.customization.preset];
 
-	global.dadobject = set[0];
-	global.gfobject = set[1];
-	global.bfobject = set[2];
-	global.bgobject = set[3];
+	global.dadobject = set.dad;
+	global.gfobject = set.gf;
+	global.bfobject = set.bf;
+	global.bgobject = set.stage;
 }
 
 var object = noone;
@@ -61,6 +61,7 @@ global.ratings = {
 	bad: 0,
 	shit: 0
 }
+global.player = opt.player1 ? global.dadinstance : global.bfinstance;
 
 global.target = global.bfobject;
 global.paused = false;
@@ -68,50 +69,8 @@ global.paused = false;
 gui_width = room_width/2;
 gui_height = room_height/2
 display_set_gui_size(gui_width,gui_height);
-strum_spacing = 4;
 
-var ctr = 0;
-
-var strumKeys = [
-	global.keys.left,
-	global.keys.down,
-	global.keys.up,
-	global.keys.right,
-	global.keys.left,
-	global.keys.down,
-	global.keys.up,
-	global.keys.right
-]
-
-var strumKeysGp = [
-	gp_shoulderlb,
-	gp_shoulderl,
-	gp_shoulderr,
-	gp_shoulderrb,
-	gp_shoulderlb,
-	gp_shoulderl,
-	gp_shoulderr,
-	gp_shoulderrb
-]
-
-repeat 8 {
-	with instance_create_layer(0,0,"UI",obj_blank) {
-		type = ctr;
-		thisKey = strumKeys[ctr];
-		thisKeyGP = strumKeysGp[ctr];
-		if floor(type / global.keyamt) % 2 {
-			tiedCharacter = global.dadinstance;
-			if global.options.player1 isbot = false else isbot = true; 
-		}
-		else { 
-			tiedCharacter = global.bfinstance;
-			if global.options.botplay || global.options.player1 isbot = true else isbot = false;
-		}
-		instance_change(obj_strum,true);
-	}
-	++ctr;
-}
-ctr = 0;
+create_strums_default();
 
 // TODO: in MP, don't start 'til synced
 alarm[0] = 3;

@@ -12,8 +12,8 @@ if ui.vis {
 	}
 	surface_set_target(ui.surface);
 	draw_clear_alpha(c_black,0);
-	with obj_strum_parent { event_perform(ev_draw,0); }
-	with obj_ui_parent { event_perform(ev_draw,0); }
+	with obj_strum_parent { if visible { event_perform(ev_draw,0); } }
+	with obj_ui_parent { if visible { event_perform(ev_draw,0); } }
 	
 	if opt.timedisplay {
 		var tdy = useds ? global.view_height-20 : 20;

@@ -1,14 +1,14 @@
 if !opt.customization.usepreset {
-	global.gfobject = global.chars[opt.customization.gfobject];
-	global.dadobject = global.chars[opt.customization.dadobject];
-	global.bfobject = global.chars[opt.customization.bfobject];
-	global.bgobject = global.stages[opt.customization.bgobject];
+	global.gfobject = global.chars[opt.customization.gfobject].object;
+	global.dadobject = global.chars[opt.customization.dadobject].object;
+	global.bfobject = global.chars[opt.customization.bfobject].object;
+	global.bgobject = global.stages[opt.customization.bgobject].object;
 }
 else {
 	var set = global.presets[selectpreset];
 
-	global.dadobject = set[0];
-	global.gfobject = set[1];
-	global.bfobject = set[2];
-	global.bgobject = set[3];
+	global.dadobject = set.dad;
+	global.gfobject = set.gf;
+	global.bfobject = set.bf;
+	global.bgobject = set.stage;
 }

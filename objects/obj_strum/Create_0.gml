@@ -28,74 +28,16 @@ if opt.usenoteskin { scalemod = global.noteopt.scale; }
 //if global.keyamt = 6 { scalemod = 0.8; }
 if global.pixelui { scalemod *= 8; }
 
-centerLeft = 300;
-centerRight = global.view_width - 300;
-centerMid = global.view_width/2;
-strum_spacing = 4 * 2;
-
-enabled = true;
-
 group = 0;
 // this kinda sucks a little
 
 if tiedCharacter = global.dadinstance { group = 1; }
 if tiedCharacter = global.bfinstance { group = 0; }
 
-if global.keyamt = 6 {
-	positions = [
-		centerLeft-(24*strum_spacing),
-		centerLeft-(8*strum_spacing),
-		centerLeft+(8*strum_spacing),
-		centerLeft+(24*strum_spacing),
-		centerRight-(24*strum_spacing),
-		centerRight-(8*strum_spacing),
-		centerRight+(8*strum_spacing),
-		centerRight+(24*strum_spacing)
-	];
-}
-else {
-	positions = [
-		centerRight-(24*strum_spacing),
-		centerRight-(8*strum_spacing),
-		centerRight+(8*strum_spacing),
-		centerRight+(24*strum_spacing),
-		centerLeft-(24*strum_spacing),
-		centerLeft-(8*strum_spacing),
-		centerLeft+(8*strum_spacing),
-		centerLeft+(24*strum_spacing)
-	];
-}
-
-positionmid = [
-	centerMid-(24*strum_spacing),
-	centerMid-(8*strum_spacing),
-	centerMid+(8*strum_spacing),
-	centerMid+(24*strum_spacing)
-]
-
-
 notetype = global.ntype[global.keyamt];
 
 image_xscale = 0.75 * scalemod;
 image_yscale = 0.75 * scalemod;
-
-if opt.middlescroll {
-	x = positionmid[type % 4];
-	if opt.player1 {
-		if type < 4 { enabled = false; }
-	}
-	else { 
-		if type > 3 { enabled = false; }
-	}
-}
-else { x = positions[type % 8]; }
-
-if !opt.usedownscroll {
-	y = 100;
-}
-else {
-	y = global.view_height - 100;
-}
 
 lastnote = noone;
 lasttime = 0;

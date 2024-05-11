@@ -164,8 +164,8 @@ switch submenu {
 				case 1:
 					if input_check_pressed(vk_right, gp_padr) { selectpreset += 1; }
 					if input_check_pressed(vk_left, gp_padl) { selectpreset -= 1; }
-					if selectpreset > array_length(global.preset_names) - 1 { selectpreset = 0; }
-					if selectpreset < 0 { selectpreset = array_length(global.preset_names) - 1; }
+					if selectpreset > array_length(global.presets) - 1 { selectpreset = 0; }
+					if selectpreset < 0 { selectpreset = array_length(global.presets) - 1; }
 					break;
 			}
 		}
@@ -177,26 +177,26 @@ switch submenu {
 				case 1:
 					if input_check_pressed(vk_right, gp_padr) { stage += 1; }
 					if input_check_pressed(vk_left, gp_padl) { stage -= 1; }
-					if stage > array_length(global.stage_names) - 1 { stage = 0; }
-					if stage < 0 { stage = array_length(global.stage_names) - 1; }
+					if stage > array_length(global.stages) - 1 { stage = 0; }
+					if stage < 0 { stage = array_length(global.stages) - 1; }
 					break;
 				case 2:
 					if input_check_pressed(vk_right, gp_padr) { dad += 1; }
 					if input_check_pressed(vk_left, gp_padl) { dad -= 1; }
-					if dad > array_length(global.char_names) - 1 { dad = 0; }
-					if dad < 0 { dad = array_length(global.char_names) - 1; }
+					if dad > array_length(global.chars) - 1 { dad = 0; }
+					if dad < 0 { dad = array_length(global.chars) - 1; }
 					break;
 				case 3:
 					if input_check_pressed(vk_right, gp_padr) { bf += 1; }
 					if input_check_pressed(vk_left, gp_padl) { bf -= 1; }
-					if bf > array_length(global.char_names) - 1 { bf = 0; }
-					if bf < 0 { bf = array_length(global.char_names) - 1; }
+					if bf > array_length(global.chars) - 1 { bf = 0; }
+					if bf < 0 { bf = array_length(global.chars) - 1; }
 					break;
 				case 4:
 					if input_check_pressed(vk_right, gp_padr) { gf += 1; }
 					if input_check_pressed(vk_left, gp_padl) { gf -= 1; }
-					if gf > array_length(global.char_names) - 1 { gf = 0; }
-					if gf < 0 { gf = array_length(global.char_names) - 1; }
+					if gf > array_length(global.chars) - 1 { gf = 0; }
+					if gf < 0 { gf = array_length(global.chars) - 1; }
 					break;
 			}
 		}
@@ -341,16 +341,16 @@ switch submenu {
 		if opt.customization.usepreset {
 			choices = [
 				"USE PRESET: YES",
-				"PRESET: " + string_upper(global.preset_names[selectpreset])
+				"PRESET: " + string_upper(global.presets[selectpreset].name)
 			];
 		}
 		else {
 			choices = [
 				"USE PRESET: NO",
-				"STAGE: " + global.stage_names[stage],
-				"LEFT: " + global.char_names[dad],
-				"RIGHT: " + global.char_names[bf],
-				"MIDDLE: " + global.char_names[gf]
+				"STAGE: " + global.stages[stage].name,
+				"LEFT: " + global.chars[dad].name,
+				"RIGHT: " + global.chars[bf].name,
+				"MIDDLE: " + global.chars[gf].name
 			];
 		}
 		break;

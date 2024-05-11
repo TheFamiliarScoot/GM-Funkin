@@ -162,8 +162,29 @@ global.buttons.down = ini_read_real("Buttons","Down",gp_shoulderl);
 global.buttons.left = ini_read_real("Buttons","Left",gp_shoulderlb);
 global.buttons.right = ini_read_real("Buttons","Right",gp_shoulderrb);
 
-ini_close();
+var centerLeft = 300;
+var centerRight = global.view_width - 300;
+var centerMid = global.view_width/2;
+var strum_spacing = 4 * 2;
 
+global.strum_positions = [
+	centerRight-(24*strum_spacing),
+	centerRight-(8*strum_spacing),
+	centerRight+(8*strum_spacing),
+	centerRight+(24*strum_spacing),
+	centerLeft-(24*strum_spacing),
+	centerLeft-(8*strum_spacing),
+	centerLeft+(8*strum_spacing),
+	centerLeft+(24*strum_spacing)
+];
+global.mid_strum_positions = [
+	centerMid-(24*strum_spacing),
+	centerMid-(8*strum_spacing),
+	centerMid+(8*strum_spacing),
+	centerMid+(24*strum_spacing)
+];
+
+ini_close();
 
 global.misses = 0;
 global.hp = 1;
@@ -251,94 +272,56 @@ global.preset = opt.customization.preset;
 
 global.pixelui = false;
 
-global.presets = [ 
-	[obj_gf,obj_gf,obj_bf,obj_bg_stage], // tutorial
-	[obj_dad,obj_gf,obj_bf,obj_bg_stage], // week 1
-	[obj_spookykids,obj_gf,obj_bf,obj_bg_spooky], // week 2
-	[obj_pico,obj_gf,obj_bf,obj_bg_philly], // week 3
-	[obj_senpai,obj_gf_pixel,obj_bf_pixel,obj_bg_school], // week 6 senpai
-	[obj_senpai_angry,obj_gf_pixel,obj_bf_pixel,obj_bg_school_roses], // week 6 roses
-	[obj_spirit,obj_gf_pixel,obj_bf_pixel,obj_bg_evilschool], // week 6 thorns
+global.presets = [
+	new Preset("TUTORIAL", obj_bg_stage, obj_bf, obj_gf, obj_gf),
+	new Preset("WEEK 1", obj_bg_stage, obj_bf, obj_gf, obj_dad),
+	new Preset("WEEK 2", obj_bg_spooky, obj_bf, obj_gf, obj_spookykids),
+	new Preset("WEEK 3", obj_bg_philly, obj_bf, obj_gf, obj_pico),
+	new Preset("WEEK 6 - SENPAI", obj_bg_school, obj_bf_pixel, obj_gf_pixel, obj_senpai),
+	new Preset("WEEK 6 - ROSES", obj_bg_school_roses, obj_bf_pixel, obj_gf_pixel, obj_senpai_angry),
+	new Preset("WEEK 6 - THORNS", obj_bg_evilschool, obj_bf_pixel, obj_gf_pixel, obj_spirit)
 ]
 
 global.chars = [
-	obj_bf,
-	obj_dad,
-	obj_gf,
-	obj_spookykids,
-	obj_pico,
-	obj_mom,
-	obj_senpai,
-	obj_senpai_angry,
-	obj_spirit,
-	obj_bf_pixel,
-	obj_gf_pixel,
-	obj_tankman,
-	obj_bf_gf,
-	obj_darnell,
-	obj_nene,
-	obj_custom_char
+	new Character("BOYFRIEND", obj_bf, spr_icon_bf, spr_bf_idle),
+	new Character("DADDY DEAREST", obj_dad, spr_icon_dad, spr_dad_idle),
+	new Character("GIRLFRIEND", obj_gf, spr_icon_gf, spr_gf_danceleft),
+	new Character("SKID & PUMP", obj_spookykids, spr_icon_spookykids, spr_spooky_danceleft),
+	new Character("PICO", obj_pico, spr_icon_pico, spr_pico_idle),
+	new Character("MOMMY MEAREST", obj_mom, spr_icon_mom, spr_mom_idle),
+	new Character("SENPAI", obj_senpai, spr_icon_senpai, spr_senpai_idle),
+	new Character("SENPAI (ANGRY)", obj_senpai_angry, spr_icon_senpai, spr_asenpai_idle),
+	new Character("SPIRIT", obj_spirit, spr_icon_spirit, spr_spirit_idle),
+	new Character("BOYFRIEND (PIXEL)", obj_bf_pixel, spr_icon_bf_pixel, spr_bf_pixel_idle),
+	new Character("GIRLFRIEND (PIXEL)", obj_gf_pixel, spr_icon_gf, spr_gf_pixel_danceleft),
+	new Character("TANKMAN", obj_tankman, spr_icon_tankman, spr_tankman_idle),
+	new Character("BOYFRIEND (HOLDING GIRLFRIEND)", obj_bf_gf, spr_icon_bf, spr_bf_gf_idle),
+	new Character("DARNELL", obj_darnell, spr_icon_darnell, spr_darnell_idle),
+	new Character("NENE", obj_nene, spr_icon_gf, spr_nene_dance_left)
 ];
 
 global.stages = [
-	obj_bg_stage,
-	obj_bg_spooky,
-	obj_bg_philly,
-	obj_bg_school,
-	obj_bg_school_roses,
-	obj_bg_evilschool,
-];
-
-global.preset_names = [
-	"tutorial",
-	"week1",
-	"week2",
-	"week3",
-	"week6-senpai",
-	"week6-roses",
-	"week6-thorns"
-];
-
-global.char_names = [
-	"BOYFRIEND",
-	"DADDY DEAREST",
-	"GIRLFRIEND",
-	"SKID & PUMP",
-	"PICO",
-	"MOMMY MEAREST",
-	"SENPAI",
-	"SENPAI (ANGRY)",
-	"SPIRIT",
-	"BOYFRIEND (PIXEL)",
-	"GIRLFRIEND (PIXEL)",
-	"TANKMAN",
-	"BOYFRIEND (HOLDING GIRLFRIEND)",
-	"DARNELL",
-	"NENE"
-];
-
-global.stage_names = [
-	"THE STAGE",
-	"HAUNTED MANSION",
-	"PHILLY",
-	"SCHOOL",
-	"SCHOOL?",
-	"GLITCHED SCHOOL"
+	new Stage("THE STAGE", obj_bg_stage),
+	new Stage("HAUNTED MANSION", obj_bg_spooky),
+	new Stage("PHILLY", obj_bg_philly),
+	new Stage("SCHOOL", obj_bg_school),
+	new Stage("SCHOOL?", obj_bg_school_roses),
+	new Stage("GLITCHED SCHOOL", obj_bg_evilschool),
 ];
 
 var set = global.presets[global.preset];
 
 if !opt.customization.usepreset {
-	global.gfobject = global.chars[opt.customization.gfobject];
-	global.dadobject = global.chars[opt.customization.dadobject];
-	global.bfobject = global.chars[opt.customization.bfobject];
-	global.bgobject = global.stages[opt.customization.bgobject];
+	global.gfobject = global.chars[opt.customization.gfobject].object;
+	global.dadobject = global.chars[opt.customization.dadobject].object;
+	global.bfobject = global.chars[opt.customization.bfobject].object;
+	global.bgobject = global.stages[opt.customization.bgobject].object;
 }
 else {
-	global.gfobject = set[0];
-	global.dadobject = set[1];
-	global.bfobject = set[2];
-	global.bgobject = set[3];
+	global.gfobject = set.gf;
+	global.dadobject = set.dad;
+	global.bfobject = set.bf;
+	global.bgobject = set.stage;
 }
 
 global.bfcustom = "bf";

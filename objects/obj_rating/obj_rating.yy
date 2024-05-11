@@ -40,5 +40,5 @@
     "path":"sprites/spr_rating/spr_rating.yy",
   },
   "spriteMaskId":null,
-  "visible":false,
+  "visible":true,
 }

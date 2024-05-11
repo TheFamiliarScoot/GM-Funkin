@@ -144,6 +144,68 @@ function spawn_char(_x,_y,_layer,side,_id) {
 	return instance_create_layer(_x,_y,_layer,_id,{playside: side});
 }
 
+function create_strum(_x,_y,layer,idx,owner,key_kb=-1,key_gp=-1) {
+	return instance_create_layer(_x,_y,layer,obj_strum,{type:idx, tiedCharacter:owner, thisKey: key_kb, thisKeyGP: key_gp});
+}
+
+function create_strums_default() {
+	var ctr = 0;
+
+	var strumKeys = [
+		global.keys.left,
+		global.keys.down,
+		global.keys.up,
+		global.keys.right,
+		global.keys.left,
+		global.keys.down,
+		global.keys.up,
+		global.keys.right
+	]
+
+	var strumKeysGp = [
+		gp_shoulderlb,
+		gp_shoulderl,
+		gp_shoulderr,
+		gp_shoulderrb,
+		gp_shoulderlb,
+		gp_shoulderl,
+		gp_shoulderr,
+		gp_shoulderrb
+	]
+
+	repeat 8 {
+		// position
+		var xx = 0;
+		var yy = 0;
+		if opt.middlescroll { xx = global.mid_strum_positions[ctr % 4]; }
+		else { xx = global.strum_positions[ctr % 8]; }
+
+		if !opt.usedownscroll {
+			yy = 100;
+		}
+		else {
+			yy = global.view_height - 100;
+		}
+		
+		// character
+		var ch = noone;
+		if floor(ctr / global.keyamt) % 2 {
+			ch = global.dadinstance;
+		}
+		else { 
+			ch = global.bfinstance;
+		}
+		
+		// create
+		with create_strum(xx, yy, "UI", ctr, ch, strumKeys[ctr], strumKeysGp[ctr]) {
+			if opt.middlescroll { visible = tiedCharacter == global.player;	}
+			isbot = opt.botplay || tiedCharacter != global.player;
+		}
+		++ctr;
+	}
+	ctr = 0;
+}
+
 /*
 function draw_note_tail(sprite,_x,_y,length) {
 	if length < 0 { return; }

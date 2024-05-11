@@ -42,5 +42,5 @@
     "path":"sprites/spr_note_strum/spr_note_strum.yy",
   },
   "spriteMaskId":null,
-  "visible":false,
+  "visible":true,
 }
