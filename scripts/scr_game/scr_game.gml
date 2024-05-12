@@ -43,26 +43,13 @@ function play_anim_ind(inst,sprt,custom,dlta) {
 	}
 }
 
-function get_hp_penalty() {
-	if variable_struct_exists(global.gimmicks,"hp_penalty_multiplier") {
-		return global.gimmicks.hp_penalty_multiplier;	
-	}
-	return opt.hpmult;
-}
-
-function get_hp_gain() {
-	if variable_struct_exists(global.gimmicks,"hp_gain_multiplier") {
-		return global.gimmicks.hp_gain_multiplier;	
-	}
-	return opt.hpgainmult;
-}
-
 function change_hp(amt,cankill=true) {
 	var a = 0;
-	var m = 0;
+	var m = 1;
 	
-	if amt < 0 { m = get_hp_penalty(); }
-	else if amt > 0 { m = get_hp_gain(); }
+	// TODO: reimplement
+	//if amt < 0 { m = get_hp_penalty(); }
+	//else if amt > 0 { m = get_hp_gain(); }
 	
 	if opt.player1 { a = -amt * m; }
 	else { a = amt * m; }

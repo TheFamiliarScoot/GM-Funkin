@@ -1,9 +1,16 @@
 vocalsmuted = [false, false];
 
-chi = fmod_system_play_sound(ins, true);
-chv = [-1, -1];
-if voc1 > -1 { chv1 = fmod_system_play_sound(voc1, true); }
-if voc2 > -1 { chv2 = fmod_system_play_sound(voc2, true); }
+// if there's no instrumental, assume this conductor is just basic
+if instrumental >= 0 {
+	channel_inst = fmod_system_play_sound(instrumental, true);
+	channel_vocals = [-1, -1];
+	if vocals[0] > -1 { channel_vocals[0] = fmod_system_play_sound(vocals[0], true); }
+	if vocals[1] > -1 { channel_vocals[1] = fmod_system_play_sound(vocals[1], true); }	
+}
+else {
+	channel_inst = -1;
+	channel_vocals = [-1, -1];
+}
 
 audiovolume = 0;
 lastbeat = 0;
@@ -14,5 +21,5 @@ countingdown = true;
 stepmode = false;
 count = -2;
 targets = [ global.bfinstance, global.dadinstance, global.gfinstance ];
-visualizer = instance_create_layer(0, 0, layer, obj_dsp_spectrum);
+visualizer = instance_create_layer(0, 0, layer, obj_dsp_spectrum, {conductor: id});
 playing = false;

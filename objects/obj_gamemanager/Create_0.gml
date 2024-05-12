@@ -1,11 +1,3 @@
-#macro ins global.inst
-#macro voc global.vocals
-#macro voc1 global.vocals[0]
-#macro voc2 global.vocals[1]
-#macro chi global.inst_index
-#macro chv global.vocals_index
-#macro chv1 global.vocals_index[0]
-#macro chv2 global.vocals_index[1]
 #macro opt global.options
 #macro keybind global.keys
 #macro buttonbind global.buttons
@@ -349,6 +341,3 @@ show_counter = true;
 global.parappamode = false;
 
 global.undertale = false;
-
-chi = -1;
-chv = [-1, -1];

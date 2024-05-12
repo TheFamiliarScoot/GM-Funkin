@@ -1,2 +1,4 @@
 /// @description Insert description here
-conductor_start(conductor);
+with obj_conductor {
+	conductor_start(id);	
+}

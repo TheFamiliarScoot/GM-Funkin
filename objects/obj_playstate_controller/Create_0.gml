@@ -8,7 +8,6 @@ global.gfinstance = noone;
 
 conductordata = load_conductor_data(global.selectedpack, global.selectedsong, global.selecteddifficulty);
 conductor = create_conductor(conductordata, 0, 0, layer);
-call_lua("onLoad", global.selectedsong);
 var c = conductor;
 
 if opt.usenoteskin {
@@ -74,6 +73,8 @@ create_strums_default(conductor);
 
 ui = instance_create_layer(0, 0, layer, obj_ingame_ui, {conductor: c});
 camera = instance_create_layer(0, 0, layer, obj_camera);
+
+call_lua("onLoad", global.selectedsong);
 
 // TODO: in MP, don't start 'til synced
 alarm[0] = 3;

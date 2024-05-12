@@ -5,10 +5,10 @@ function load_conductor_data(pack, song, difficulty, use_audio = true) {
 	c.keyamt = 4;
 	switch song.chartType {
 		case "old":
-			c = load_chart_old(c, pack, song, difficulty);
+			c = load_chart_old(c, pack, song, difficulty, use_audio);
 			break;
 		case "funkinv3":
-			c = load_chart_funkin_v3(c, pack, song, difficulty);
+			c = load_chart_funkin_v3(c, pack, song, difficulty, use_audio);
 			break;
 	}
 	c.crochet = 60 / c.bpm;
@@ -93,7 +93,6 @@ function load_chart_old(c, pack, song, difficulty, use_audio = true) {
 		var msg = "Could not load the chart :(\n\nTHIS IS NOT A CRASH!\n\n"
 		+ e.longMessage;
 		show_message(msg);
-		instance_deactivate_all(false);
 		room_goto(room_menu);
 		return -1;
 	}
@@ -105,12 +104,12 @@ function load_chart_old(c, pack, song, difficulty, use_audio = true) {
 			room_goto(room_menu);
 			return -1;
 		}
-		ins = fmod_system_create_stream(songlocation, FMOD_MODE.LOOP_OFF);
-		voc = [];
+		c.instrumental = fmod_system_create_stream(songlocation, FMOD_MODE.LOOP_OFF);
+		c.vocals = [];
 		var voicesloc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[1];
-		if file_exists(voicesloc) { voc2 = fmod_system_create_stream(voicesloc, FMOD_MODE.LOOP_OFF); }
-		else { voc2 = -1 }
-		voc1 = -1;	
+		if file_exists(voicesloc) { c.vocals[1] = fmod_system_create_stream(voicesloc, FMOD_MODE.LOOP_OFF); }
+		else { c.vocals[1] = -1 }
+		c.vocals[0] = -1;	
 	}
 	
 	c.scrollspeed = chrt.song.speed;
@@ -122,7 +121,7 @@ function load_chart_old(c, pack, song, difficulty, use_audio = true) {
 	return c;
 }
 
-function load_chart_funkin_v3(c, pack, song, difficulty) {
+function load_chart_funkin_v3(c, pack, song, difficulty, use_audio = true) {
 	var metadata = read_json("assets\\songs\\" + pack + "\\" + song.fileName + "\\" + song.fileName + "-metadata.json");
 	var chart = read_json("assets\\songs\\" + pack + "\\" + song.fileName + "\\" + song.fileName + "-chart.json");
 	
@@ -151,15 +150,15 @@ function load_chart_funkin_v3(c, pack, song, difficulty) {
 			room_goto(room_menu);
 			return -1;
 		}
-		ins = fmod_system_create_stream(songlocation, FMOD_MODE.LOOP_OFF);
+		c.instrumental = fmod_system_create_stream(songlocation, FMOD_MODE.LOOP_OFF);
 	
-		voc = [];
+		c.vocals = [];
 		var voices1loc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[0];
-		if file_exists(voices1loc) { voc1 = fmod_system_create_stream(voices1loc, FMOD_MODE.LOOP_OFF); }
-		else { voc1 = -1 }
+		if file_exists(voices1loc) { c.vocals[0] = fmod_system_create_stream(voices1loc, FMOD_MODE.LOOP_OFF); }
+		else { c.vocals[0] = -1 }
 		var voices2loc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[1];
-		if file_exists(voices2loc) { voc2 = fmod_system_create_stream(voices2loc, FMOD_MODE.LOOP_OFF); }
-		else { voc2 = -1 }	
+		if file_exists(voices2loc) { c.vocals[1] = fmod_system_create_stream(voices2loc, FMOD_MODE.LOOP_OFF); }
+		else { c.vocals[1] = -1 }	
 	}
 	
 	c.scrollspeed = variable_struct_get(chart.scrollSpeed, difficulty);

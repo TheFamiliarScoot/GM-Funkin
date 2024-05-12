@@ -4,11 +4,14 @@ function new_lua_state() {
 	var state = lua_state_create();
 	lua_global_set(state, "os", undefined)
 	lua_global_set(state, "io", undefined)
+	lua_add_function(state, "string", string);
+	lua_add_function(state, "log", l_log);
 	lua_add_function(state, "loadJson", read_json_lua);
 	lua_add_function(state, "loadConductorData", load_conductor_data);
 	lua_add_function(state, "createCharacter", create_character);
 	lua_add_function(state, "createStrum", create_strum);
 	lua_add_function(state, "createConductor", create_conductor);
+	lua_add_function(state, "getCharacter", l_get_character);
 	return state
 }
 
@@ -40,4 +43,12 @@ function call_lua(func, args) {
 	catch (e) { }
 	
 	return undefined;
+}
+
+function l_log(msg) {
+	show_debug_message(msg);	
+}
+
+function l_get_character(idx) {
+	return [ global.bfinstance, global.dadinstance, global.gfinstance ];
 }

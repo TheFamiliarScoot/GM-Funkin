@@ -16,22 +16,28 @@ repeat (ev_length)
 }
 
 lastpos = songpos;
-if countingdown {
-	songpos += delta_time / 1000000;
+if !global.paused && window_has_focus() {
+	if instrumental < 0 || countingdown {
+		songpos += delta_time / 1000000;
+	}
+	else {
+		songpos = fmod_channel_get_position(channel_inst, FMOD_TIMEUNIT.MS) / 1000;
+	}	
 }
-else {
-	songpos = fmod_channel_get_position(chi, FMOD_TIMEUNIT.MS) / 1000;
-}
+
 if songpos >= 0 && countingdown {
 	countingdown = false;
-	fmod_channel_control_set_paused(chi, false);
-	if chv1 > -1 { fmod_channel_control_set_paused(chv1, false); }
-	if chv2 > -1 { fmod_channel_control_set_paused(chv2, false); }
-	fmod_channel_set_position(chi, 0, FMOD_TIMEUNIT.MS);
-	if chv1 > -1 { fmod_channel_set_position(chv1, 0, FMOD_TIMEUNIT.MS); }
-	if chv2 > -1 { fmod_channel_set_position(chv2, 0, FMOD_TIMEUNIT.MS); }
-	audiovolume = 0.5;
+	if instrumental >= 0 {
+		fmod_channel_control_set_paused(channel_inst, false);
+		if channel_vocals[0] > -1 { fmod_channel_control_set_paused(channel_vocals[0], false); }
+		if channel_vocals[1] > -1 { fmod_channel_control_set_paused(channel_vocals[1], false); }
+		fmod_channel_set_position(channel_inst, 0, FMOD_TIMEUNIT.MS);
+		if channel_vocals[0] > -1 { fmod_channel_set_position(channel_vocals[0], 0, FMOD_TIMEUNIT.MS); }
+		if channel_vocals[1] > -1 { fmod_channel_set_position(channel_vocals[1], 0, FMOD_TIMEUNIT.MS); }
+		audiovolume = 0.5;
+	}
 }
+
 var sdelta = songpos - lastpos;
 notepos = songpos * 1000;
 gstep += sdelta / crochet;
@@ -39,44 +45,11 @@ gbeat += (sdelta / crochet) / timenumerator;
 cbeat = floor(gbeat);
 cstep = floor(gstep) % timenumerator;
 
-if !countingdown {
-	timeleft = (fmod_sound_get_length(ins, timeunit) - fmod_channel_get_position(chi, timeunit)) / 1000;
-}
-
-/*
-if cond.stephit {
-	var inspos = fmod_channel_get_position(chi, timeunit);
-	var voc1pos = chv1 > -1 ? fmod_channel_get_position(chv1, timeunit) : inspos;
-	var voc2pos = chv2 > -1 ? fmod_channel_get_position(chv2, timeunit) : inspos;
-	if voc1pos != inspos { fmod_channel_set_position(chv1, inspos, timeunit); }
-	if voc2pos != inspos { fmod_channel_set_position(chv2, inspos, timeunit); }	
-}
-*/
-
 // Conductor display
 if beathit {
 	if conductordisplay { audio_play_sound(sfx_beat,0,false); }
 }
 else if stephit && conductordisplay { audio_play_sound(sfx_bar,0,false); }
-
-// Audio volume
-fmod_channel_control_set_volume(chi, audiovolume);
-if chv1 > -1 { fmod_channel_control_set_volume(chv1, !vocalsmuted[0]*audiovolume); }
-if chv2 > -1 { fmod_channel_control_set_volume(chv2, !vocalsmuted[1]*audiovolume); }
-
-// Pausing
-if !stepmode && !global.paused {
-	if !window_has_focus() {
-		fmod_channel_control_set_paused(chi, true);
-		if chv1 > -1 { fmod_channel_control_set_paused(chv1, true); }
-		if chv2 > -1 { fmod_channel_control_set_paused(chv2, true); }
-	}
-	else {
-		fmod_channel_control_set_paused(chi, false);
-		if chv1 > -1 { fmod_channel_control_set_paused(chv1, false); }
-		if chv2 > -1 { fmod_channel_control_set_paused(chv2, false); }
-	}
-}
 
 // Countdown
 var c = abs(cstep);
@@ -92,3 +65,22 @@ if countingdown && c != count {
 	}
 }
 count = c;
+
+if instrumental >= 0 {
+	// Time left
+	if !countingdown {
+		timeleft = (fmod_sound_get_length(instrumental, timeunit) - fmod_channel_get_position(channel_inst, timeunit)) / 1000;
+	}
+	
+	// Audio volume
+	fmod_channel_control_set_volume(channel_inst, audiovolume);
+	if channel_vocals[0] > -1 { fmod_channel_control_set_volume(channel_vocals[0], !vocalsmuted[0]*audiovolume); }
+	if channel_vocals[1] > -1 { fmod_channel_control_set_volume(channel_vocals[1], !vocalsmuted[1]*audiovolume); }
+
+	// Pausing
+	if !stepmode && !global.paused {
+		fmod_channel_control_set_paused(channel_inst, !window_has_focus());
+		if channel_vocals[0] > -1 { fmod_channel_control_set_paused(channel_vocals[0], !window_has_focus()); }
+		if channel_vocals[1] > -1 { fmod_channel_control_set_paused(channel_vocals[1], !window_has_focus()); }
+	}	
+}

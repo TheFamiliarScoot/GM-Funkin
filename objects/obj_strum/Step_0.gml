@@ -16,11 +16,6 @@ if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
 			var k = type % 4;
 			var the = conductor.notepos - lastnote.position;
 			play_anim_d(id,nsprite[p][2]);
-			if variable_struct_exists(global.gimmicks,"opponent_deals_damage") {
-				if global.gimmicks.opponent_deals_damage && opponentcheck {
-					change_hp(-0.02,false);
-				}
-			}
 			if !isbot && !(lastnote.special > 0) {
 	//			show_debug_message(string(the) + " - " + check_rating(the));
 				global.combo += 1;
