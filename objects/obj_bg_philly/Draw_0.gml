@@ -4,7 +4,7 @@ draw_bg_sprite(spr_bg_philly,2,room_width/2,room_height/2,view_camera[0],0.85,0.
 // windows
 draw_bg_sprite(spr_bg_philly,4,room_width/2,room_height/2,view_camera[0],0.85,0.7,0.7,wincolors[curcolor],winalpha);
 
-if cond.beathit {
+if instance_exists(conductor) && conductor.beathit {
 	winalpha = 1;
 	curcolor = (curcolor + 1) % 5;
 }

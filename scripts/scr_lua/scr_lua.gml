@@ -5,7 +5,10 @@ function new_lua_state() {
 	lua_global_set(state, "os", undefined)
 	lua_global_set(state, "io", undefined)
 	lua_add_function(state, "loadJson", read_json_lua);
-	lua_add_function(state, "create_strum", create_strum);
+	lua_add_function(state, "loadConductorData", load_conductor_data);
+	lua_add_function(state, "createCharacter", create_character);
+	lua_add_function(state, "createStrum", create_strum);
+	lua_add_function(state, "createConductor", create_conductor);
 	return state
 }
 

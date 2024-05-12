@@ -140,23 +140,19 @@ function conductor_start(c) {
 	c.playing = true;
 }
 
-function create_custom_char(nm,_x,_y,_lyr,side) {
-	return instance_create_layer(_x,_y,_lyr,obj_custom_char,{loadname: nm, playside: side});
+function create_character(c,_x,_y,_layer,side,_id) {
+	return instance_create_layer(_x,_y,_layer,_id,{conductor: c, playside: side});
 }
 
-function create_character(_x,_y,_layer,side,_id,c) {
-	return instance_create_layer(_x,_y,_layer,_id,{playside: side, conductor: c});
-}
-
-function create_conductor(c) {
-	return instance_create_depth(0, 0, 0, obj_conductor, c);
+function create_conductor(c,_x,_y,_layer) {
+	return instance_create_layer(_x, _y, _layer, obj_conductor, c);
 }
 
 function create_strum(c,_x,_y,layer,idx,owner,key_kb=-1,key_gp=-1) {
 	return instance_create_layer(_x,_y,layer,obj_strum,{conductor: c, type: idx, tiedCharacter: owner, thisKey: key_kb, thisKeyGP: key_gp});
 }
 
-function create_strums_default() {
+function create_strums_default(c) {
 	var ctr = 0;
 
 	var strumKeys = [
@@ -205,7 +201,7 @@ function create_strums_default() {
 		}
 		
 		// create
-		with create_strum(cond, xx, yy, "UI", ctr, ch, strumKeys[ctr], strumKeysGp[ctr]) {
+		with create_strum(c, xx, yy, "UI", ctr, ch, strumKeys[ctr], strumKeysGp[ctr]) {
 			if opt.middlescroll { visible = tiedCharacter == global.player;	}
 			isbot = opt.botplay || tiedCharacter != global.player;
 		}

@@ -10,8 +10,8 @@
   "name":"obj_static_bg",
   "overriddenProperties":[],
   "parent":{
-    "name":"ui",
-    "path":"folders/Objects/ui.yy",
+    "name":"ingame",
+    "path":"folders/Objects/ui/ingame.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -1,1 +1,0 @@
-if room = room_play surface_free(ui.surface);

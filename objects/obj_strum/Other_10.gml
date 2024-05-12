@@ -62,9 +62,13 @@ else {
 	draw_sprite_ext(ovsprite,image_index,x,y,image_xscale,image_yscale,stype.ang+visualangle,col2,image_alpha);
 	ovalpha(false);
 }
+
+if !instance_exists(obj_conductor) {
+	return;	
+}
 var ctr = 0;
 
-var notes = conductor.notes[clamp_side_and_type(group, type % global.keyamt)];
+var notes = conductor.notes[clamp_side_and_type(group, type % conductor.keyamt, conductor.keyamt)];
 var nlength = array_length(notes);
 repeat nlength {
 	var note = notes[ctr];

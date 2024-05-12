@@ -30,13 +30,13 @@ function add_note(list,note) {
 	array_push(list,note);
 }
 
-function find_note_in_range(group,column,minn,maxx) {
+function find_note_in_range(c,column,minn,maxx) {
 	var ctr = 0;
 	var viablenotes = [];
-	var glength = array_length(group[column]);
+	var glength = array_length(c.notes[column]);
 	for (var i = 0; i < glength; i++) {
-		var ourNote = group[column][i];
-		var calcPos = cond.notepos - ourNote.position; // position relative to judgement line
+		var ourNote = c.notes[column][i];
+		var calcPos = c.notepos - ourNote.position; // position relative to judgement line
 		var rmn = ourNote.special > 0 ? minn/2 : minn;
 		var rmx = ourNote.special > 0 ? maxx/2 : maxx;
 		if (calcPos < rmx) && (calcPos > rmn) && !ourNote.hit && !ourNote.missed {
@@ -71,6 +71,6 @@ function ovalpha(on) {
 	}
 }
 
-function clamp_side_and_type(side, type) {
-	return (side * global.keyamt) + type;
+function clamp_side_and_type(side, type, keyamt) {
+	return (side * keyamt) + type;
 }

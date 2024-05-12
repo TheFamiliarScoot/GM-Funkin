@@ -34,7 +34,7 @@ group = 0;
 if tiedCharacter = global.dadinstance { group = 1; }
 if tiedCharacter = global.bfinstance { group = 0; }
 
-notetype = global.ntype[global.keyamt];
+notetype = global.ntype[conductor.keyamt];
 
 image_xscale = 0.75 * scalemod;
 image_yscale = 0.75 * scalemod;

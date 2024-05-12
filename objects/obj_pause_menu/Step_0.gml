@@ -5,7 +5,7 @@ if input_check_pressed(vk_enter, gp_face1) {
 			global.paused = false;
 			break;
 		case 1:
-			room_transition(room_load);
+			room_transition(room_play);
 			instance_destroy(selections);
 			instance_destroy(id);
 			break;

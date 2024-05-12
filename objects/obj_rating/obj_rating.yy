@@ -11,8 +11,8 @@
   "name":"obj_rating",
   "overriddenProperties":[],
   "parent":{
-    "name":"ui",
-    "path":"folders/Objects/ui.yy",
+    "name":"ingame",
+    "path":"folders/Objects/ui/ingame.yy",
   },
   "parentObjectId":{
     "name":"obj_ui_parent",

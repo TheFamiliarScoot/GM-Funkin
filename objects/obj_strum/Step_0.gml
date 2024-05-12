@@ -1,11 +1,15 @@
+if !instance_exists(conductor) {
+	return;	
+}
+
 var p = global.pixelui;
 
 var leniency = global.options.inputleniency * clamp(global.realscroll,1,1.5);
 var key = type % 4;
-var opponentcheck = (isbot && find_note_in_range(conductor.notes, clamp_side_and_type(group, key), 0, 500) != noone);
+var opponentcheck = (isbot && find_note_in_range(conductor, clamp_side_and_type(group, key, conductor.keyamt), 0, 500) != noone);
 if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
-	if isbot { lastnote = find_note_in_range(conductor.notes, clamp_side_and_type(group, key), 0, 500); }
-	else { lastnote = find_note_in_range(conductor.notes, clamp_side_and_type(group, key), -leniency, leniency); }
+	if isbot { lastnote = find_note_in_range(conductor, clamp_side_and_type(group, key, conductor.keyamt), 0, 500); }
+	else { lastnote = find_note_in_range(conductor, clamp_side_and_type(group, key, conductor.keyamt), -leniency, leniency); }
 	if lastnote != noone {
 //		var spec = opt.notetypes[lastnote.special + 1];
 		if !(isbot && lastnote.special > 0) {

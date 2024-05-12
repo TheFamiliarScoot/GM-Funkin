@@ -15,8 +15,8 @@
     {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_gameover","path":"objects/obj_gameover/obj_gameover.yy",},"propertyId":{"name":"no_antialiasing","path":"objects/obj_gameover/obj_gameover.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"True",},
   ],
   "parent":{
-    "name":"game",
-    "path":"folders/Objects/game.yy",
+    "name":"playstate",
+    "path":"folders/Objects/game/playstate.yy",
   },
   "parentObjectId":{
     "name":"obj_gameover",

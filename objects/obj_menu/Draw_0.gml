@@ -142,7 +142,7 @@ if menuenabled {
 						global.selecteddifficulty = difficulties[menu.selection];
 						ini_close();
 						menuenabled = false;
-						room_transition(room_load);
+						room_transition(room_play);
 					//}
 				}
 			}
@@ -155,6 +155,8 @@ if menuenabled {
 				array_push(newchoices, "back");
 				menu.choices = newchoices;
 				menu.selection = 0;
+				clear_lua_state(global.songscript);
+				global.songscript = -1;
 				audio_play_sound(snd_menu_cancel,0,false);
 			}
 			break;
@@ -176,7 +178,11 @@ if menuenabled {
 					menu.selection = 0;
 					setupstate = 2;
 					audio_play_sound(snd_menu_confirm,0,false);
-					global.gimmicks = get_gimmicks_song(global.selectedsong.name);
+					var scrlocation = "assets/songs/" + global.selectedpack + "/" + global.selectedsong.fileName + "/song.lua";
+					if file_exists(scrlocation) {
+						global.songscript = new_lua_state();
+						lua_add_file(global.songscript, scrlocation);
+					}
 					var newchoices = [];
 					for (var i = 0; i < array_length(global.selectedsong.difficulties); i += 1) {
 						array_push(newchoices, global.selectedsong.difficulties[i]);
@@ -194,6 +200,7 @@ if menuenabled {
 				menu.choices = newchoices;
 				menu.selection = 0;
 				clear_lua_state(global.packscript);
+				global.packscript = -1;
 				audio_play_sound(snd_menu_cancel,0,false);
 			}
 			break;

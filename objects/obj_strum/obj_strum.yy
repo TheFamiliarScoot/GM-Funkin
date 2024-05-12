@@ -13,8 +13,8 @@
   "name":"obj_strum",
   "overriddenProperties":[],
   "parent":{
-    "name":"game",
-    "path":"folders/Objects/game.yy",
+    "name":"ingame",
+    "path":"folders/Objects/ui/ingame.yy",
   },
   "parentObjectId":{
     "name":"obj_strum_parent",

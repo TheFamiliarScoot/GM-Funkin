@@ -10,7 +10,7 @@ if input_check_pressed(vk_enter, gp_face1) {
 		alarm[2] = 0;
 	}
 	else if retried && alarm[1] > 0 {
-		room_transition(room_load);
+		room_transition(room_play);
 		fmod_channel_control_stop(deathmusic);
 		fmod_sound_release(dsnd_loop);
 		fmod_sound_release(dsnd_end);

@@ -1,2 +1,2 @@
-room_transition(room_load);
+room_transition(room_play);
 visible = false;

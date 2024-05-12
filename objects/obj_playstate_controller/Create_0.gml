@@ -1,13 +1,15 @@
 texture_prefetch("ingame_ui");
 texture_flush("mainmenu");
+audio_group_load(audiogroup_countdown);
 
 global.dadinstance = noone;
 global.bfinstance = noone;
 global.gfinstance = noone;
 
 conductordata = load_conductor_data(global.selectedpack, global.selectedsong, global.selecteddifficulty);
-conductor = create_conductor(conductordata);
+conductor = create_conductor(conductordata, 0, 0, layer);
 call_lua("onLoad", global.selectedsong);
+var c = conductor;
 
 if opt.usenoteskin {
 	var ndir = "assets/sprites/noteskins/" + global.curnoteskin + "/";
@@ -29,20 +31,22 @@ if opt.customization.usepreset {
 }
 
 var object = noone;
-var gfisdad = global.dadobject == global.gfobject;
-
-if gfisdad { object = obj_gfspawn; }
+if global.dadobject == global.gfobject { object = obj_gfspawn; }
 else { object = obj_dadspawn; }
-global.dadinstance = create_character(object.x,object.y,object.layer,0,global.dadobject,conductor);
+global.dadinstance = create_character(conductor,object.x,object.y,object.layer,0,global.dadobject);
 
 object = obj_bfspawn;
-global.bfinstance = create_character(object.x,object.y,object.layer,1,global.bfobject,conductor);
+global.bfinstance = create_character(conductor,object.x,object.y,object.layer,1,global.bfobject);
 
 object = obj_gfspawn;
-global.gfinstance = create_character(object.x,object.y,object.layer,2,global.gfobject,conductor);
+global.gfinstance = create_character(conductor,object.x,object.y,object.layer,2,global.gfobject);
 
-if !opt.nobg { instance_create_layer(0,0,layer,global.bgobject); }
+if !opt.nobg { instance_create_layer(0,0,layer,global.bgobject,{conductor: c}); }
 else { instance_create_layer(0,0,layer,obj_static_bg) }
+
+// one of the only instances of this ever being used
+global.realscroll = global.options.scrollspeed == 0 ? conductor.scrollspeed/2.5 : global.options.scrollspeed/2.5;
+global.notescroll = global.options.usedownscroll ? global.realscroll : -global.realscroll;
 
 global.hp = 1;
 global.score = 0;
@@ -66,7 +70,10 @@ gui_width = room_width/2;
 gui_height = room_height/2
 display_set_gui_size(gui_width,gui_height);
 
-create_strums_default();
+create_strums_default(conductor);
+
+ui = instance_create_layer(0, 0, layer, obj_ingame_ui, {conductor: c});
+camera = instance_create_layer(0, 0, layer, obj_camera);
 
 // TODO: in MP, don't start 'til synced
 alarm[0] = 3;

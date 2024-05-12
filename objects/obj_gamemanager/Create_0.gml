@@ -1,5 +1,3 @@
-#macro cond global.conductor
-#macro mus global.music
 #macro ins global.inst
 #macro voc global.vocals
 #macro voc1 global.vocals[0]
@@ -336,8 +334,6 @@ if array_length(global.noteskins) = 0 {
 else if opt.noteskin > array_length(global.noteskins) - 1 { opt.noteskin = 0; }
 
 global.curnoteskin = global.noteskins[opt.noteskin];
-
-global.gimmicks = -1;
 
 room_goto(room_menu);
 

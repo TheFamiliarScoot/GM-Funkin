@@ -11,8 +11,8 @@
     {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_gameover","path":"objects/obj_gameover/obj_gameover.yy",},"propertyId":{"name":"die_sound","path":"objects/obj_gameover/obj_gameover.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"snd_death_pico",},
   ],
   "parent":{
-    "name":"game",
-    "path":"folders/Objects/game.yy",
+    "name":"playstate",
+    "path":"folders/Objects/game/playstate.yy",
   },
   "parentObjectId":{
     "name":"obj_gameover",

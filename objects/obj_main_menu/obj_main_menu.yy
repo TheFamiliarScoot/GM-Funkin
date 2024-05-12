@@ -6,8 +6,8 @@
   "name":"obj_main_menu",
   "overriddenProperties":[],
   "parent":{
-    "name":"ui",
-    "path":"folders/Objects/ui.yy",
+    "name":"menus",
+    "path":"folders/Objects/ui/menus.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -7,7 +7,7 @@ draw_bg_sprite(spr_school,2,xcenter,ycenter,view_camera[0],6,0.1,0.1);
 draw_bg_sprite(spr_school,3,xcenter,ycenter,view_camera[0],6,0.1,0.1);
 draw_bg_sprite(spr_bg_trees,floor(timer),xcenter,ycenter,view_camera[0],6,0.25,0.25);
 draw_bg_sprite(spr_bg_petals,floor(timer),xcenter,ycenter,view_camera[0],6,0.25,0.25);
-if cond.beathit {
+if instance_exists(conductor) && conductor.beathit {
 	image_index = 0;
 	image_speed = 1;
 }

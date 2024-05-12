@@ -3,14 +3,14 @@ if !playing {
 }
 
 var timeunit = FMOD_TIMEUNIT.MS;
-var ev_length = array_length(global.events);
+var ev_length = array_length(events);
 var i = 0;
 repeat (ev_length)
 {
-	var ev = global.events[i];
+	var ev = events[i];
 	if !ev.played && notepos >= ev.position {
 		ev.played = true;
-		handle_event(ev);
+		handle_event(id, ev);
 	}
 	i++;
 }

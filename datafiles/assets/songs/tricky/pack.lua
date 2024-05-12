@@ -29,3 +29,9 @@ function getChart(song, difficulty)
 	end
 	return song .. "/" .. song .. diffaddstring .. ".json"
 end
+
+function getSpecialNoteType(note_obj)
+	if note_obj[2] > 7 then
+		return 1
+	end
+end

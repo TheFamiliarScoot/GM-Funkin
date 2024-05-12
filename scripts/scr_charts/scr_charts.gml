@@ -1,4 +1,4 @@
-function load_conductor_data(pack, song, difficulty) {
+function load_conductor_data(pack, song, difficulty, use_audio = true) {
 	var c = {}
 	c.notes = [];
 	c.events = [];
@@ -25,7 +25,7 @@ function load_conductor_data(pack, song, difficulty) {
 	return c;
 }
 
-function load_chart_old(c, pack, song, difficulty) {
+function load_chart_old(c, pack, song, difficulty, use_audio = true) {
 	var diffaddstring = "-" + difficulty;
 	if difficulty == "normal" { diffaddstring = ""; }
 	var jsonlocation = "assets\\songs\\" + pack + "\\" + song.fileName + "\\" + song.fileName + diffaddstring + ".json";
@@ -47,61 +47,16 @@ function load_chart_old(c, pack, song, difficulty) {
 	}
 	
 	try {
-		for (var h = 0; h < array_length(chrt.song.notes); h += 1) {	
+		for (var h = 0; h < array_length(chrt.song.notes); h += 1) {
 			for (var i = 0; i < array_length(chrt.song.notes[h].sectionNotes); i += 1) {
 				var notearray = chrt.song.notes[h].sectionNotes[i];
-		
-				var nspecial = 0;
-		
-				var skip = false;
-				var ignore = false;
-		
-				var do_strum_ids = false;
 
-				if global.gimmicks != -1 {
-					switch global.gimmicks.special_note_type {
-						case "strum_ids":
-							var typeid = floor(notearray[1] / strums) - 1;
-							if typeid > -1 {
-								nspecial = note_special_string_id(global.gimmicks.map[typeid]);
-							}
-							break;
-						case "psych_tags":
-							if array_length(notearray) > 3 {
-								if variable_struct_exists(global.gimmicks,"ignore") {
-									for (var h = 0; h < array_length(global.gimmicks.ignore); h += 1) {
-										if notearray[3] = global.gimmicks.ignore[h] { ignore = true; }
-									}
-								}
-								if notearray[1] < 0 { skip = true; }
-								if !skip { nspecial = note_special_string_id(variable_struct_get(global.gimmicks.map,notearray[3])); }
-							}
-							break;
-						case "fourth_value":
-							if array_length(notearray) > 3 {
-								nspecial = note_special_string_id(global.gimmicks.map[notearray[3]]);
-							}
-							break;
-					}
-				}
-				else {
-					if array_length(notearray) > 3 {
-						skip = true;
-					}
-					for (var j = 0; j < array_length(notearray); j += 1) {
-						if !is_numeric(notearray[j]) { skip = true; }
-					}
-				}
-				if notearray[1] < 0 { skip = true; }
-		
-				if skip { continue; }
+				var nspecial = get_special_note_type(notearray);
+				if nspecial > 0 && !opt.specialnotes { continue; }
 		
 				var pos = notearray[0];
 				var typ = notearray[1];
 				var len = notearray[2];
-		
-				if !opt.specialnotes && nspecial > 0 && !ignore { continue; }
-				if ignore { nspecial = 0; }
 		
 				var swap = chrt.song.notes[h].mustHitSection;
 				if swap != lastswap {
@@ -142,19 +97,21 @@ function load_chart_old(c, pack, song, difficulty) {
 		room_goto(room_menu);
 		return -1;
 	}
-
-	var songlocation = "assets\\songs\\" + pack + "\\" + song.instLocation;
-	if !file_exists(songlocation) {
-		show_message("Couldn't find the instrumental! :(");
-		room_goto(room_menu);
-		return -1;
+	
+	if use_audio {
+		var songlocation = "assets\\songs\\" + pack + "\\" + song.instLocation;
+		if !file_exists(songlocation) {
+			show_message("Couldn't find the instrumental! :(");
+			room_goto(room_menu);
+			return -1;
+		}
+		ins = fmod_system_create_stream(songlocation, FMOD_MODE.LOOP_OFF);
+		voc = [];
+		var voicesloc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[1];
+		if file_exists(voicesloc) { voc2 = fmod_system_create_stream(voicesloc, FMOD_MODE.LOOP_OFF); }
+		else { voc2 = -1 }
+		voc1 = -1;	
 	}
-	ins = fmod_system_create_stream(songlocation, FMOD_MODE.LOOP_OFF);
-	voc = [];
-	var voicesloc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[1];
-	if file_exists(voicesloc) { voc2 = fmod_system_create_stream(voicesloc, FMOD_MODE.LOOP_OFF); }
-	else { voc2 = -1 }
-	voc1 = -1;
 	
 	c.scrollspeed = chrt.song.speed;
 	c.bpm = chrt.song.bpm;
@@ -182,24 +139,28 @@ function load_chart_funkin_v3(c, pack, song, difficulty) {
 	var notes = variable_struct_get(chart.notes, difficulty);
 	for (var i = 0; i < array_length(notes); i++) {
 		var note = notes[i];
-		add_note(c.notes[note.d], new c_note(note.t, note.d, note.l));
+		var cnote = new c_note(note.t, note.d, note.l);
+		cnote.special = get_special_note_type(note);
+		add_note(c.notes[note.d], cnote);
 	}
 	
-	var songlocation = "assets\\songs\\" + pack + "\\" + song.instLocation;
-	if !file_exists(songlocation) {
-		show_message("Couldn't find the instrumental! :(");
-		room_goto(room_menu);
-		return -1;
-	}
-	ins = fmod_system_create_stream(songlocation, FMOD_MODE.LOOP_OFF);
+	if use_audio {
+		var songlocation = "assets\\songs\\" + pack + "\\" + song.instLocation;
+		if !file_exists(songlocation) {
+			show_message("Couldn't find the instrumental! :(");
+			room_goto(room_menu);
+			return -1;
+		}
+		ins = fmod_system_create_stream(songlocation, FMOD_MODE.LOOP_OFF);
 	
-	voc = [];
-	var voices1loc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[0];
-	if file_exists(voices1loc) { voc1 = fmod_system_create_stream(voices1loc, FMOD_MODE.LOOP_OFF); }
-	else { voc1 = -1 }
-	var voices2loc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[1];
-	if file_exists(voices2loc) { voc2 = fmod_system_create_stream(voices2loc, FMOD_MODE.LOOP_OFF); }
-	else { voc2 = -1 }
+		voc = [];
+		var voices1loc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[0];
+		if file_exists(voices1loc) { voc1 = fmod_system_create_stream(voices1loc, FMOD_MODE.LOOP_OFF); }
+		else { voc1 = -1 }
+		var voices2loc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[1];
+		if file_exists(voices2loc) { voc2 = fmod_system_create_stream(voices2loc, FMOD_MODE.LOOP_OFF); }
+		else { voc2 = -1 }	
+	}
 	
 	c.scrollspeed = variable_struct_get(chart.scrollSpeed, difficulty);
 	c.bpm = metadata.timeChanges[0].bpm;
@@ -208,4 +169,12 @@ function load_chart_funkin_v3(c, pack, song, difficulty) {
 	c.offset = metadata.offsets.instrumental;
 	
 	return c;
+}
+
+function get_special_note_type(note_obj) {
+	var lua_result = call_lua("getSpecialNoteType", note_obj);
+	if !is_undefined(lua_result) {
+		return lua_result;	
+	}
+	return 0;
 }

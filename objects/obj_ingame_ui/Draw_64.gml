@@ -1,7 +1,7 @@
 /// @description Normal UI
 var useds = opt.usedownscroll;
 if ui.vis {
-	if cond.beathit && opt.bump {
+	if instance_exists(conductor) && conductor.beathit && opt.bump {
 		bump = 1.03;	
 	}
 	bump = lerp(bump,1,d(0.05));
@@ -15,21 +15,19 @@ if ui.vis {
 	with obj_strum_parent { if visible { event_perform(ev_draw,0); } }
 	with obj_ui_parent { if visible { event_perform(ev_draw,0); } }
 	
-	if opt.timedisplay {
+	if instance_exists(conductor) && opt.timedisplay {
 		var tdy = useds ? global.view_height-20 : 20;
-		var minutes = string(floor(cond.timeleft / 60));
+		var minutes = string(floor(conductor.timeleft / 60));
 		var secs = "";
-		if cond.timeleft % 60 < 10 { secs = "0" + string(floor(cond.timeleft % 60)) }
-		else { secs = string(floor(cond.timeleft % 60)); }
+		if conductor.timeleft % 60 < 10 { secs = "0" + string(floor(conductor.timeleft % 60)) }
+		else { secs = string(floor(conductor.timeleft % 60)); }
 		
 		
 		
 		draw_set_halign(fa_center);
-		draw_set_valign(fa_center);
+		draw_set_valign(fa_middle);
 		gpu_set_texfilter(false);
-		if instance_exists(obj_conductor) {
-			if !obj_conductor.countingdown draw_text_transformed(global.view_width/2,tdy,minutes + ":" + secs,2,2,0);
-		}
+		if conductor.countingdown draw_text_transformed(global.view_width/2,tdy,minutes + ":" + secs,2,2,0);
 		gpu_set_texfilter(opt.antialiasing);
 		draw_set_valign(fa_top);
 		draw_set_halign(fa_left);
@@ -75,7 +73,7 @@ if ui.vis {
 	gpu_set_texfilter(opt.antialiasing);
 	
 	iconscale = clamp(iconscale - d(0.01),1,1.5);
-	if cond.stephit && opt.bump { iconscale = 1.25; }
+	if instance_exists(conductor) && conductor.stephit && opt.bump { iconscale = 1.25; }
 
 	draw_set_halign(fa_center);
 	var centerx = global.view_width/2;

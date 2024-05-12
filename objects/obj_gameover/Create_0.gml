@@ -3,7 +3,7 @@ image_xscale = scale;
 image_yscale = scale;
 with obj_ui_parent { instance_destroy(id); }
 with obj_strum_parent { instance_destroy(id); }
-obj_camera.ui.vis = false;
+obj_ingame_ui.ui.vis = false;
 instance_destroy(global.bgobject);
 audio_play_sound(die_sound,0,false);
 alarm[0] = 60;

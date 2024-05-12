@@ -110,24 +110,8 @@ function try_load_scores(file) {
 	return stats;
 }
 
-function get_gimmicks_song(song) {
-	var path = "assets/songs/" + global.selectedpack + "/" + song + "/gimmicks.json";
-	if !file_exists(path) { return global.gimmicks; }
-	var gimmicks = read_json(path);
-
-	return gimmicks;
-}
-
-function get_gimmicks_pack(pack) {
-	var path = "assets/songs/" + pack + "/gimmicks.json";
-	if !file_exists(path) { return -1; }
-	var gimmicks = read_json(path);
-
-	return gimmicks;
-}
-
 function get_songs_from_current_pack() {
-	var songlist = call_lua("getSongList");
+	var songlist = call_lua("getSongList", undefined);
 	if !is_undefined(songlist) && is_array(songlist) {
 		var songs = [];
 		for (var i = 0; i < array_length(songlist); i++) {

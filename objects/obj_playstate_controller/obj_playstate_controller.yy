@@ -11,8 +11,8 @@
   "name":"obj_playstate_controller",
   "overriddenProperties":[],
   "parent":{
-    "name":"game",
-    "path":"folders/Objects/game.yy",
+    "name":"playstate",
+    "path":"folders/Objects/game/playstate.yy",
   },
   "parentObjectId":null,
   "persistent":false,

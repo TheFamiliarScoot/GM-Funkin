@@ -13,6 +13,7 @@ global.selecteddifficulty = "";
 global.selectedpack = "";
 
 global.packscript = -1;
+global.songscript = -1;
 
 packs = get_folders("assets/songs","pack.lua");
 songs = [];
