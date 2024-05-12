@@ -1,31 +1,31 @@
-function init_conductor(pack, song, difficulty) {
-	global.notes = [];
-	global.events = [];
-	global.keyamt = 4;
-
-	cond = {}
+function load_conductor_data(pack, song, difficulty) {
+	var c = {}
+	c.notes = [];
+	c.events = [];
+	c.keyamt = 4;
 	switch song.chartType {
 		case "old":
-			load_chart_old(pack, song, difficulty);
+			c = load_chart_old(c, pack, song, difficulty);
 			break;
 		case "funkinv3":
-			load_chart_funkin_v3(pack, song, difficulty);
+			c = load_chart_funkin_v3(c, pack, song, difficulty);
 			break;
 	}
-	cond.crochet = 60 / cond.bpm;
-	cond.lastpos = -cond.crochet * 4;
-	cond.songpos = -cond.crochet * 4;
-	cond.notepos = (-cond.crochet * 4) * 1000;
-	cond.gbeat = 0;
-	cond.gstep = 0;
-	cond.cbeat = 0;
-	cond.cstep = 0;
-	cond.beathit = false;
-	cond.stephit = false;
-	cond.timeleft = 0;
+	c.crochet = 60 / c.bpm;
+	c.lastpos = -c.crochet * 4;
+	c.songpos = -c.crochet * 4;
+	c.notepos = (-c.crochet * 4) * 1000;
+	c.gbeat = 0;
+	c.gstep = 0;
+	c.cbeat = 0;
+	c.cstep = 0;
+	c.beathit = false;
+	c.stephit = false;
+	c.timeleft = 0;
+	return c;
 }
 
-function load_chart_old(pack, song, difficulty) {
+function load_chart_old(c, pack, song, difficulty) {
 	var diffaddstring = "-" + difficulty;
 	if difficulty == "normal" { diffaddstring = ""; }
 	var jsonlocation = "assets\\songs\\" + pack + "\\" + song.fileName + "\\" + song.fileName + diffaddstring + ".json";
@@ -40,10 +40,10 @@ function load_chart_old(pack, song, difficulty) {
 
 	var donotechecks = false;
 
-	var strums = global.keyamt * 2;
+	var strums = c.keyamt * 2;
 	
 	repeat strums {
-		array_push(global.notes, []);	
+		array_push(c.notes, []);	
 	}
 	
 	try {
@@ -107,12 +107,12 @@ function load_chart_old(pack, song, difficulty) {
 				if swap != lastswap {
 					var ch = swap ? 0 : 1;
 					if ch == 0 && variable_struct_exists(chrt.song.notes[h], "gfSection") && chrt.song.notes[h].gfSection { ch = 2; }
-					array_push(global.events, new c_event(curpos, "FocusCamera", { char: ch }));
+					array_push(c.events, new c_event(curpos, "FocusCamera", { char: ch }));
 				}
 				lastswap = swap;
 				
 				if variable_struct_exists(chrt.song.notes[h], "changeBPM") && chrt.song.notes[h].changeBPM {
-					array_push(global.events, new c_event(curpos, "ChangeTime", { bpm: chrt.song.notes[h].bpm, n: 4, d: 4 }))	
+					array_push(c.events, new c_event(curpos, "ChangeTime", { bpm: chrt.song.notes[h].bpm, n: 4, d: 4 }))	
 				}
 		
 				if len < 0 { len = 0 };	
@@ -121,12 +121,12 @@ function load_chart_old(pack, song, difficulty) {
 		
 				thisNote.special = nspecial;
 		
-				var rt = (typ + global.keyamt) % global.keyamt;
-				var side = floor(typ / global.keyamt) % 2;
+				var rt = (typ + c.keyamt) % c.keyamt;
+				var side = floor(typ / c.keyamt) % 2;
 				if swap ? side : !side {
-					rt += global.keyamt;
+					rt += c.keyamt;
 				}
-				add_note(global.notes[rt], thisNote);
+				add_note(c.notes[rt], thisNote);
 				totalnotecount += 1;
 			}
 			var dsteps = chrt.song.notes[h].lengthInSteps;
@@ -156,31 +156,33 @@ function load_chart_old(pack, song, difficulty) {
 	else { voc2 = -1 }
 	voc1 = -1;
 	
-	cond.scrollspeed = chrt.song.speed;
-	cond.bpm = chrt.song.bpm;
-	cond.timedenominator = 4;
-	cond.timenumerator = 4;	
-	cond.offset = -10;
+	c.scrollspeed = chrt.song.speed;
+	c.bpm = chrt.song.bpm;
+	c.timedenominator = 4;
+	c.timenumerator = 4;	
+	c.offset = -10;
+	
+	return c;
 }
 
-function load_chart_funkin_v3(pack, song, difficulty) {
+function load_chart_funkin_v3(c, pack, song, difficulty) {
 	var metadata = read_json("assets\\songs\\" + pack + "\\" + song.fileName + "\\" + song.fileName + "-metadata.json");
 	var chart = read_json("assets\\songs\\" + pack + "\\" + song.fileName + "\\" + song.fileName + "-chart.json");
 	
 	for (var i = 0; i < array_length(chart.events); i++) {
 		var ev = chart.events[i];
-		add_note(global.events, new c_event(ev.t, ev.e, ev.v));
+		add_note(c.events, new c_event(ev.t, ev.e, ev.v));
 	}
 	
-	var strums = global.keyamt * 2;
+	var strums = c.keyamt * 2;
 	repeat strums {
-		array_push(global.notes, []);	
+		array_push(c.notes, []);	
 	}
 	
 	var notes = variable_struct_get(chart.notes, difficulty);
 	for (var i = 0; i < array_length(notes); i++) {
 		var note = notes[i];
-		add_note(global.notes[note.d], new c_note(note.t, note.d, note.l));
+		add_note(c.notes[note.d], new c_note(note.t, note.d, note.l));
 	}
 	
 	var songlocation = "assets\\songs\\" + pack + "\\" + song.instLocation;
@@ -199,9 +201,11 @@ function load_chart_funkin_v3(pack, song, difficulty) {
 	if file_exists(voices2loc) { voc2 = fmod_system_create_stream(voices2loc, FMOD_MODE.LOOP_OFF); }
 	else { voc2 = -1 }
 	
-	cond.scrollspeed = variable_struct_get(chart.scrollSpeed, difficulty);
-	cond.bpm = metadata.timeChanges[0].bpm;
-	cond.timedenominator = metadata.timeChanges[0].d;
-	cond.timenumerator = metadata.timeChanges[0].n;
-	cond.offset = metadata.offsets.instrumental;
+	c.scrollspeed = variable_struct_get(chart.scrollSpeed, difficulty);
+	c.bpm = metadata.timeChanges[0].bpm;
+	c.timedenominator = metadata.timeChanges[0].d;
+	c.timenumerator = metadata.timeChanges[0].n;
+	c.offset = metadata.offsets.instrumental;
+	
+	return c;
 }

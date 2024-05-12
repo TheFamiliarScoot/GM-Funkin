@@ -136,16 +136,24 @@ function room_transition(rm, inst = false) {
 	instance_create_layer(0,0,"Instances",obj_transition,{roomtogoto: rm, instant: inst});
 }
 
+function conductor_start(c) {
+	c.playing = true;
+}
+
 function create_custom_char(nm,_x,_y,_lyr,side) {
 	return instance_create_layer(_x,_y,_lyr,obj_custom_char,{loadname: nm, playside: side});
 }
 
-function spawn_char(_x,_y,_layer,side,_id) {
-	return instance_create_layer(_x,_y,_layer,_id,{playside: side});
+function create_character(_x,_y,_layer,side,_id,c) {
+	return instance_create_layer(_x,_y,_layer,_id,{playside: side, conductor: c});
 }
 
-function create_strum(_x,_y,layer,idx,owner,key_kb=-1,key_gp=-1) {
-	return instance_create_layer(_x,_y,layer,obj_strum,{type:idx, tiedCharacter:owner, thisKey: key_kb, thisKeyGP: key_gp});
+function create_conductor(c) {
+	return instance_create_depth(0, 0, 0, obj_conductor, c);
+}
+
+function create_strum(c,_x,_y,layer,idx,owner,key_kb=-1,key_gp=-1) {
+	return instance_create_layer(_x,_y,layer,obj_strum,{conductor: c, type: idx, tiedCharacter: owner, thisKey: key_kb, thisKeyGP: key_gp});
 }
 
 function create_strums_default() {
@@ -189,7 +197,7 @@ function create_strums_default() {
 		
 		// character
 		var ch = noone;
-		if floor(ctr / global.keyamt) % 2 {
+		if floor(ctr / 4) % 2 {
 			ch = global.dadinstance;
 		}
 		else { 
@@ -197,7 +205,7 @@ function create_strums_default() {
 		}
 		
 		// create
-		with create_strum(xx, yy, "UI", ctr, ch, strumKeys[ctr], strumKeysGp[ctr]) {
+		with create_strum(cond, xx, yy, "UI", ctr, ch, strumKeys[ctr], strumKeysGp[ctr]) {
 			if opt.middlescroll { visible = tiedCharacter == global.player;	}
 			isbot = opt.botplay || tiedCharacter != global.player;
 		}

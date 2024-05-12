@@ -1,6 +1,10 @@
-cond.stephit = false;
-cond.beathit = false;
-if laststep != cond.cstep { cond.stephit = true; }
-if lastbeat != cond.cbeat { cond.beathit = true; }
-lastbeat = cond.cbeat;
-laststep = cond.cstep;
+if !playing {
+	return;	
+}
+
+stephit = false;
+beathit = false;
+if laststep != cstep { stephit = true; }
+if lastbeat != cbeat { beathit = true; }
+lastbeat = cbeat;
+laststep = cstep;

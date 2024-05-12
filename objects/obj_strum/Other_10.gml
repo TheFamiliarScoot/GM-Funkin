@@ -64,16 +64,16 @@ else {
 }
 var ctr = 0;
 
-var notes = global.notes[clamp_side_and_type(group, type % global.keyamt)];
+var notes = conductor.notes[clamp_side_and_type(group, type % global.keyamt)];
 var nlength = array_length(notes);
 repeat nlength {
 	var note = notes[ctr];
-	var pos = cond.notepos - note.position;
-	var range = 3000 / cond.scrollspeed;
+	var pos = conductor.notepos - note.position;
+	var range = 3000 / conductor.scrollspeed;
 		
 	// dont draw if out of range
 	if pos < range + note.length && pos > -range {
-		var diff = cond.notepos - note.position;
+		var diff = conductor.notepos - note.position;
 		var real_y = diff * global.notescroll;
 		var thistype = notetype[note.type % 4];
 		var noteLimitY = 900;

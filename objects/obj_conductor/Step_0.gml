@@ -1,24 +1,28 @@
+if !playing {
+	return;	
+}
+
 var timeunit = FMOD_TIMEUNIT.MS;
 var ev_length = array_length(global.events);
 var i = 0;
 repeat (ev_length)
 {
 	var ev = global.events[i];
-	if !ev.played && cond.notepos >= ev.position {
+	if !ev.played && notepos >= ev.position {
 		ev.played = true;
 		handle_event(ev);
 	}
 	i++;
 }
 
-cond.lastpos = cond.songpos;
+lastpos = songpos;
 if countingdown {
-	cond.songpos += delta_time / 1000000;
+	songpos += delta_time / 1000000;
 }
 else {
-	cond.songpos = fmod_channel_get_position(chi, FMOD_TIMEUNIT.MS) / 1000;
+	songpos = fmod_channel_get_position(chi, FMOD_TIMEUNIT.MS) / 1000;
 }
-if cond.songpos >= 0 && countingdown {
+if songpos >= 0 && countingdown {
 	countingdown = false;
 	fmod_channel_control_set_paused(chi, false);
 	if chv1 > -1 { fmod_channel_control_set_paused(chv1, false); }
@@ -28,15 +32,15 @@ if cond.songpos >= 0 && countingdown {
 	if chv2 > -1 { fmod_channel_set_position(chv2, 0, FMOD_TIMEUNIT.MS); }
 	audiovolume = 0.5;
 }
-var sdelta = cond.songpos - cond.lastpos;
-cond.notepos = cond.songpos * 1000;
-cond.gstep += sdelta / cond.crochet;
-cond.gbeat += (sdelta / cond.crochet) / cond.timenumerator;
-cond.cbeat = floor(cond.gbeat);
-cond.cstep = floor(cond.gstep) % cond.timenumerator;
+var sdelta = songpos - lastpos;
+notepos = songpos * 1000;
+gstep += sdelta / crochet;
+gbeat += (sdelta / crochet) / timenumerator;
+cbeat = floor(gbeat);
+cstep = floor(gstep) % timenumerator;
 
 if !countingdown {
-	cond.timeleft = (fmod_sound_get_length(ins, timeunit) - fmod_channel_get_position(chi, timeunit)) / 1000;
+	timeleft = (fmod_sound_get_length(ins, timeunit) - fmod_channel_get_position(chi, timeunit)) / 1000;
 }
 
 /*
@@ -50,10 +54,10 @@ if cond.stephit {
 */
 
 // Conductor display
-if cond.beathit {
+if beathit {
 	if conductordisplay { audio_play_sound(sfx_beat,0,false); }
 }
-else if cond.stephit && conductordisplay { audio_play_sound(sfx_bar,0,false); }
+else if stephit && conductordisplay { audio_play_sound(sfx_bar,0,false); }
 
 // Audio volume
 fmod_channel_control_set_volume(chi, audiovolume);
@@ -75,7 +79,7 @@ if !stepmode && !global.paused {
 }
 
 // Countdown
-var c = abs(cond.cstep);
+var c = abs(cstep);
 if countingdown && c != count {
 	switch c {
 		case 0: audio_play_sound(snd_cd_three,3,false); break;

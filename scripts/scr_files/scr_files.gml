@@ -127,26 +127,18 @@ function get_gimmicks_pack(pack) {
 }
 
 function get_songs_from_current_pack() {
-	// why do i have to do this
-	try {
-		if global.packscript > -1 {
-			var songlist = lua_call(global.packscript, "getSongList");
-			if !is_undefined(songlist) && is_array(songlist) {
-				var songs = [];
-				for (var i = 0; i < array_length(songlist); i++) {
-					var songinfo = lua_call(global.packscript, "getSong", songlist[i]);
-					if !is_undefined(songinfo) {
-						array_push(songs, songinfo);	
-					}
-				}
-				if array_length(songs) > 0 {
-					return songs;	
-				}
-			}		
+	var songlist = call_lua("getSongList");
+	if !is_undefined(songlist) && is_array(songlist) {
+		var songs = [];
+		for (var i = 0; i < array_length(songlist); i++) {
+			var songinfo = lua_call(global.packscript, "getSong", songlist[i]);
+			if !is_undefined(songinfo) {
+				array_push(songs, songinfo);	
+			}
 		}
-	}
-	catch (e) {
-		// pussy.wav
+		if array_length(songs) > 0 {
+			return songs;	
+		}
 	}
 	if file_exists("assets/songs/" + global.selectedpack + "/songlist.txt") {
 		return get_songs(global.selectedpack);

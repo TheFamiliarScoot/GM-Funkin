@@ -5,6 +5,9 @@ global.dadinstance = noone;
 global.bfinstance = noone;
 global.gfinstance = noone;
 
+conductordata = load_conductor_data(global.selectedpack, global.selectedsong, global.selecteddifficulty);
+conductor = create_conductor(conductordata);
+call_lua("onLoad", global.selectedsong);
 
 if opt.usenoteskin {
 	var ndir = "assets/sprites/noteskins/" + global.curnoteskin + "/";
@@ -30,22 +33,16 @@ var gfisdad = global.dadobject == global.gfobject;
 
 if gfisdad { object = obj_gfspawn; }
 else { object = obj_dadspawn; }
-if global.dadobject = obj_custom_char { global.dadinstance = create_custom_char(global.dadcustom,object.x,object.y,object.layer,0); }
-else { global.dadinstance = spawn_char(object.x,object.y,object.layer,0,global.dadobject); }
+global.dadinstance = create_character(object.x,object.y,object.layer,0,global.dadobject,conductor);
 
-object = obj_bfspawn
-if global.bfobject = obj_custom_char { global.bfinstance = create_custom_char(global.bfcustom,object.x,object.y,object.layer,1); }
-else { global.bfinstance = spawn_char(object.x,object.y,object.layer,1,global.bfobject); }
+object = obj_bfspawn;
+global.bfinstance = create_character(object.x,object.y,object.layer,1,global.bfobject,conductor);
 
-object = obj_gfspawn
-if !gfisdad { global.gfinstance = spawn_char(object.x,object.y,object.layer,2,global.gfobject); }
+object = obj_gfspawn;
+global.gfinstance = create_character(object.x,object.y,object.layer,2,global.gfobject,conductor);
 
 if !opt.nobg { instance_create_layer(0,0,layer,global.bgobject); }
 else { instance_create_layer(0,0,layer,obj_static_bg) }
-
-// one of the only instances of this ever being used
-global.realscroll = global.options.scrollspeed == 0 ? cond.scrollspeed/2.5 : global.options.scrollspeed/2.5;
-global.notescroll = global.options.usedownscroll ? global.realscroll : -global.realscroll;
 
 global.hp = 1;
 global.score = 0;
