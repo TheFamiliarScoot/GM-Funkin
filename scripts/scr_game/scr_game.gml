@@ -79,7 +79,7 @@ function die() {
 				instance_create_layer(obj.x,obj.y,"Instances",obj.gameover_obj);	
 			}
 			else {
-				room_transition(room_menu);
+				room_transition(room_entrypoint);
 			}
 		}	
 	}

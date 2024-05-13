@@ -327,7 +327,7 @@ else if opt.noteskin > array_length(global.noteskins) - 1 { opt.noteskin = 0; }
 
 global.curnoteskin = global.noteskins[opt.noteskin];
 
-room_goto(room_menu);
+room_goto(room_entrypoint);
 
 pausesprite = -1;
 uicopy = 0;

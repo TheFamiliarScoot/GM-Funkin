@@ -3,6 +3,10 @@ enum data_type {
 	chat
 }
 
+// profile
+// Client-bound: sends client ID and default player data
+// Server-bound: updates player info, making sure client id is the same
+
 function find_client_by_socket(server, socket) {
 	var cl = array_length(server.clients);
 	for (var i = 0; i < cl; i++) {
@@ -29,6 +33,7 @@ function net_send_packet(type, socket, data_struct) {
 	buffer_write(buf, buffer_u8, type);
 	switch type {
 		case data_type.profile:
+			buffer_write(buf, buffer_u8, data_struct.client_id);
 			buffer_write(buf, buffer_string, data_struct.name);
 			buffer_write(buf, buffer_u8, data_struct.character);
 			break;
@@ -40,12 +45,20 @@ function net_send_packet(type, socket, data_struct) {
 	buffer_delete(buf);
 }
 
+function net_send_packet_all(type, clients, data_struct) {
+	var clen = array_length(clients);
+	for (var i = 0; i < clen; i++) {
+		net_send_packet(type, clients[i].client, data_struct);	
+	}
+}
+
 function net_read_packet(buf) {
 	var type = buffer_read(buf, buffer_u8);
 	var data_struct = {};
 	data_struct.type = type;
 	switch type {
 		case data_type.profile:
+			data_struct.client_id = buffer_read(buf, buffer_u8);
 			data_struct.name = buffer_read(buf, buffer_string);
 			data_struct.character = buffer_read(buf, buffer_u8);
 			break;

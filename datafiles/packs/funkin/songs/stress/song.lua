@@ -13,5 +13,11 @@ function onLoad(song)
 end
 
 function onNoteHit(note, strum, character)
+	log("note time " .. string(note.position))
+	log(strum)
+	log(character)
+end
 
+function onEvent(event)
+	log("event type " .. event.type)
 end

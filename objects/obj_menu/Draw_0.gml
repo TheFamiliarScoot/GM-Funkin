@@ -6,16 +6,23 @@ if menuenabled {
 			switch menu.selection {
 				case 0:
 					if input_check_pressed(vk_enter, gp_face1) {
-						if array_length(packs) = 0 || !directory_exists("assets/songs") {
+						if !directory_exists("packs") {
 							play_miss_sfx();	
 						}
+						else {
+							setupstate = 1;
+							instance_deactivate_object(menu);
+							packchooser = instance_create_layer(0,0,layer,obj_pack_chooser);
+							audio_play_sound(snd_menu_confirm,0,false);	
+						}
+						/*
 						setupstate = 1;
 						menu.selection = 0;
 						var newchoices = [];
 						array_copy(newchoices, 0, packs, 0, array_length(packs));
 						array_push(newchoices, "back");
 						menu.choices = newchoices;
-						audio_play_sound(snd_menu_confirm,0,false);
+						*/
 					}
 					break;
 				case 1:
@@ -38,6 +45,7 @@ if menuenabled {
 			}
 			break;
 		case 1:
+			/*
 			if menu.selection >= array_length(packs) {
 				if input_check_pressed(vk_enter, gp_face1) {
 					setupstate = 0;
@@ -50,7 +58,7 @@ if menuenabled {
 				if input_check_pressed(vk_enter, gp_face1) {
 					global.selectedpack = packs[menu.selection];
 					global.packscript = new_lua_state();
-					lua_add_file(global.packscript, "assets/songs/" + global.selectedpack + "/pack.lua");
+					lua_add_file(global.packscript, "packs/" + global.selectedpack + "/pack.lua");
 					songs = get_songs_from_current_pack();
 					if !is_undefined(songs) && is_array(songs) && array_length(songs) > 0 {
 						menu.selection = 0;
@@ -70,13 +78,24 @@ if menuenabled {
 					}
 				}
 			}
+			*/
 			if input_check_pressed(vk_escape, gp_face2) {
 				setupstate = 0;
+				instance_destroy(packchooser);
+				packchooser = noone;
+				instance_activate_object(menu);
 				menu.choices = [ "pack chooser", "host game", "join game", "options", "exit" ];
 				menu.selection = 0;
 				audio_play_sound(snd_menu_cancel,0,false);
 			}
+			else if input_check_pressed(vk_enter, gp_face1) {
+				audio_play_sound(snd_menu_confirm,0,false);
+				global.selectedpack = packchooser.packinfo[packchooser.selectedpack].filename;
+				packchooser.alarm[0] = 120;
+				setupstate = -1;
+			}
 			break;
+		/*
 		case 2:
 			if menu.selection >= array_length(global.selectedsong.difficulties) {
 				if input_check_pressed(vk_enter, gp_face1) {
@@ -129,21 +148,10 @@ if menuenabled {
 				}
 				
 				if input_check_pressed(vk_enter, gp_face1) {
-					var str = "assets/songs/" +
-						global.selectedpack +
-						"/" +
-						global.selectedsong.name +
-						"/" +
-						difficulty_to_file(global.selectedsong.name,difficulties[menu.selection]);
-					//if !file_exists(str) {
-					//	play_miss_sfx();
-					//}
-					//else {
-						global.selecteddifficulty = difficulties[menu.selection];
-						ini_close();
-						menuenabled = false;
-						room_transition(room_play);
-					//}
+					global.selecteddifficulty = difficulties[menu.selection];
+					ini_close();
+					menuenabled = false;
+					room_transition(room_play);
 				}
 			}
 			if input_check_pressed(vk_escape, gp_face2) {
@@ -178,7 +186,7 @@ if menuenabled {
 					menu.selection = 0;
 					setupstate = 2;
 					audio_play_sound(snd_menu_confirm,0,false);
-					var scrlocation = "assets/songs/" + global.selectedpack + "/" + global.selectedsong.fileName + "/song.lua";
+					var scrlocation = "packs/" + global.selectedpack + "/songs/" + global.selectedsong.fileName + "/song.lua";
 					if file_exists(scrlocation) {
 						global.songscript = new_lua_state();
 						lua_add_file(global.songscript, scrlocation);
@@ -204,6 +212,7 @@ if menuenabled {
 				audio_play_sound(snd_menu_cancel,0,false);
 			}
 			break;
+		*/
 	}
 }
 timer += 0.25;

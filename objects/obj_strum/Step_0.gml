@@ -16,6 +16,7 @@ if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
 			var k = type % 4;
 			var the = conductor.notepos - lastnote.position;
 			play_anim_d(id,nsprite[p][2]);
+			call_lua_3arg("onNoteHit", lastnote, id, tiedCharacter);
 			if !isbot && !(lastnote.special > 0) {
 	//			show_debug_message(string(the) + " - " + check_rating(the));
 				global.combo += 1;

@@ -15,7 +15,7 @@ global.selectedpack = "";
 global.packscript = -1;
 global.songscript = -1;
 
-packs = get_folders("assets/songs","pack.lua");
+packs = get_folders("packs","pack.lua");
 songs = [];
 
 menuenabled = true;
@@ -26,5 +26,6 @@ deletingstats = false;
 menu = create_scroll_menu(140,400,layer_get_id("Menus"),
 	["pack chooser", "host game", "join game", "options", "exit"]
 );
+packchooser = noone;
 
 lastchoices = [];

@@ -1,0 +1,33 @@
+{
+	"name": "Friday Night Funkin'",
+	"description": "The base game",
+	"songs": [
+		"tutorial",
+		"bopeebo",
+		"fresh",
+		"dadbattle",
+		"spookeez",
+		"south",
+		"monster",
+		"pico",
+		"philly",
+		"blammed",
+		"satin-panties",
+		"high",
+		"milf",
+		"cocoa",
+		"eggnog",
+		"winter-horrorland",
+		"senpai",
+		"roses",
+		"thorns",
+		"ugh",
+		"guns",
+		"stress",
+		"darnell"
+	],
+	"weeks": [
+		{ "name": "tutorial", "title": "something", "songs": [ "tutorial" ] },
+		{ "name": "week 1", "title": "something", "songs": [ "bopeebo", "fresh", "dadbattle" ] }
+	]
+}

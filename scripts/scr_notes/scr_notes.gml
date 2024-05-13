@@ -1,24 +1,5 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function c_note(t,str,l) constructor {
-	position = t;      // position of the note
-	type = str;        // note type
-	length = l;        // length of the note
-	hit = false;       // if the note was hit
-	missed = false;    // if the note was missed
-	covered = 0;       // how much of the length of the note was covered
-	completed = false; // if the hold note was actually finished
-	timehit = 0;       // ms at which the note was hit
-	special = 0;       // special note type
-}
-
-function c_event(t,str,v) constructor {
-	position = t;      // position of the event
-	type = str;        // type of the event
-	value = v;         // value struct of the event
-	played = false;    // if the event was played
-}
-
 function add_note(list,note) {
 	for (var i = 0; i < array_length(list); i += 1) {
 		var cur = list[i];

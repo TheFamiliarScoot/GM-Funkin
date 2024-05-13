@@ -116,7 +116,7 @@ function fmod_error_string(_error_code = fmod_last_result())
 }
 
 /// @ignore
-function fmod_handle_async_events() 
+function fmod_handle_asynEvents() 
 {
 	static _async_buffer = buffer_create(2048, buffer_fixed, 1);
 	
@@ -755,7 +755,7 @@ function fmod_system_load_geometry(_buffer_id, _length) {
 }
 
 function fmod_system_update() {
-	fmod_handle_async_events();
+	fmod_handle_asynEvents();
 	return fmod_system_update_multiplatform();
 }
 
@@ -2796,7 +2796,7 @@ function fmod_studio_system_set_parameter_by_name_with_label(_name, _label, _ign
 }
 
 function fmod_studio_system_update() {
-	fmod_handle_async_events();
+	fmod_handle_asynEvents();
 	return fmod_studio_system_update_multiplatform();
 }
 

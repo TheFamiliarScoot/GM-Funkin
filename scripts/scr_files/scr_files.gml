@@ -12,7 +12,7 @@ function read_json(file_path){
 }
 
 function read_json_lua(file_path) {
-	return read_json("assets/songs/" + global.selectedpack + "/" + file_path);	
+	return read_json("packs/" + global.selectedpack + "/" + file_path);	
 }
 
 function read_json_map(file_path){
@@ -60,7 +60,7 @@ function get_folders(dir,file_to_exist) {
 }
 
 function get_songs(pack) {
-	var list = read_text("assets/songs/" + pack + "/songlist.txt");
+	var list = read_text("packs/" + pack + "/songlist.txt");
 	var songs = []
 	
 	for (var i = 0; i < array_length(list); i += 1) {
@@ -124,7 +124,7 @@ function get_songs_from_current_pack() {
 			return songs;	
 		}
 	}
-	if file_exists("assets/songs/" + global.selectedpack + "/songlist.txt") {
+	if file_exists("packs/" + global.selectedpack + "/songlist.txt") {
 		return get_songs(global.selectedpack);
 	}
 	return undefined;

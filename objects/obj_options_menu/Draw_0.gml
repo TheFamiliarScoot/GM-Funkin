@@ -426,7 +426,7 @@ if input_check_pressed(vk_escape, gp_face2) && !instance_exists(obj_transition) 
 	else {
 		switch submenu {
 			case 10:
-				room_transition(room_menu);
+				room_transition(room_entrypoint);
 				audio_play_sound(snd_menu_cancel,0,false);
 				write_save(working_directory + "options.json");
 				break;

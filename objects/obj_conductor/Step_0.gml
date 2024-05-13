@@ -3,14 +3,32 @@ if !playing {
 }
 
 var timeunit = FMOD_TIMEUNIT.MS;
+
+// Events
 var ev_length = array_length(events);
 var i = 0;
-repeat (ev_length)
-{
+repeat (ev_length) {
 	var ev = events[i];
 	if !ev.played && notepos >= ev.position {
 		ev.played = true;
-		handle_event(id, ev);
+		if call_lua_event("onEvent", ev) {
+			handle_event(id, ev);
+		}
+	}
+	i++;
+}
+
+// Time Changes
+var t_length = array_length(timechanges);
+i = 0;
+repeat (t_length) {
+	var t = timechanges[i];
+	if !t.played && notepos >= ev.position {
+		t.played = true;
+		bpm = t.bpm;
+		timenumerator = t.n;
+		timedenominator = t.d;
+		crochet = 60 / bpm;
 	}
 	i++;
 }

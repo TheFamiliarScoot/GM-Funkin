@@ -10,7 +10,7 @@ if input_check_pressed(vk_enter, gp_face1) {
 			instance_destroy(id);
 			break;
 		case 2:
-			room_transition(room_menu);
+			room_transition(room_entrypoint);
 			instance_destroy(selections);
 			instance_destroy(id);
 			break;

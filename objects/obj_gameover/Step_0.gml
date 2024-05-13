@@ -18,5 +18,5 @@ if input_check_pressed(vk_enter, gp_face1) {
 	}	
 }
 if input_check_pressed(vk_escape, gp_face2) && !instance_exists(obj_transition) {
-	room_transition(room_menu);
+	room_transition(room_entrypoint);
 }
