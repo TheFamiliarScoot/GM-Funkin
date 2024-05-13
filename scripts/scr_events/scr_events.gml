@@ -9,5 +9,6 @@ function handle_event(c, ev) {
 }
 
 function event_focus_camera(c, ev) {
-	global.target = c.targets[ev.value.char];
+	var targets = [ global.bfinstance, global.dadinstance, global.gfinstance ];
+	obj_camera.target = targets[ev.value.char];
 }

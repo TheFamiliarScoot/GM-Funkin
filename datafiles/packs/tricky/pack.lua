@@ -17,8 +17,8 @@ function getSong(song)
 		["name"] = song,
 		["chartType"] = "old",
 		["difficulties"] = diffs,
-		["instLocation"] = song .. "/Inst.ogg",
-		["voicesLocations"] = { "", song .. "/Voices.ogg" }
+		["instLocation"] = "songs/" .. song .. "/Inst.ogg",
+		["voicesLocations"] = { "", "songs/" .. song .. "/Voices.ogg" }
 	}
 end
 
@@ -27,7 +27,7 @@ function getChart(song, difficulty)
 	if difficulty == "normal" then
 		diffaddstring = ""
 	end
-	return song .. "/" .. song .. diffaddstring .. ".json"
+	return "songs/" .. song .. "/" .. song .. diffaddstring .. ".json"
 end
 
 function getSpecialNoteType(note_obj)

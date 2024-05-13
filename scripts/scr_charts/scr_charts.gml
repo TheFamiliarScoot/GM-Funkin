@@ -29,7 +29,7 @@ function load_conductor_data(pack, song, difficulty, use_audio = true) {
 function load_chart_old(c, pack, song, difficulty, use_audio = true) {
 	var diffaddstring = "-" + difficulty;
 	if difficulty == "normal" { diffaddstring = ""; }
-	var jsonlocation = "assets\\songs\\" + pack + "\\" + song.fileName + "\\" + song.fileName + diffaddstring + ".json";
+	var jsonlocation = "packs\\" + pack + "\\songs\\" + song.fileName + "\\" + song.fileName + diffaddstring + ".json";
 	show_debug_message(jsonlocation);
 	var chrt = read_json(jsonlocation);
 
@@ -99,7 +99,7 @@ function load_chart_old(c, pack, song, difficulty, use_audio = true) {
 	}
 	
 	if use_audio {
-		var songlocation = "assets\\songs\\" + pack + "\\" + song.instLocation;
+		var songlocation = "packs\\" + pack + "\\" + song.instLocation;
 		if !file_exists(songlocation) {
 			show_message("Couldn't find the instrumental! :(");
 			room_goto(room_entrypoint);
@@ -107,7 +107,7 @@ function load_chart_old(c, pack, song, difficulty, use_audio = true) {
 		}
 		c.instrumental = fmod_system_create_stream(songlocation, FMOD_MODE.LOOP_OFF);
 		c.vocals = [];
-		var voicesloc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[1];
+		var voicesloc = "packs\\" + pack + "\\" + song.voicesLocations[1];
 		if file_exists(voicesloc) { c.vocals[1] = fmod_system_create_stream(voicesloc, FMOD_MODE.LOOP_OFF); }
 		else { c.vocals[1] = -1 }
 		c.vocals[0] = -1;	
@@ -123,8 +123,8 @@ function load_chart_old(c, pack, song, difficulty, use_audio = true) {
 }
 
 function load_chart_funkin_v3(c, pack, song, difficulty, use_audio = true) {
-	var metadata = read_json("assets\\songs\\" + pack + "\\" + song.fileName + "\\" + song.fileName + "-metadata.json");
-	var chart = read_json("assets\\songs\\" + pack + "\\" + song.fileName + "\\" + song.fileName + "-chart.json");
+	var metadata = read_json("packs\\" + pack + "\\songs\\" + song.fileName + "\\" + song.fileName + "-metadata.json");
+	var chart = read_json("packs\\" + pack + "\\songs\\" + song.fileName + "\\" + song.fileName + "-chart.json");
 	
 	for (var i = 0; i < array_length(chart.events); i++) {
 		var ev = chart.events[i];
@@ -145,7 +145,7 @@ function load_chart_funkin_v3(c, pack, song, difficulty, use_audio = true) {
 	}
 	
 	if use_audio {
-		var songlocation = "assets\\songs\\" + pack + "\\" + song.instLocation;
+		var songlocation = "packs\\" + pack + "\\" + song.instLocation;
 		if !file_exists(songlocation) {
 			show_message("Couldn't find the instrumental! :(");
 			room_goto(room_entrypoint);
@@ -154,10 +154,10 @@ function load_chart_funkin_v3(c, pack, song, difficulty, use_audio = true) {
 		c.instrumental = fmod_system_create_stream(songlocation, FMOD_MODE.LOOP_OFF);
 	
 		c.vocals = [];
-		var voices1loc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[0];
+		var voices1loc = "packs\\" + pack + "\\" + song.voicesLocations[0];
 		if file_exists(voices1loc) { c.vocals[0] = fmod_system_create_stream(voices1loc, FMOD_MODE.LOOP_OFF); }
 		else { c.vocals[0] = -1 }
-		var voices2loc = "assets\\songs\\" + pack + "\\" + song.voicesLocations[1];
+		var voices2loc = "packs\\" + pack + "\\" + song.voicesLocations[1];
 		if file_exists(voices2loc) { c.vocals[1] = fmod_system_create_stream(voices2loc, FMOD_MODE.LOOP_OFF); }
 		else { c.vocals[1] = -1 }	
 	}

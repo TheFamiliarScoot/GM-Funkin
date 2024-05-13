@@ -5,8 +5,6 @@ function draw_font_text(text, xx, yy, bold, spacing = 40, scale = 1, centered = 
 	var boldchars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	var chars = "";
 	
-
-	
 	var ctr = 0;
 	var realtext = "";
 	var fontsprite = noone;

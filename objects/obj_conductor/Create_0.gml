@@ -20,6 +20,5 @@ conductordisplay = false;
 countingdown = true;
 stepmode = false;
 count = -2;
-targets = [ global.bfinstance, global.dadinstance, global.gfinstance ];
 visualizer = instance_create_layer(0, 0, layer, obj_dsp_spectrum, {conductor: id});
 playing = false;

@@ -47,7 +47,7 @@
         {"$GMExtensionConstant":"","%Name":"lua_type_userdata","hidden":false,"name":"lua_type_userdata","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"8",},
         {"$GMExtensionConstant":"","%Name":"lua_type_lightuserdata","hidden":false,"name":"lua_type_lightuserdata","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"9",},
         {"$GMExtensionConstant":"","%Name":"lua_type_unknown","hidden":false,"name":"lua_type_unknown","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"10",},
-      ],"copyToTargets":105553658380352,"filename":"Apollo.dll","final":"","functions":[
+      ],"copyToTargets":4294967360,"filename":"Apollo.dll","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"lua_show_error","argCount":1,"args":[1,],"documentation":"","externalName":"lua_show_error","help":"lua_show_error(text)","hidden":false,"kind":1,"name":"lua_show_error","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"lua_reset","argCount":0,"args":[],"documentation":"","externalName":"lua_reset","help":"lua_reset() : Destroys every single state at once","hidden":false,"kind":1,"name":"lua_reset","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"lua_get_cwd","argCount":0,"args":[],"documentation":"","externalName":"lua_get_cwd","help":"","hidden":true,"kind":11,"name":"lua_get_cwd","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},

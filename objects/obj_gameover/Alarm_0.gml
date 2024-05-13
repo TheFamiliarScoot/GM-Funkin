@@ -1,1 +1,1 @@
-global.target = id;
+obj_camera.target = id;

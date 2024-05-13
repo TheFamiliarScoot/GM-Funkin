@@ -28,14 +28,14 @@ end
 
 function getSong(song)
 	if song == "darnell" then
-		local metadata = loadJson(song .. "/" .. song .. "-metadata.json")
+		local metadata = loadJson("songs/" .. song .. "/" .. song .. "-metadata.json")
 		return {
 			["fileName"] = song,
 			["name"] = metadata.songName,
 			["chartType"] = "funkinv3",
 			["difficulties"] = metadata.playData.difficulties,
-			["instLocation"] = song .. "/Inst.ogg",
-			["voicesLocations"] = { song .. "/Voices-darnell.ogg", song .. "/Voices-pico.ogg" }
+			["instLocation"] = "songs/" .. song .. "/Inst.ogg",
+			["voicesLocations"] = { "songs/" .. song .. "/Voices-darnell.ogg", "songs/" .. song .. "/Voices-pico.ogg" }
 		}
 	else
 		return {
@@ -43,20 +43,20 @@ function getSong(song)
 			["name"] = song,
 			["chartType"] = "old",
 			["difficulties"] = { "easy", "normal", "hard" },
-			["instLocation"] = song .. "/Inst.ogg",
-			["voicesLocations"] = { "", song .. "/Voices.ogg" }
+			["instLocation"] = "songs/" .. song .. "/Inst.ogg",
+			["voicesLocations"] = { "", "songs/" .. song .. "/Voices.ogg" }
 		}
 	end
 end
 
 function getChart(song, difficulty)
 	if song == "darnell" then
-		return song .. "/" .. song .. "-chart.json"
+		return "songs/" .. song .. "/" .. song .. "-chart.json"
 	else
 		local diffaddstring = "-" .. difficulty
 		if difficulty == "normal" then
 			diffaddstring = ""
 		end
-		return song .. "/" .. song .. diffaddstring .. ".json"
+		return "songs/" .. song .. "/" .. song .. diffaddstring .. ".json"
 	end
 end

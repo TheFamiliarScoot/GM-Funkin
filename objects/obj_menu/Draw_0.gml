@@ -90,7 +90,10 @@ if menuenabled {
 			}
 			else if input_check_pressed(vk_enter, gp_face1) {
 				audio_play_sound(snd_menu_confirm,0,false);
+				packchooser.selected = true;
 				global.selectedpack = packchooser.packinfo[packchooser.selectedpack].filename;
+				global.packscript = new_lua_state();
+				lua_add_file(global.packscript, "packs/" + global.selectedpack + "/pack.lua");
 				packchooser.alarm[0] = 120;
 				setupstate = -1;
 			}

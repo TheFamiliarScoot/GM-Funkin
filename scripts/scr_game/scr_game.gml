@@ -209,3 +209,14 @@ function draw_note_tail(sprite,_x,_y,length) {
 function create_scroll_menu(_x,_y,_layer,chc) {
 	return instance_create_layer(_x,_y,_layer,obj_scrollmenu,{choices: chc});
 }
+
+function play_song(song, difficulty) {
+	global.selectedsong = songs[menu.selection];
+	global.selecteddifficulty = songs[menu.selection].difficulties[seldifficulty];
+	var scrlocation = "packs/" + global.selectedpack + "/songs/" + global.selectedsong.fileName + "/song.lua";
+	if file_exists(scrlocation) {
+		global.songscript = new_lua_state();
+		lua_add_file(global.songscript, scrlocation);
+	}
+	room_transition(room_play);
+}

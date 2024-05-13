@@ -10,3 +10,5 @@ xoffset = 0;
 selectedpack = 0;
 
 depth = -100;
+
+selected = false;

@@ -54,30 +54,6 @@ fmod_system_init(1024, FMOD_INIT.NORMAL);
 texture_prefetch("Default");
 audio_group_load(audiogroup_default);
 
-global.songs = [
-	"tutorial",
-	"bopeebo",
-	"fresh",
-	"dadbattle",
-	"spookeez",
-	"south",
-	"pico",
-	"philly",
-	"blammed",
-	"satin-panties",
-	"high",
-	"milf",
-	"cocoa",
-	"eggnog",
-	"winter-horrorland",
-	"senpai",
-	"roses",
-	"thorns",
-	"ugh",
-	"guns",
-	"stress"
-];
-
 var tempoptions = {
 	scrollspeed: 0,
 	inputleniency: 150,

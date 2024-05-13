@@ -62,7 +62,6 @@ global.ratings = {
 	shit: 0
 }
 global.player = opt.player1 ? global.dadinstance : global.bfinstance;
-global.target = global.player;
 global.paused = false;
 
 gui_width = room_width/2;
@@ -72,7 +71,7 @@ display_set_gui_size(gui_width,gui_height);
 create_strums_default(conductor);
 
 ui = instance_create_layer(0, 0, layer, obj_ingame_ui, {conductor: c});
-camera = instance_create_layer(0, 0, layer, obj_camera);
+camera = instance_create_layer(0, 0, layer, obj_camera, {target: global.player});
 
 call_lua("onLoad", global.selectedsong);
 

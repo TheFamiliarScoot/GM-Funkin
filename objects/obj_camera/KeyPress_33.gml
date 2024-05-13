@@ -1,1 +1,1 @@
-global.cam.zoom += 0.1;
+zoom += 0.1;

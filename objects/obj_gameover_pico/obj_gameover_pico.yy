@@ -5,10 +5,10 @@
   "managed":true,
   "name":"obj_gameover_pico",
   "overriddenProperties":[
-    {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_gameover","path":"objects/obj_gameover/obj_gameover.yy",},"propertyId":{"name":"music","path":"objects/obj_gameover/obj_gameover.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"assets/music/gameOver-pico.ogg",},
-    {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_gameover","path":"objects/obj_gameover/obj_gameover.yy",},"propertyId":{"name":"music_end","path":"objects/obj_gameover/obj_gameover.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"assets/music/gameOverEnd-pico.ogg",},
-    {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_gameover","path":"objects/obj_gameover/obj_gameover.yy",},"propertyId":{"name":"music_start_frame","path":"objects/obj_gameover/obj_gameover.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"131",},
-    {"$GMOverriddenProperty":"","%Name":"","name":"","objectId":{"name":"obj_gameover","path":"objects/obj_gameover/obj_gameover.yy",},"propertyId":{"name":"die_sound","path":"objects/obj_gameover/obj_gameover.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"snd_death_pico",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_gameover","path":"objects/obj_gameover/obj_gameover.yy",},"propertyId":{"name":"music","path":"objects/obj_gameover/obj_gameover.yy",},"resource":null,"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"assets/music/gameOver-pico.ogg",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_gameover","path":"objects/obj_gameover/obj_gameover.yy",},"propertyId":{"name":"music_end","path":"objects/obj_gameover/obj_gameover.yy",},"resource":null,"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"assets/music/gameOverEnd-pico.ogg",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_gameover","path":"objects/obj_gameover/obj_gameover.yy",},"propertyId":{"name":"music_start_frame","path":"objects/obj_gameover/obj_gameover.yy",},"resource":null,"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"131",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_gameover","path":"objects/obj_gameover/obj_gameover.yy",},"propertyId":{"name":"die_sound","path":"objects/obj_gameover/obj_gameover.yy",},"resource":null,"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"snd_death_pico",},
   ],
   "parent":{
     "name":"playstate",
