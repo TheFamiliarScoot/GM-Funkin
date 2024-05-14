@@ -1,1 +1,1 @@
-call_lua_event("onMenuUnload", false);
+call_lua_event("onMenuUnload", id);

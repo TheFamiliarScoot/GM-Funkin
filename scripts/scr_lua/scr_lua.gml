@@ -5,9 +5,15 @@ function new_lua_state() {
 	ref_variable_instance_init(state);
 	lua_global_set(state, "os", undefined);
 	lua_global_set(state, "io", undefined);
-	lua_add_function(state, "string", string);
-	lua_add_function(state, "log", l_log);
+	
+	// basic utils
 	lua_add_function(state, "loadJson", read_json_lua);
+	
+	// window functions
+	lua_add_function(state, "resizeWindow", l_resize_window);
+	lua_add_function(state, "setWindowPos", window_set_position);
+	
+	// in-game stuff
 	lua_add_function(state, "loadConductorData", load_conductor_data);
 	lua_add_function(state, "createCharacter", create_character);
 	lua_add_function(state, "createStrum", create_strum);
@@ -184,9 +190,15 @@ function call_lua_event_3arg(func, arg1, arg2, arg3) {
 
 
 function l_log(msg) {
-	show_debug_message(msg);	
+	show_debug_message(msg);
 }
 
 function l_get_character(idx) {
 	return [ global.bfinstance, global.dadinstance, global.gfinstance ];
+}
+
+function l_resize_window(width, height) {
+	window_set_size(width, height);
+	global.view_width = width;
+	global.view_height = height;
 }

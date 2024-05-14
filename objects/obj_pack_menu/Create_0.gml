@@ -1,3 +1,4 @@
+islua = false;
 if call_lua_event("onMenuLoad", undefined) {
 	sprite_index = spr_menu_bg;
 	image_speed = 0;
@@ -17,9 +18,12 @@ if call_lua_event("onMenuLoad", undefined) {
 		depth = 1;
 	}
 	else {
-		//clear_lua_state(global.packscript);
-		//play_miss_sfx();
+		show_message("Error: Couldn't find any songs in this pack!");
+		room_goto(room_entrypoint);
 	}
+}
+else {
+	islua = true;
 }
 
 prevchc = 0;
