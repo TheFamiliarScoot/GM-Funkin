@@ -34,17 +34,17 @@ if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
 				switch lastnote.special {
 					case 1:
 						with tiedCharacter event_user(k + 4);
-						if instance_exists(conductor) conductor.vocalsmuted[tiedCharacter.playside] = true;
+						if instance_exists(conductor) && instance_exists(tiedCharacter) conductor.vocalsmuted[tiedCharacter.playside] = true;
 						change_hp(-0.2);
 						break;
 					case 2:
 						with tiedCharacter event_user(k);
-						if instance_exists(conductor) conductor.vocalsmuted[tiedCharacter.playside] = false;
+						if instance_exists(conductor) && instance_exists(tiedCharacter) conductor.vocalsmuted[tiedCharacter.playside] = false;
 						change_hp(0.2);
 						break;
 					case 3:
 //						with tiedCharacter event_user(k + 4);
-						if instance_exists(conductor) conductor.vocalsmuted[tiedCharacter.playside] = false;
+						if instance_exists(conductor) && instance_exists(tiedCharacter) conductor.vocalsmuted[tiedCharacter.playside] = false;
 //						change_hp(-0.2);
 						break;
 					case 4:
@@ -53,16 +53,18 @@ if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
 				}
 			}
 			else {
-				if instance_exists(conductor) conductor.vocalsmuted[tiedCharacter.playside] = false;
-				with tiedCharacter {
-					event_user(k);
+				if instance_exists(conductor) && instance_exists(tiedCharacter) {
+					conductor.vocalsmuted[tiedCharacter.playside] = false;
+					with tiedCharacter {
+						event_user(k);
+					}	
 				}
 			}
 			lastnote.hit = true;
 			lastnote.timehit = the;
 			if isbot { 
 				d_alarm[0] = 20;
-				if instance_exists(conductor) conductor.vocalsmuted[tiedCharacter.playside] = false;
+				if instance_exists(conductor) && instance_exists(tiedCharacter) conductor.vocalsmuted[tiedCharacter.playside] = false;
 			}
 		}
 	}

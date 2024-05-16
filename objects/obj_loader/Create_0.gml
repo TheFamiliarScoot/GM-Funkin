@@ -6,4 +6,5 @@ textures_to_load = [ bftex, gftex, dadtex, stagetex ];
 curtex = 0;
 loaded_last_group = true;
 loaded_conductor_data = false;
+loaded_textures = opt.nobg;
 instance_destroy(obj_transition);

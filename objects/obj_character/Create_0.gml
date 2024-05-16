@@ -2,10 +2,6 @@ event_inherited();
 
 depth = 0;
 
-if texture != "none" {
-	load_textures(texture);
-}
-
 self.holding = false;
 self.lastStep = 0;
 

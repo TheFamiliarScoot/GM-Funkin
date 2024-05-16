@@ -29,6 +29,7 @@ if opt.usenoteskin { scalemod = global.noteopt.scale; }
 if global.pixelui { scalemod *= 8; }
 
 group = 0;
+
 // this kinda sucks a little
 
 if tiedCharacter = global.dadinstance { group = 1; }

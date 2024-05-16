@@ -4,7 +4,9 @@ image_yscale = scale;
 with obj_ui_parent { instance_destroy(id); }
 with obj_strum_parent { instance_destroy(id); }
 obj_ingame_ui.ui.vis = false;
-instance_destroy(global.bgobject);
+if instance_exists(global.bg.object) {
+	instance_destroy(global.bg.object);
+}
 audio_play_sound(die_sound,0,false);
 alarm[0] = 60;
 alarm[2] = music_start_frame;
