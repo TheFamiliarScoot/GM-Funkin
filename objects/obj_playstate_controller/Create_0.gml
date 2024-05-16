@@ -6,8 +6,7 @@ global.dadinstance = noone;
 global.bfinstance = noone;
 global.gfinstance = noone;
 
-conductordata = load_conductor_data(global.selectedpack, global.selectedsong, global.selecteddifficulty);
-conductor = create_conductor(conductordata, 0, 0, layer);
+conductor = create_conductor(global.conductordata, 0, 0, layer);
 var c = conductor;
 
 if opt.usenoteskin {
@@ -23,28 +22,28 @@ if opt.usenoteskin {
 if opt.customization.usepreset {
 	var set = global.presets[opt.customization.preset];
 
-	global.dadobject = set.dad;
-	global.gfobject = set.gf;
-	global.bfobject = set.bf;
-	global.bgobject = set.stage;
+	global.dad = global.chars[set.dad];
+	global.gf = global.chars[set.gf];
+	global.bf = global.chars[set.bf];
+	global.bg = global.stages[set.stage];
 }
 
 var object = noone;
-if global.dadobject == global.gfobject { object = obj_gfspawn; }
+if global.dad.object == global.gf.object { object = obj_gfspawn; }
 else { object = obj_dadspawn; }
-global.dadinstance = create_character(conductor,object.x,object.y,object.layer,0,global.dadobject);
+global.dadinstance = create_character(conductor,object.x,object.y,object.layer,0,global.dad.object);
 
 object = obj_bfspawn;
-global.bfinstance = create_character(conductor,object.x,object.y,object.layer,1,global.bfobject);
+global.bfinstance = create_character(conductor,object.x,object.y,object.layer,1,global.bf.object);
 
 object = obj_gfspawn;
-global.gfinstance = create_character(conductor,object.x,object.y,object.layer,2,global.gfobject);
+global.gfinstance = create_character(conductor,object.x,object.y,object.layer,2,global.gf.object);
 
 global.player = opt.player1 ? global.dadinstance : global.bfinstance;
 ui = instance_create_layer(0, 0, layer, obj_ingame_ui, {conductor: c});
 camera = instance_create_layer(0, 0, layer, obj_camera, {target: global.player});
 
-if !opt.nobg { instance_create_layer(0,0,layer,global.bgobject,{conductor: c}); }
+if !opt.nobg { instance_create_layer(0,0,layer,global.bg.object,{conductor: c}); }
 else { instance_create_layer(0,0,layer,obj_static_bg) }
 
 // one of the only instances of this ever being used

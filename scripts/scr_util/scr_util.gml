@@ -334,3 +334,7 @@ function note_special_string_id(str) {
 		default: return -1;
 	}
 }
+
+function load_textures(texture) {
+	texturegroup_load(texture);
+}

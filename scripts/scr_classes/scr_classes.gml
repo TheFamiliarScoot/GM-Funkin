@@ -72,14 +72,16 @@ function delete_pack_info(pack) {
 	}
 }
 
-function Character(name, object, icon, default_sprite) constructor {
+function Character(filename, name, object, icon, default_sprite) constructor {
+	self.filename = filename;
 	self.name = name;
 	self.object = object;
 	self.icon = icon;
 	self.default_sprite = default_sprite;
 }
 
-function Stage(name, object) constructor {
+function Stage(filename, name, object) constructor {
+	self.filename = filename;
 	self.name = name;
 	self.object = object;
 }

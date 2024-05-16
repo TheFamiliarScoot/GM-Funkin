@@ -85,8 +85,8 @@
   "swatchColours":null,
   "swfPrecision":2.525,
   "textureGroupId":{
-    "name":"char_senpai",
-    "path":"texturegroups/char_senpai",
+    "name":"char_asenpai",
+    "path":"texturegroups/char_asenpai",
   },
   "type":0,
   "VTile":false,

@@ -218,5 +218,5 @@ function play_song(song, difficulty) {
 		global.songscript = new_lua_state();
 		lua_add_file(global.songscript, scrlocation);
 	}
-	room_transition(room_play);
+	room_transition(room_load);
 }

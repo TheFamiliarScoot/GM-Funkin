@@ -238,67 +238,108 @@ global.preset = opt.customization.preset;
 
 global.pixelui = false;
 
-global.presets = [
-	new Preset("TUTORIAL", obj_bg_stage, obj_bf, obj_gf, obj_gf),
-	new Preset("WEEK 1", obj_bg_stage, obj_bf, obj_gf, obj_dad),
-	new Preset("WEEK 2", obj_bg_spooky, obj_bf, obj_gf, obj_spookykids),
-	new Preset("WEEK 2 - MONSTER", obj_bg_spooky, obj_bf, obj_gf, obj_monster),
-	new Preset("WEEK 3", obj_bg_philly, obj_bf, obj_gf, obj_pico),
-	new Preset("WEEK 6 - SENPAI", obj_bg_school, obj_bf_pixel, obj_gf_pixel, obj_senpai),
-	new Preset("WEEK 6 - ROSES", obj_bg_school_roses, obj_bf_pixel, obj_gf_pixel, obj_senpai_angry),
-	new Preset("WEEK 6 - THORNS", obj_bg_evilschool, obj_bf_pixel, obj_gf_pixel, obj_spirit),
-	new Preset("WEEK 7", obj_bg_tankmen, obj_bf, obj_gf_tankmen, obj_tankman),
-	new Preset("WEEK 7 - STRESS", obj_bg_tankmen, obj_bf_gf, obj_pico_speaker, obj_tankman)
-]
+enum character {
+	BF,
+	DAD,
+	GF,
+	SPOOKYKIDS,
+	MONSTER,
+	PICO,
+	MOM,
+	SENPAI,
+	SENPAI_ANGRY,
+	SPIRIT,
+	BF_PIXEL,
+	GF_PIXEL,
+	GF_TANKMEN,
+	TANKMAN,
+	PICO_SPEAKER,
+	BF_HOLDING_GF,
+	DARNELL,
+	NENE
+}
 
 global.chars = [
-	new Character("BOYFRIEND", obj_bf, spr_icon_bf, spr_bf_idle),
-	new Character("DADDY DEAREST", obj_dad, spr_icon_dad, spr_dad_idle),
-	new Character("GIRLFRIEND", obj_gf, spr_icon_gf, spr_gf_danceleft),
-	new Character("SKID & PUMP", obj_spookykids, spr_icon_spookykids, spr_spooky_danceleft),
-	new Character("MONSTER", obj_monster, spr_icon_monster, spr_monster_idle),
-	new Character("PICO", obj_pico, spr_icon_pico, spr_pico_idle),
-	new Character("MOMMY MEAREST", obj_mom, spr_icon_mom, spr_mom_idle),
-	new Character("SENPAI", obj_senpai, spr_icon_senpai, spr_senpai_idle),
-	new Character("SENPAI (ANGRY)", obj_senpai_angry, spr_icon_senpai, spr_asenpai_idle),
-	new Character("SPIRIT", obj_spirit, spr_icon_spirit, spr_spirit_idle),
-	new Character("BOYFRIEND (PIXEL)", obj_bf_pixel, spr_icon_bf_pixel, spr_bf_pixel_idle),
-	new Character("GIRLFRIEND (PIXEL)", obj_gf_pixel, spr_icon_gf, spr_gf_pixel_danceleft),
-	new Character("GIRLFRIEND (TANKMEN)", obj_gf_tankmen, spr_icon_gf, spr_gf_tankmen_danceleft),
-	new Character("TANKMAN", obj_tankman, spr_icon_tankman, spr_tankman_idle),
-	new Character("PICO (SPEAKER)", obj_pico_speaker, spr_icon_pico, spr_pico_speaker_idle),
-	new Character("BOYFRIEND (HOLDING GIRLFRIEND)", obj_bf_gf, spr_icon_bf, spr_bf_gf_idle),
-	new Character("DARNELL", obj_darnell, spr_icon_darnell, spr_darnell_idle),
-	new Character("NENE", obj_nene, spr_icon_gf, spr_nene_dance_left)
+	new Character("bf", "BOYFRIEND", obj_bf, spr_icon_bf, spr_bf_idle),
+	new Character("dad", "DADDY DEAREST", obj_dad, spr_icon_dad, spr_dad_idle),
+	new Character("gf", "GIRLFRIEND", obj_gf, spr_icon_gf, spr_gf_danceleft),
+	new Character("spookykids", "SKID & PUMP", obj_spookykids, spr_icon_spookykids, spr_spooky_danceleft),
+	new Character("monster", "MONSTER", obj_monster, spr_icon_monster, spr_monster_idle),
+	new Character("pico", "PICO", obj_pico, spr_icon_pico, spr_pico_idle),
+	new Character("mom", "MOMMY MEAREST", obj_mom, spr_icon_mom, spr_mom_idle),
+	new Character("senpai", "SENPAI", obj_senpai, spr_icon_senpai, spr_senpai_idle),
+	new Character("asenpai", "SENPAI (ANGRY)", obj_senpai_angry, spr_icon_senpai, spr_asenpai_idle),
+	new Character("spirit", "SPIRIT", obj_spirit, spr_icon_spirit, spr_spirit_idle),
+	new Character("bf_pixel", "BOYFRIEND (PIXEL)", obj_bf_pixel, spr_icon_bf_pixel, spr_bf_pixel_idle),
+	new Character("gf_pixel", "GIRLFRIEND (PIXEL)", obj_gf_pixel, spr_icon_gf, spr_gf_pixel_danceleft),
+	new Character("gf_tankmen", "GIRLFRIEND (TANKMEN)", obj_gf_tankmen, spr_icon_gf, spr_gf_tankmen_danceleft),
+	new Character("tankman", "TANKMAN", obj_tankman, spr_icon_tankman, spr_tankman_idle),
+	new Character("pico_speaker", "PICO (SPEAKER)", obj_pico_speaker, spr_icon_pico, spr_pico_speaker_idle),
+	new Character("bf_gf", "BOYFRIEND (HOLDING GIRLFRIEND)", obj_bf_gf, spr_icon_bf, spr_bf_gf_idle),
+	new Character("darnell", "DARNELL", obj_darnell, spr_icon_darnell, spr_darnell_idle),
+	new Character("nene", "NENE", obj_nene, spr_icon_gf, spr_nene_dance_left)
 ];
 
+enum stage {
+	STAGE,
+	HAUNTED_MANSION,
+	PHILLY,
+	SCHOOL,
+	SCHOOL_ROSES,
+	SCHOOL_THORNS,
+	TANKMAN_BATTLEFIELD
+}
+
 global.stages = [
-	new Stage("THE STAGE", obj_bg_stage),
-	new Stage("HAUNTED MANSION", obj_bg_spooky),
-	new Stage("PHILLY", obj_bg_philly),
-	new Stage("SCHOOL", obj_bg_school),
-	new Stage("SCHOOL?", obj_bg_school_roses),
-	new Stage("GLITCHED SCHOOL", obj_bg_evilschool),
-	new Stage("TANKMAN BATTLEFIELD", obj_bg_tankmen)
+	new Stage("none", "THE STAGE", obj_bg_stage),
+	new Stage("spooky", "HAUNTED MANSION", obj_bg_spooky),
+	new Stage("philly", "PHILLY", obj_bg_philly),
+	new Stage("school", "SCHOOL", obj_bg_school),
+	new Stage("school", "SCHOOL?", obj_bg_school_roses),
+	new Stage("evilschool", "GLITCHED SCHOOL", obj_bg_evilschool),
+	new Stage("tankmen", "TANKMAN BATTLEFIELD", obj_bg_tankmen)
+];
+
+enum preset {
+	TUTORIAL,
+	WEEK_1,
+	WEEK_2,
+	WEEK_2_MONSTER,
+	WEEK_3,
+	WEEK_6_SENPAI,
+	WEEK_6_ROSES,
+	WEEK_6_THORNS,
+	WEEK_7,
+	WEEK_7_STRESS
+}
+
+global.presets = [
+	new Preset("TUTORIAL", stage.STAGE, character.BF, character.GF, character.GF),
+	new Preset("WEEK 1", stage.STAGE, character.BF, character.GF, character.DAD),
+	new Preset("WEEK 2", stage.HAUNTED_MANSION, character.BF, character.GF, character.SPOOKYKIDS),
+	new Preset("WEEK 2 - MONSTER", stage.HAUNTED_MANSION, character.BF, character.GF, character.MONSTER),
+	new Preset("WEEK 3", stage.PHILLY, character.BF, character.GF, character.PICO),
+	new Preset("WEEK 6 - SENPAI", stage.SCHOOL, character.BF_PIXEL, character.GF_PIXEL, character.SENPAI),
+	new Preset("WEEK 6 - ROSES", stage.SCHOOL_ROSES, character.BF_PIXEL, character.GF_PIXEL, character.SENPAI_ANGRY),
+	new Preset("WEEK 6 - THORNS", stage.SCHOOL_THORNS, character.BF_PIXEL, character.GF_PIXEL, character.SPIRIT),
+	new Preset("WEEK 7", stage.TANKMAN_BATTLEFIELD, character.BF, character.GF_TANKMEN, character.TANKMAN),
+	new Preset("WEEK 7 - STRESS", stage.TANKMAN_BATTLEFIELD, character.BF_HOLDING_GF, character.PICO_SPEAKER, character.TANKMAN)
 ];
 
 var set = global.presets[global.preset];
 
 if !opt.customization.usepreset {
-	global.gfobject = global.chars[opt.customization.gfobject].object;
-	global.dadobject = global.chars[opt.customization.dadobject].object;
-	global.bfobject = global.chars[opt.customization.bfobject].object;
-	global.bgobject = global.stages[opt.customization.bgobject].object;
+	global.gf = global.chars[opt.customization.gfobject];
+	global.dad = global.chars[opt.customization.dadobject];
+	global.bf = global.chars[opt.customization.bfobject];
+	global.bg = global.stages[opt.customization.bgobject];
 }
 else {
-	global.gfobject = set.gf;
-	global.dadobject = set.dad;
-	global.bfobject = set.bf;
-	global.bgobject = set.stage;
+	global.gf = global.chars[set.gf];
+	global.dad = global.chars[set.dad];
+	global.bf = global.chars[set.bf];
+	global.bg = global.stages[set.stage];
 }
-
-global.bfcustom = "bf";
-global.dadcustom = "hypno2";
 
 global.noteskins = get_folders("assets/sprites/noteskins","skinoptions.json");
 global.customchars = get_folders("assets/sprites/chars","object.json");

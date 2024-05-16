@@ -1,0 +1,1 @@
+draw_font_text("LOADING", room_width / 2, room_height / 2, true, 40, 1, true);
