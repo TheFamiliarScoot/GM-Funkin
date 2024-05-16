@@ -3,7 +3,7 @@
   "%Name":"spr_icon_darnell",
   "bboxMode":0,
   "bbox_bottom":120,
-  "bbox_left":5,
+  "bbox_left":25,
   "bbox_right":130,
   "bbox_top":22,
   "collisionKind":1,

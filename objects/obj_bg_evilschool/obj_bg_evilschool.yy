@@ -3,12 +3,13 @@
   "%Name":"obj_bg_evilschool",
   "eventList":[
     {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":12,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"obj_bg_evilschool",
-  "overriddenProperties":[],
+  "overriddenProperties":[
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_bg","path":"objects/obj_bg/obj_bg.yy",},"propertyId":{"name":"texture","path":"objects/obj_bg/obj_bg.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"bg_evilschool",},
+  ],
   "parent":{
     "name":"bg",
     "path":"folders/Objects/bg.yy",

@@ -7,3 +7,7 @@ function draw_bg_sprite(spr,subimg,_x,_y,scrollcam,scale,scrollfacx,scrollfacy,c
 	var ydraw = lerp(_y,camera_get_view_y(scrollcam)+(global.view_height*z)/2,scrollfacy);
 	draw_sprite_ext(spr,subimg,xdraw,ydraw,scale,scale,0,color,alpha);
 }
+
+function bg_create_prop(bg, xx, yy, lyr, object) {
+	return instance_create_layer(xx, yy, lyr, object, {conductor: bg.conductor});
+}

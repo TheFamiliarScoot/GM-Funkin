@@ -242,10 +242,13 @@ global.presets = [
 	new Preset("TUTORIAL", obj_bg_stage, obj_bf, obj_gf, obj_gf),
 	new Preset("WEEK 1", obj_bg_stage, obj_bf, obj_gf, obj_dad),
 	new Preset("WEEK 2", obj_bg_spooky, obj_bf, obj_gf, obj_spookykids),
+	new Preset("WEEK 2 - MONSTER", obj_bg_spooky, obj_bf, obj_gf, obj_monster),
 	new Preset("WEEK 3", obj_bg_philly, obj_bf, obj_gf, obj_pico),
 	new Preset("WEEK 6 - SENPAI", obj_bg_school, obj_bf_pixel, obj_gf_pixel, obj_senpai),
 	new Preset("WEEK 6 - ROSES", obj_bg_school_roses, obj_bf_pixel, obj_gf_pixel, obj_senpai_angry),
-	new Preset("WEEK 6 - THORNS", obj_bg_evilschool, obj_bf_pixel, obj_gf_pixel, obj_spirit)
+	new Preset("WEEK 6 - THORNS", obj_bg_evilschool, obj_bf_pixel, obj_gf_pixel, obj_spirit),
+	new Preset("WEEK 7", obj_bg_tankmen, obj_bf, obj_gf_tankmen, obj_tankman),
+	new Preset("WEEK 7 - STRESS", obj_bg_tankmen, obj_bf_gf, obj_pico_speaker, obj_tankman)
 ]
 
 global.chars = [
@@ -253,6 +256,7 @@ global.chars = [
 	new Character("DADDY DEAREST", obj_dad, spr_icon_dad, spr_dad_idle),
 	new Character("GIRLFRIEND", obj_gf, spr_icon_gf, spr_gf_danceleft),
 	new Character("SKID & PUMP", obj_spookykids, spr_icon_spookykids, spr_spooky_danceleft),
+	new Character("MONSTER", obj_monster, spr_icon_monster, spr_monster_idle),
 	new Character("PICO", obj_pico, spr_icon_pico, spr_pico_idle),
 	new Character("MOMMY MEAREST", obj_mom, spr_icon_mom, spr_mom_idle),
 	new Character("SENPAI", obj_senpai, spr_icon_senpai, spr_senpai_idle),
@@ -260,7 +264,9 @@ global.chars = [
 	new Character("SPIRIT", obj_spirit, spr_icon_spirit, spr_spirit_idle),
 	new Character("BOYFRIEND (PIXEL)", obj_bf_pixel, spr_icon_bf_pixel, spr_bf_pixel_idle),
 	new Character("GIRLFRIEND (PIXEL)", obj_gf_pixel, spr_icon_gf, spr_gf_pixel_danceleft),
+	new Character("GIRLFRIEND (TANKMEN)", obj_gf_tankmen, spr_icon_gf, spr_gf_tankmen_danceleft),
 	new Character("TANKMAN", obj_tankman, spr_icon_tankman, spr_tankman_idle),
+	new Character("PICO (SPEAKER)", obj_pico_speaker, spr_icon_pico, spr_pico_speaker_idle),
 	new Character("BOYFRIEND (HOLDING GIRLFRIEND)", obj_bf_gf, spr_icon_bf, spr_bf_gf_idle),
 	new Character("DARNELL", obj_darnell, spr_icon_darnell, spr_darnell_idle),
 	new Character("NENE", obj_nene, spr_icon_gf, spr_nene_dance_left)
@@ -273,6 +279,7 @@ global.stages = [
 	new Stage("SCHOOL", obj_bg_school),
 	new Stage("SCHOOL?", obj_bg_school_roses),
 	new Stage("GLITCHED SCHOOL", obj_bg_evilschool),
+	new Stage("TANKMAN BATTLEFIELD", obj_bg_tankmen)
 ];
 
 var set = global.presets[global.preset];

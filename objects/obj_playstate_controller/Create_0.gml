@@ -40,6 +40,10 @@ global.bfinstance = create_character(conductor,object.x,object.y,object.layer,1,
 object = obj_gfspawn;
 global.gfinstance = create_character(conductor,object.x,object.y,object.layer,2,global.gfobject);
 
+global.player = opt.player1 ? global.dadinstance : global.bfinstance;
+ui = instance_create_layer(0, 0, layer, obj_ingame_ui, {conductor: c});
+camera = instance_create_layer(0, 0, layer, obj_camera, {target: global.player});
+
 if !opt.nobg { instance_create_layer(0,0,layer,global.bgobject,{conductor: c}); }
 else { instance_create_layer(0,0,layer,obj_static_bg) }
 
@@ -61,17 +65,9 @@ global.ratings = {
 	bad: 0,
 	shit: 0
 }
-global.player = opt.player1 ? global.dadinstance : global.bfinstance;
 global.paused = false;
 
-gui_width = room_width/2;
-gui_height = room_height/2
-display_set_gui_size(gui_width,gui_height);
-
 create_strums_default(conductor);
-
-ui = instance_create_layer(0, 0, layer, obj_ingame_ui, {conductor: c});
-camera = instance_create_layer(0, 0, layer, obj_camera, {target: global.player});
 
 call_lua("onLoad", global.selectedsong);
 

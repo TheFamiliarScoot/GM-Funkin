@@ -2,9 +2,9 @@
   "$GMSprite":"",
   "%Name":"spr_bg_philly",
   "bboxMode":0,
-  "bbox_bottom":539,
-  "bbox_left":54,
-  "bbox_right":1634,
+  "bbox_bottom":954,
+  "bbox_left":0,
+  "bbox_right":1728,
   "bbox_top":0,
   "collisionKind":1,
   "collisionTolerance":0,
@@ -12,14 +12,18 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"eeb58f76-559d-4b0b-84d3-169cc1498414","name":"eeb58f76-559d-4b0b-84d3-169cc1498414","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"711d79b3-d0ee-4b1e-a9c8-2f495f695590","name":"711d79b3-d0ee-4b1e-a9c8-2f495f695590","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"67eeb646-eb59-4d45-af9c-b27875bb721c","name":"67eeb646-eb59-4d45-af9c-b27875bb721c","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"f7d4e127-933d-4b37-a230-d07809761813","name":"f7d4e127-933d-4b37-a230-d07809761813","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"a445447f-5665-4148-81bd-ea4ebf7acfb8","name":"a445447f-5665-4148-81bd-ea4ebf7acfb8","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"ab0d98a9-7077-4100-953e-5b8c41f8ba73","name":"ab0d98a9-7077-4100-953e-5b8c41f8ba73","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":955,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"c26e8dad-cbc8-4366-a843-cb2a0f187b33","blendMode":0,"displayName":"default","isLocked":false,"name":"c26e8dad-cbc8-4366-a843-cb2a0f187b33","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"f1dc2131-08f0-483e-b6de-5a8d35a29198","blendMode":0,"displayName":"default","isLocked":false,"name":"f1dc2131-08f0-483e-b6de-5a8d35a29198","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_bg_philly",
   "nineSlice":null,
@@ -49,7 +53,7 @@
     },
     "eventStubScript":null,
     "eventToFunction":{},
-    "length":1.0,
+    "length":5.0,
     "lockOrigin":false,
     "moments":{
       "$KeyframeStore<MomentsEventKeyframe>":"",
@@ -69,8 +73,20 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"eeb58f76-559d-4b0b-84d3-169cc1498414","path":"sprites/spr_bg_philly/spr_bg_philly.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"e0412de5-c8bc-4b88-9eb1-e4b4e7eb783e","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"711d79b3-d0ee-4b1e-a9c8-2f495f695590","path":"sprites/spr_bg_philly/spr_bg_philly.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"f9c4603f-2dc7-4d83-8369-acc05506f72f","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"67eeb646-eb59-4d45-af9c-b27875bb721c","path":"sprites/spr_bg_philly/spr_bg_philly.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"d149c236-b5c8-447e-aac1-f3a4c8a834a9","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"f7d4e127-933d-4b37-a230-d07809761813","path":"sprites/spr_bg_philly/spr_bg_philly.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"d1acfcab-bae4-4ec1-9b01-7d27a7054457","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"a445447f-5665-4148-81bd-ea4ebf7acfb8","path":"sprites/spr_bg_philly/spr_bg_philly.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"a103f92b-3a99-4cce-b037-1f79b1295c8a","IsCreationKey":false,"Key":3.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"ab0d98a9-7077-4100-953e-5b8c41f8ba73","path":"sprites/spr_bg_philly/spr_bg_philly.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"a1c56e7f-de89-4349-8c45-d532327556bb","IsCreationKey":false,"Key":4.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,
@@ -81,10 +97,10 @@
   "swatchColours":null,
   "swfPrecision":0.050000012,
   "textureGroupId":{
-    "name":"Default",
-    "path":"texturegroups/Default",
+    "name":"bg_philly",
+    "path":"texturegroups/bg_philly",
   },
-  "type":1,
+  "type":0,
   "VTile":false,
   "width":1729,
 }

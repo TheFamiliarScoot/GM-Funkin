@@ -42,7 +42,7 @@
   "option_ios_scale":0,
   "option_ios_splashscreen_background_colour":255,
   "option_ios_team_id":"",
-  "option_ios_texture_page":"2048x2048",
+  "option_ios_texture_page":"4096x4096",
   "option_ios_version":"1.0.0.0",
   "resourceType":"GMiOSOptions",
   "resourceVersion":"2.0",

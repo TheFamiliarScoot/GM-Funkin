@@ -11,3 +11,5 @@ ui = {
 
 iconscale = 1;
 bump = 1;
+
+display_set_gui_size(global.view_width,global.view_height);

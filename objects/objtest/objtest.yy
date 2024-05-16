@@ -8,10 +8,10 @@
   "managed":true,
   "name":"objtest",
   "overriddenProperties":[
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"propertyId":{"name":"name","path":"objects/obj_character/obj_character.yy",},"resource":null,"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"gf_ut",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"propertyId":{"name":"icon","path":"objects/obj_character/obj_character.yy",},"resource":null,"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"spr_icon_gf",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"propertyId":{"name":"barcolor","path":"objects/obj_character/obj_character.yy",},"resource":null,"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"$FFFFFFFF",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"propertyId":{"name":"no_antialiasing","path":"objects/obj_character/obj_character.yy",},"resource":null,"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"True",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"propertyId":{"name":"name","path":"objects/obj_character/obj_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"gf_ut",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"propertyId":{"name":"icon","path":"objects/obj_character/obj_character.yy",},"resource":{"name":"spr_icon_gf","path":"sprites/spr_icon_gf/spr_icon_gf.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"spr_icon_gf",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"propertyId":{"name":"barcolor","path":"objects/obj_character/obj_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"$FFFFFFFF",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},"propertyId":{"name":"no_antialiasing","path":"objects/obj_character/obj_character.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"True",},
   ],
   "parent":{
     "name":"chars",

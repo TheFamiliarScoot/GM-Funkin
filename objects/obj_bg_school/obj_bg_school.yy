@@ -9,7 +9,9 @@
   ],
   "managed":true,
   "name":"obj_bg_school",
-  "overriddenProperties":[],
+  "overriddenProperties":[
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_bg","path":"objects/obj_bg/obj_bg.yy",},"propertyId":{"name":"texture","path":"objects/obj_bg/obj_bg.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"bg_school",},
+  ],
   "parent":{
     "name":"bg",
     "path":"folders/Objects/bg.yy",

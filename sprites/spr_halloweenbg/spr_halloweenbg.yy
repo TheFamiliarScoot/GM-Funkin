@@ -2,7 +2,7 @@
   "$GMSprite":"",
   "%Name":"spr_halloweenbg",
   "bboxMode":0,
-  "bbox_bottom":1066,
+  "bbox_bottom":1068,
   "bbox_left":0,
   "bbox_right":2110,
   "bbox_top":0,
@@ -12,14 +12,14 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"5b81a8a1-a70f-4e65-9662-41ef6ff4146a","name":"5b81a8a1-a70f-4e65-9662-41ef6ff4146a","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"8b2d1dfd-7dd5-47a1-a68a-01b00614baf9","name":"8b2d1dfd-7dd5-47a1-a68a-01b00614baf9","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
-  "height":1068,
+  "height":1075,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"d207f80f-d28d-4e11-8690-8621ced73ee1","blendMode":0,"displayName":"default","isLocked":false,"name":"d207f80f-d28d-4e11-8690-8621ced73ee1","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"35fd683a-6c96-4f36-9b75-9d34be4611d6","blendMode":0,"displayName":"default","isLocked":false,"name":"35fd683a-6c96-4f36-9b75-9d34be4611d6","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_halloweenbg",
   "nineSlice":null,
@@ -59,7 +59,7 @@
     },
     "name":"spr_halloweenbg",
     "playback":1,
-    "playbackSpeed":30.0,
+    "playbackSpeed":0.0,
     "playbackSpeedType":0,
     "resourceType":"GMSequence",
     "resourceVersion":"2.0",
@@ -69,8 +69,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"5b81a8a1-a70f-4e65-9662-41ef6ff4146a","path":"sprites/spr_halloweenbg/spr_halloweenbg.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"a95d461a-1497-4c81-a978-a06a53952eab","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"8b2d1dfd-7dd5-47a1-a68a-01b00614baf9","path":"sprites/spr_halloweenbg/spr_halloweenbg.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"cdc66c2c-b9a9-4677-921d-7c7bb1021c7e","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,
@@ -81,10 +81,10 @@
   "swatchColours":null,
   "swfPrecision":2.525,
   "textureGroupId":{
-    "name":"Default",
-    "path":"texturegroups/Default",
+    "name":"bg_spooky",
+    "path":"texturegroups/bg_spooky",
   },
-  "type":1,
+  "type":0,
   "VTile":false,
-  "width":2111,
+  "width":2114,
 }
