@@ -8,3 +8,4 @@ loaded_last_group = true;
 loaded_conductor_data = false;
 loaded_textures = opt.nobg;
 instance_destroy(obj_transition);
+fade = 0;

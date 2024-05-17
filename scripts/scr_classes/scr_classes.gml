@@ -8,6 +8,7 @@ function Note(t,str,l) constructor {
 	completed = false; // if the hold note was actually finished
 	timehit = 0;       // ms at which the note was hit
 	special = 0;       // special note type
+	alt = false;       // if the note plays the alt animation
 }
 
 function Event(t,str,v) constructor {

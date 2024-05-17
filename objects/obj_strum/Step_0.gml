@@ -33,19 +33,14 @@ if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
 			if lastnote.special > 0 {
 				switch lastnote.special {
 					case 1:
-						with tiedCharacter event_user(k + 4);
-						if instance_exists(conductor) && instance_exists(tiedCharacter) conductor.vocalsmuted[tiedCharacter.playside] = true;
+						character_note_miss(tiedCharacter, lastnote);
 						change_hp(-0.2);
 						break;
 					case 2:
-						with tiedCharacter event_user(k);
-						if instance_exists(conductor) && instance_exists(tiedCharacter) conductor.vocalsmuted[tiedCharacter.playside] = false;
+						character_note_hit(tiedCharacter, lastnote);
 						change_hp(0.2);
 						break;
 					case 3:
-//						with tiedCharacter event_user(k + 4);
-						if instance_exists(conductor) && instance_exists(tiedCharacter) conductor.vocalsmuted[tiedCharacter.playside] = false;
-//						change_hp(-0.2);
 						break;
 					case 4:
 						die();
@@ -53,12 +48,7 @@ if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
 				}
 			}
 			else {
-				if instance_exists(conductor) && instance_exists(tiedCharacter) {
-					conductor.vocalsmuted[tiedCharacter.playside] = false;
-					with tiedCharacter {
-						event_user(k);
-					}	
-				}
+				character_note_hit(tiedCharacter, lastnote);
 			}
 			lastnote.hit = true;
 			lastnote.timehit = the;
@@ -70,8 +60,9 @@ if (input_check_pressed(thisKey, thisKeyGP) && !isbot) || opponentcheck {
 	}
 	else {
 		play_anim_d(id,nsprite[p][1]);
-		if !global.options.ghosttapping && !isbot { 
-			miss(tiedCharacter,-0.04,key);
+		if !global.options.ghosttapping && !isbot {
+			miss(-0.04);
+			character_note_miss(tiedCharacter, lastnote);
 		}
 	}
 }
@@ -80,7 +71,7 @@ if input_check(thisKey, thisKeyGP) || (isbot && lastnote != noone && lastnote.le
 		var k = type % 4;
 		if !(lastnote.length < 0) && !(lastnote.covered >= lastnote.length) {
 			lastnote.covered += conductor.notepos - lasttime;
-			with tiedCharacter { event_user(k); }
+			character_note_hit(tiedCharacter, lastnote);
 		}
 		else { 
 			lastnote.completed = true;
@@ -98,7 +89,8 @@ if !isbot && input_check_released(thisKey, thisKeyGP) {
 			}
 		}
 		else if global.options.missnotes {
-			miss(tiedCharacter,-0.075,key);
+			miss(-0.075);
+			character_note_miss(tiedCharacter, lastnote);
 			lastnote.missed = true;
 		}
 		if lastnote.length > 0 {

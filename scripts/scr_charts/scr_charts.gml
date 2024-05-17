@@ -54,6 +54,7 @@ function load_chart_old(c, pack, song, difficulty, use_audio = true) {
 
 				var nspecial = get_special_note_type(notearray);
 				if nspecial > 0 && !opt.specialnotes { continue; }
+				var alt = false;
 		
 				var pos = notearray[0];
 				var typ = notearray[1];
@@ -70,12 +71,16 @@ function load_chart_old(c, pack, song, difficulty, use_audio = true) {
 				if variable_struct_exists(chrt.song.notes[h], "changeBPM") && chrt.song.notes[h].changeBPM {
 					array_push(c.timechanges, new TimeChange(curpos, chrt.song.notes[h].bpm, 4, 4));
 				}
+				if variable_struct_exists(chrt.song.notes[h], "altAnim") {
+					alt = chrt.song.notes[h].altAnim;
+				}
 		
 				if len < 0 { len = 0 };	
 		
 				var thisNote = new Note(pos,typ,len);
 		
 				thisNote.special = nspecial;
+				thisNote.alt = alt;
 		
 				var rt = (typ + c.keyamt) % c.keyamt;
 				var side = floor(typ / c.keyamt) % 2;

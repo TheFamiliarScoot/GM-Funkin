@@ -85,13 +85,9 @@ function die() {
 	}
 }
 
-function miss(char, penalty, key) {
+function miss(penalty) {
 	if opt.missnotes {
-		if instance_exists(char) with char { event_user(key + 4); }
 		change_hp(penalty);
-		if instance_exists(obj_conductor) && instance_exists(char) {
-			obj_conductor.vocalsmuted[char.playside] = true;
-		}
 		global.misses += 1;
 		global.combo = 0;
 	}

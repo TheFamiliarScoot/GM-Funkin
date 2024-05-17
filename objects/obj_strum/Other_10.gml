@@ -168,7 +168,8 @@ repeat nlength {
 			else { notecheck = real_y > global.options.inputleniency }
 			if !note.hit && notecheck && !note.missed {
 				if note.special <= 0 {
-					miss(tiedCharacter,-0.04,key);
+					miss(-0.04);
+					character_note_miss(tiedCharacter, note);
 					note.missed = true;
 					global.notesplayed += 1;
 					recalc_accuracy();		
